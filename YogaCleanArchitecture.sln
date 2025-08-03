@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YogaCleanArchitecture", "YogaCleanArchitecture\YogaCleanArchitecture.csproj", "{6626C604-E165-4BA3-B71A-BCBA22B1E88B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YogaApp.Domain", "YogaApp.Domain\YogaApp.Domain.csproj", "{CC7A5E68-30FE-4256-AEB7-32CDEAAC756E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YogaApp.Application", "YogaApp.Application\YogaApp.Application.csproj", "{0DAA8143-359D-4B1F-8201-7C85CDCEF8C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YogaApp.Infrastructure", "YogaApp.Infrastructure\YogaApp.Infrastructure.csproj", "{DCCD102C-3DDA-477E-A8C5-8E20CCF41ECE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YogaApp.Web", "YogaApp.Web\YogaApp.Web.csproj", "{7C565306-A925-4F09-96A9-E6AA44203D96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YogaApp.Domain.Tests", "YogaApp.Domain.Tests\YogaApp.Domain.Tests.csproj", "{53273420-6CD4-4F76-A4CC-B546FF8F6064}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YogaApp.Application.Tests", "YogaApp.Application.Tests\YogaApp.Application.Tests.csproj", "{4E839E7D-92AB-4ADA-9614-D51E75FB231E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6626C604-E165-4BA3-B71A-BCBA22B1E88B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6626C604-E165-4BA3-B71A-BCBA22B1E88B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6626C604-E165-4BA3-B71A-BCBA22B1E88B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6626C604-E165-4BA3-B71A-BCBA22B1E88B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC7A5E68-30FE-4256-AEB7-32CDEAAC756E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC7A5E68-30FE-4256-AEB7-32CDEAAC756E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC7A5E68-30FE-4256-AEB7-32CDEAAC756E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC7A5E68-30FE-4256-AEB7-32CDEAAC756E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DAA8143-359D-4B1F-8201-7C85CDCEF8C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DAA8143-359D-4B1F-8201-7C85CDCEF8C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DAA8143-359D-4B1F-8201-7C85CDCEF8C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DAA8143-359D-4B1F-8201-7C85CDCEF8C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCCD102C-3DDA-477E-A8C5-8E20CCF41ECE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCCD102C-3DDA-477E-A8C5-8E20CCF41ECE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCCD102C-3DDA-477E-A8C5-8E20CCF41ECE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCCD102C-3DDA-477E-A8C5-8E20CCF41ECE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C565306-A925-4F09-96A9-E6AA44203D96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C565306-A925-4F09-96A9-E6AA44203D96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C565306-A925-4F09-96A9-E6AA44203D96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C565306-A925-4F09-96A9-E6AA44203D96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53273420-6CD4-4F76-A4CC-B546FF8F6064}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53273420-6CD4-4F76-A4CC-B546FF8F6064}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53273420-6CD4-4F76-A4CC-B546FF8F6064}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53273420-6CD4-4F76-A4CC-B546FF8F6064}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E839E7D-92AB-4ADA-9614-D51E75FB231E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E839E7D-92AB-4ADA-9614-D51E75FB231E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E839E7D-92AB-4ADA-9614-D51E75FB231E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E839E7D-92AB-4ADA-9614-D51E75FB231E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

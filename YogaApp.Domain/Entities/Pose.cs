@@ -16,7 +16,7 @@ public class Pose
 
     public Pose(string Name)
     {
-        PoseName = Name;
+       SetName(Name);
     }
 
     public void SetName(string newName)
@@ -40,5 +40,23 @@ public class Pose
             throw new ArgumentException("Thumbnail Url must be a valid svg image!");
         }
         ThumbnailUrlSvg = url;
+    }
+    
+    public void SetProperties(
+        string sanskritName,
+        string translationOfName,
+        string description,
+        string benefits,
+        int difficultyId,
+        string urlSvg,
+        string thumbnailUrlSvg)
+    {
+        SanskritName = sanskritName;
+        TranslationOfName = translationOfName;
+        PoseDescription = description;
+        PoseBenefits = benefits;
+        DifficultyId = difficultyId;
+        SetUrlSvg(urlSvg);
+        SetThumbnailUrlSvg(thumbnailUrlSvg);
     }
 }

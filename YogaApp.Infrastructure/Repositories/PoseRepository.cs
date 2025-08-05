@@ -15,9 +15,10 @@ public class PoseRepository:IPoseRepository
     }
     
     
-    public Task<List<Pose>> GetAllPosesAsync()
+    public async Task<List<Pose>> GetAllPosesAsync()
     {
-        throw new NotImplementedException();
+        var poses =  await _db.QueryAsync<Pose>("SELECT * FROM Pose");
+        return poses.ToList();
     }
 
     public Task<Pose> GetPoseByIdAsync(int id)

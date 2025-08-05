@@ -24,7 +24,8 @@ public class CreatePoseUseCase
             request.PoseBenefits,
             request.DifficultyId,
             request.UrlSvg,
-            request.ThumbnailUrlSvg);
+            request.ThumbnailUrlSvg,
+            request.CategoryIds);
         
         
         //Repository saves the result

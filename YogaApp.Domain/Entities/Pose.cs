@@ -4,15 +4,15 @@ public class Pose
 {
     public int PoseId { get; set; }
     public string PoseName { get; set; }
-    public string SanskritName { get; set; }
-    public string TranslationOfName { get; set; }
-    public string PoseDescription { get; set; }
-    public string PoseBenefits { get; set; }
-    public int DifficultyId { get; set; }
-    public string DifficultyName { get; set; }
-    public List<int> CategoryIds { get; set; }
-    public string UrlSvg { get; set; }
-    public string ThumbnailUrlSvg { get; set; }
+    public string? SanskritName { get; set; }
+    public string? TranslationOfName { get; set; }
+    public string? PoseDescription { get; set; }
+    public string? PoseBenefits { get; set; }
+    public int? DifficultyId { get; set; }
+    public Difficulty Difficulty { get; set; }
+    public List<int>? CategoryIds { get; set; }
+    public string? UrlSvg { get; set; }
+    public string? ThumbnailUrlSvg { get; set; }
 
     public Pose(string Name)
     {
@@ -43,13 +43,14 @@ public class Pose
     }
     
     public void SetProperties(
-        string sanskritName,
-        string translationOfName,
-        string description,
-        string benefits,
-        int difficultyId,
-        string urlSvg,
-        string thumbnailUrlSvg)
+        string? sanskritName,
+        string? translationOfName,
+        string? description,
+        string? benefits,
+        int? difficultyId,
+        string? urlSvg,
+        string? thumbnailUrlSvg,
+        List<int>? categoryIds)
     {
         SanskritName = sanskritName;
         TranslationOfName = translationOfName;
@@ -58,5 +59,6 @@ public class Pose
         DifficultyId = difficultyId;
         SetUrlSvg(urlSvg);
         SetThumbnailUrlSvg(thumbnailUrlSvg);
+        CategoryIds = categoryIds;
     }
 }

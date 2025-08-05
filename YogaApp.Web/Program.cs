@@ -1,7 +1,26 @@
+using System.Data;
+using MySql.Data.MySqlClient;
+using YogaApp.Application.Interfaces;
+using YogaApp.Application.Services;
+using YogaApp.Infrastructure.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IDbConnection>(s => 
+{
+    var connectionString = builder.Configuration.GetConnectionString("yogaApi");
+    return new MySqlConnection(connectionString);
+});
+
+builder.Services.AddScoped<IPoseRepository, PoseRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IDifficultyRepository, DifficultyRepository>();
+
+// Register your use case
+builder.Services.AddScoped<CreatePoseUseCase>();
 
 var app = builder.Build();
 

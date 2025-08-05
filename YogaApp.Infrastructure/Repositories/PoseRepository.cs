@@ -18,7 +18,7 @@ public class PoseRepository : IPoseRepository
 
     public async Task<List<Pose>> GetAllPosesAsync()
     {
-        var dtos = await _db.QueryAsync<PoseDto>("SELECT * FROM Pose");
+        var dtos = await _db.QueryAsync<PoseDto>("SELECT * FROM poses");
         //map dto to pose entity here
         return dtos.Select(MapDtoToEntity).ToList();
     }

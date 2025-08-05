@@ -1,7 +1,7 @@
 using YogaApp.Application.Interfaces;
 using YogaApp.Domain.Entities;
 
-namespace YogaApp.Application.Services;
+namespace YogaApp.Application.UseCases;
 
 public class GetAllDifficultiesUseCase
 {

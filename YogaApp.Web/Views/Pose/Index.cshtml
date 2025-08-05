@@ -1,0 +1,22 @@
+@using YogaApp.Domain.Entities
+@model List<AllPosesViewModel>
+
+<h2>All Poses</h2>
+
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Sanskrit Name</th>
+        <th>Description</th>
+        <th>Image</th>
+    </tr>
+    @foreach (var pose in Model)
+    {
+        <tr>
+            <td>@pose.PoseName</td>
+            <td>@pose.SanskritName</td>
+            <td>@pose.PoseDescription</td>
+            <td><img src="@pose.ThumbnailUrlSvg" alt="@pose.PoseName" style="max-height: 50px"></td>
+        </tr>
+    }
+</table>

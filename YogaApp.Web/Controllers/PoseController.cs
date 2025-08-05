@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using YogaApp.Application.DTO;
 using YogaApp.Application.Interfaces;
-using YogaApp.Application.Services;
+using YogaApp.Application.UseCases;
 using YogaApp.Web.Models;
 
 namespace YogaApp.Web.Controllers;
@@ -16,24 +16,27 @@ public class PoseController : Controller
     private readonly ICategoryRepository _categoryRepo;
     private readonly IDifficultyRepository _difficultyRepo;
     private readonly CreatePoseUseCase _createPoseUseCase;
+    GetAllPosesUseCase _getAllPosesUseCase;
 
     public PoseController(ILogger<PoseController> logger, IPoseRepository poseRepo, ICategoryRepository categoryRepo,
-        IDifficultyRepository difficultyRepo, CreatePoseUseCase createPoseUseCase)
+        IDifficultyRepository difficultyRepo, CreatePoseUseCase createPoseUseCase, GetAllPosesUseCase getAllPosesUseCase)
     {
         _logger = logger;
         _poseRepo = poseRepo;
         _categoryRepo = categoryRepo;
         _difficultyRepo = difficultyRepo;
         _createPoseUseCase = createPoseUseCase;
+        _getAllPosesUseCase = getAllPosesUseCase;
     }
 
     [HttpGet]
     public async Task<IActionResult> Index()
     {
-        var poses = await _poseRepo.GetAllPosesAsync();
+        var posesDto = await _getAllPosesUseCase.ExecuteGetAllPosesAsync();
+        var poseViews = posesDto.Select(p =>new AllPosesViewModel(p)).ToList();
         //map DTO to AllPosesViewModel
         //return View(model)
-        return View();
+        return View(poseViews);
     }
     
     [HttpGet]

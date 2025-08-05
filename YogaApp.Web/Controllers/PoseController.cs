@@ -30,7 +30,7 @@ public class PoseController : Controller
     [HttpGet]
     public async Task<IActionResult> Index()
     {
-        //call use case
+        var poses = await _poseRepo.GetAllPosesAsync();
         //map DTO to AllPosesViewModel
         //return View(model)
         return View();

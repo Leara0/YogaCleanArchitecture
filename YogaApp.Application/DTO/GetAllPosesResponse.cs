@@ -11,8 +11,19 @@ public class GetAllPosesResponse
     public string? PoseDescription { get; set; }
     public string? PoseBenefits { get; set; }
     public int? DifficultyId { get; set; }
-    public Difficulty Difficulty { get; set; }
-    public List<int>? CategoryIds { get; set; }
     public string? UrlSvg { get; set; }
     public string? ThumbnailUrlSvg { get; set; }
+
+    public GetAllPosesResponse(Pose pose)
+    {
+        PoseId = pose.PoseId;
+        PoseName = pose.PoseName;
+        SanskritName = pose.SanskritName;
+        TranslationOfName = pose.TranslationOfName;
+        PoseDescription = pose.PoseDescription;
+        PoseBenefits = pose.PoseBenefits;
+        DifficultyId = pose.DifficultyId;
+        UrlSvg = pose.UrlSvg;
+        ThumbnailUrlSvg = pose.ThumbnailUrlSvg;
+    }
 }

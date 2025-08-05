@@ -1,9 +1,23 @@
+using YogaApp.Application.DTO;
+using YogaApp.Application.Interfaces;
+using YogaApp.Domain.Entities;
+
 namespace YogaApp.Application.Services;
 
 public class GetAllPosesUseCase
 {
-    //calls repo and stores returned entity
-    //call repo to get the name of the difficulty 
-    //maps entity to DTO
-    //returns DTO
+    private readonly IPoseRepository _poseRepo;
+
+    public GetAllPosesUseCase(IPoseRepository poseRepo)
+    {
+        _poseRepo = poseRepo;
+    }
+
+    public async Task<List<GetAllPosesResponse>> ExecuteGetAllPosesAsync()
+    {
+        var poses = await _poseRepo.GetAllPosesAsync();
+        
+        return poses.Select(p => new GetAllPosesResponse(p)).ToList();
+    }
+    
 }

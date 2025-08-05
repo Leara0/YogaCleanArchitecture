@@ -49,8 +49,8 @@ public class Pose
         string? benefits,
         int? difficultyId,
         string? urlSvg,
-        string? thumbnailUrlSvg,
-        List<int>? categoryIds)
+        string? thumbnailUrlSvg)
+        
     {
         SanskritName = sanskritName;
         TranslationOfName = translationOfName;
@@ -59,6 +59,7 @@ public class Pose
         DifficultyId = difficultyId;
         SetUrlSvg(urlSvg);
         SetThumbnailUrlSvg(thumbnailUrlSvg);
-        CategoryIds = categoryIds;
+        
     }
+    
 }

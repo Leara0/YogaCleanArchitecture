@@ -24,9 +24,8 @@ public class CreatePoseUseCase
             request.PoseBenefits,
             request.DifficultyId,
             request.UrlSvg,
-            request.ThumbnailUrlSvg,
-            request.CategoryIds);
-        
+            request.ThumbnailUrlSvg);
+        pose.CategoryIds = request.CategoryIds;
         
         //Repository saves the result
         var poseId = await _repo.CreatePoseAsync(pose);

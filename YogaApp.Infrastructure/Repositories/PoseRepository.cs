@@ -23,9 +23,10 @@ public class PoseRepository : IPoseRepository
         return dtos.Select(MapDtoToEntity).ToList();
     }
 
-    public Task<Pose> GetPoseByIdAsync(int id)
+    public async Task<Pose> GetPoseByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        var dto = await _db.QuerySingleOrDefaultAsync<PoseDto>("SELECT * FROM poses WHERE id = @id", new { id });
+        return MapDtoToEntity(dto);
     }
 
     public Task<Pose> UpdatePoseAsync(Pose pose)

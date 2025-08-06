@@ -7,11 +7,11 @@ public class CreatePoseViewModel
 {
     [Required]
     public string PoseName { get; set; }
-    public string SanskritName { get; set; }
-    public string TranslationOfName { get; set; }
-    public string PoseDescription { get; set; }
-    public string PoseBenefits { get; set; }
-    public int DifficultyId { get; set; }
+    public string? SanskritName { get; set; }
+    public string? TranslationOfName { get; set; }
+    public string? PoseDescription { get; set; }
+    public string? PoseBenefits { get; set; }
+    public int? DifficultyId { get; set; }
     
     //this code says you must either enter nothing or a file with .svg
     [RegularExpression(@"^$|.*\.svg$", ErrorMessage = "Please enter a valid SVG URL or leave blank")]
@@ -21,8 +21,8 @@ public class CreatePoseViewModel
     [RegularExpression(@"^(|.*svg.*)$", ErrorMessage = "Please enter a valid SVG URL or leave blank")]
     [Display(Name = "SVG URL")]
     public string? UrlSvgAlt { get; set; }
-    public List<int> CategoryIds { get; set; } = new List<int>();
+    public List<int>? CategoryIds { get; set; } = new List<int>();
     
-    public List<SelectListItem> DifficultyOptions { get; set; }
-    public List<SelectListItem> CategoryOptions { get; set; }
+    public List<SelectListItem>? DifficultyOptions { get; set; }
+    public List<SelectListItem>? CategoryOptions { get; set; }
 }

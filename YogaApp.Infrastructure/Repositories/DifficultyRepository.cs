@@ -19,4 +19,11 @@ public class DifficultyRepository:IDifficultyRepository
         var diff = await _db.QueryAsync<Difficulty>("SELECT * FROM difficulty");
         return diff.ToList();
     }
-}
+
+    public async Task<string> GetDifficultyNameByDifficultyIdAsync(int Id)
+    {
+        return await _db.QuerySingleOrDefaultAsync<string>
+            ("SELECT difficulty_level FROM difficulty WHERE difficulty_id = @ Id", 
+                new { Id });
+    }
+} 

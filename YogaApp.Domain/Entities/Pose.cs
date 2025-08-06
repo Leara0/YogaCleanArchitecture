@@ -49,17 +49,18 @@ public class Pose
         string? benefits,
         int? difficultyId,
         string? urlSvg,
-        string? thumbnailUrlSvg)
-        
+        string? thumbnailUrlSvg) 
     {
         SanskritName = sanskritName;
         TranslationOfName = translationOfName;
         PoseDescription = description;
         PoseBenefits = benefits;
         DifficultyId = difficultyId;
-        SetUrlSvg(urlSvg);
-        SetThumbnailUrlSvg(thumbnailUrlSvg);
-        
+        if (!string.IsNullOrEmpty(urlSvg))
+            SetUrlSvg(urlSvg);
+    
+        if (!string.IsNullOrEmpty(thumbnailUrlSvg))
+            SetThumbnailUrlSvg(thumbnailUrlSvg);
     }
     
 }

@@ -12,19 +12,19 @@ public class PoseController : Controller
 {
     private readonly ILogger<PoseController> _logger;
 
-    private readonly IPoseRepository _poseRepo;
-    private readonly ICategoryRepository _categoryRepo;
-    private readonly IDifficultyRepository _difficultyRepo;
+    
+    private readonly GetAllCategoriesUseCase _getAllCategories;
+    private readonly GetAllDifficultiesUseCase _getAllDifficulties;
     private readonly CreatePoseUseCase _createPoseUseCase;
-    GetAllPosesUseCase _getAllPosesUseCase;
+    private readonly  GetAllPosesUseCase _getAllPosesUseCase;
 
-    public PoseController(ILogger<PoseController> logger, IPoseRepository poseRepo, ICategoryRepository categoryRepo,
-        IDifficultyRepository difficultyRepo, CreatePoseUseCase createPoseUseCase, GetAllPosesUseCase getAllPosesUseCase)
+    public PoseController(ILogger<PoseController> logger, GetAllCategoriesUseCase getAllCategories,
+        GetAllDifficultiesUseCase getAllDifficulties, CreatePoseUseCase createPoseUseCase, GetAllPosesUseCase getAllPosesUseCase)
     {
         _logger = logger;
-        _poseRepo = poseRepo;
-        _categoryRepo = categoryRepo;
-        _difficultyRepo = difficultyRepo;
+        
+        _getAllCategories = getAllCategories;
+        _getAllDifficulties = getAllDifficulties;
         _createPoseUseCase = createPoseUseCase;
         _getAllPosesUseCase = getAllPosesUseCase;
     }
@@ -42,8 +42,8 @@ public class PoseController : Controller
     [HttpGet]
     public async Task<IActionResult> CreateNewPoseGet()
     {
-        var categories = await _categoryRepo.GetAllCategoriesAsync();
-        var difficulties = await _difficultyRepo.GetAllDifficultiesAsync();
+        var categories = await _getAllCategories.ExecuteGetAllCategoriesAsync();
+        var difficulties = await _getAllDifficulties.ExecuteGetAllDifficultiesAsync();
         var pose = new CreatePoseViewModel();
         await PopulateDropdownsAsync(pose);
         
@@ -53,11 +53,14 @@ public class PoseController : Controller
     [HttpPost]
     public async Task<IActionResult> CreateNewPosePost(CreatePoseViewModel pose)
     {
+        
         if (!ModelState.IsValid)
         {
+            _logger.LogInformation("Creating new pose failed. Model invalid");
             await PopulateDropdownsAsync(pose);
             return View("CreateNewPoseGet", pose);
         }
+        _logger.LogInformation("The model is valid");
 
         var request = new CreatePoseRequest
         {
@@ -75,10 +78,11 @@ public class PoseController : Controller
         try
         {
             var poseId = await _createPoseUseCase.ExecuteCreatePoseAsync(request);
-            return RedirectToAction("Index");//@TODO change this to a view of the table
+            return RedirectToAction("Index");
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, ex.Message);
             ModelState.AddModelError("", ex.Message);
             await PopulateDropdownsAsync(pose);
             return View("CreateNewPoseGet", pose);
@@ -89,14 +93,14 @@ public class PoseController : Controller
     private async Task PopulateDropdownsAsync(CreatePoseViewModel pose)
     {
         // load difficulties and categories
-        var difficulties = await _difficultyRepo.GetAllDifficultiesAsync();
+        var difficulties = await _getAllDifficulties.ExecuteGetAllDifficultiesAsync();
         pose.DifficultyOptions = difficulties.Select(d => new SelectListItem
         {
             Value = d.Difficulty_Id.ToString(),
             Text = d.Difficulty_Level
         }).ToList();
 
-        var categories = await _categoryRepo.GetAllCategoriesAsync();
+        var categories = await _getAllCategories.ExecuteGetAllCategoriesAsync();
         pose.CategoryOptions = categories.Select(c => new SelectListItem
         {
             Value = c.Category_Id.ToString(),

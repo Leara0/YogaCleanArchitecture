@@ -21,7 +21,9 @@ builder.Services.AddScoped<IDifficultyRepository, DifficultyRepository>();
 
 // Register your use case
 builder.Services.AddScoped<CreatePoseUseCase>();
-builder.Services.AddScoped < GetAllPosesUseCase>();
+builder.Services.AddScoped<GetAllCategoriesUseCase>();
+builder.Services.AddScoped<GetAllDifficultiesUseCase>();
+builder.Services.AddScoped<GetAllPosesUseCase>();
 
 var app = builder.Build();
 

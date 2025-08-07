@@ -1,6 +1,6 @@
 using System.Data;
 using Dapper;
-using YogaApp.Application.Interfaces;
+using YogaApp.Application.RespositoryInterfaces;
 using YogaApp.Domain.Entities;
 using YogaApp.Infrastructure.DTO;
 
@@ -25,7 +25,7 @@ public class PoseRepository : IPoseRepository
 
     public async Task<Pose> GetPoseByIdAsync(int id)
     {
-        var dto = await _db.QuerySingleOrDefaultAsync<PoseDto>("SELECT * FROM poses WHERE id = @id", new { id });
+        var dto = await _db.QuerySingleOrDefaultAsync<PoseDto>("SELECT * FROM poses WHERE pose_id = @id", new { id });
         return MapDtoToEntity(dto);
     }
 

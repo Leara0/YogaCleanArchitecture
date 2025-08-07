@@ -1,6 +1,6 @@
 using YogaApp.Domain.Entities;
 
-namespace YogaApp.Application.Interfaces;
+namespace YogaApp.Application.RespositoryInterfaces;
 
 public interface IPoseRepository
 {

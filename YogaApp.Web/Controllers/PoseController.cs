@@ -2,7 +2,6 @@ using Google.Protobuf.WellKnownTypes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using YogaApp.Application.DTO;
-using YogaApp.Application.Interfaces;
 using YogaApp.Application.UseCases;
 using YogaApp.Web.Models;
 
@@ -48,8 +47,9 @@ public class PoseController : Controller
         //get GetPoseByIdResponse DTO
         var poseDto = await _getPoseByIdUseCase.ExecuteGetPoseByIdAsync(id);
         // map onto View Model
+        var poseView = new PoseDetailsViewModel(poseDto);
         
-        return View(poseDto);
+        return View(poseView);
     }
     
     [HttpGet]

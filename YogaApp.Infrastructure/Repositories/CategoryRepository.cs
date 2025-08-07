@@ -1,6 +1,6 @@
 using System.Data;
 using Dapper;
-using YogaApp.Application.Interfaces;
+using YogaApp.Application.RespositoryInterfaces;
 using YogaApp.Domain.Entities;
 using YogaApp.Infrastructure.DTO;
 

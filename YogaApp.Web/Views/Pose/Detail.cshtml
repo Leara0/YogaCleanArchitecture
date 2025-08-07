@@ -1,18 +1,22 @@
-@model TModel
+@model PoseDetailsViewModel
+<h2>@Model.PoseName Pose:</h2>
 
-@{
-    Layout = null;
+<!-- Add update product link -->
+<!--Add delete product link here -->
+<img src="@Model.ImageUrl" alt="@Model.PoseName" height="500px">
+<p><strong>Sanskrit Name:</strong> @Model.SanskritName</p>
+<p><strong>Sanskrit Name Translation:</strong> @Model.TranslationOfName</p>
+<p><strong>Description:</strong> @Model.PoseDescription</p>
+<p><strong>Pose Benefits: </strong> @Model.PoseBenefits</p>
+<p><strong>Category/s: </strong>
+@if (Model.CategoryLink == null || !Model.CategoryLink.Any())
+{
+    @:No categories are associated with this pose yet. 
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title>title</title>
-</head>
-<body>
-<div>
-      
-</div>
-</body>
-</html>
+@foreach (var cat in Model.CategoryLink)
+{
+    <a>@cat.CategoryName</a>
+    @(cat != Model.CategoryLink.Last() ? ", " : "")
+}
+</p>
+<p><strong>Pose Difficulty:</strong><a> @Model.DifficultyLink.DifficultyName</a></p>

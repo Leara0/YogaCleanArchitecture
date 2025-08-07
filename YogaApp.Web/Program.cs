@@ -1,6 +1,6 @@
 using System.Data;
 using MySql.Data.MySqlClient;
-using YogaApp.Application.Interfaces;
+using YogaApp.Application.RespositoryInterfaces;
 using YogaApp.Application.UseCases;
 using YogaApp.Infrastructure.Repositories;
 
@@ -24,6 +24,7 @@ builder.Services.AddScoped<CreatePoseUseCase>();
 builder.Services.AddScoped<GetAllCategoriesUseCase>();
 builder.Services.AddScoped<GetAllDifficultiesUseCase>();
 builder.Services.AddScoped<GetAllPosesUseCase>();
+builder.Services.AddScoped<GetPoseByIdUseCase>();
 
 var app = builder.Build();
 

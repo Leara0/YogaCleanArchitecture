@@ -1,8 +1,9 @@
+using YogaApp.Application.DTO;
 using YogaApp.Domain.Entities;
 
-namespace YogaApp.Application.DTO;
+namespace YogaApp.Web.Models;
 
-public class GetPoseByIdResponse
+public class PoseDetailsViewModel
 {
     public int PoseId { get; set; }
     public string PoseName { get; set; }
@@ -10,12 +11,11 @@ public class GetPoseByIdResponse
     public string? TranslationOfName { get; set; }
     public string? PoseDescription { get; set; }
     public string? PoseBenefits { get; set; }
-    
     public string? ImageUrl { get; set; }
     public DifficultyLink? DifficultyLink { get; set; } = new DifficultyLink();
     public List<CategoryLink>? CategoryLink { get; set; }
 
-    public GetPoseByIdResponse(Pose pose, string? difficultyLevel, List<CategoryLink>? categoryLink)
+    public PoseDetailsViewModel(GetPoseByIdResponse pose)
     {
         PoseId = pose.PoseId;
         PoseName = pose.PoseName;
@@ -23,10 +23,8 @@ public class GetPoseByIdResponse
         TranslationOfName = pose.TranslationOfName;
         PoseDescription = pose.PoseDescription;
         PoseBenefits = pose.PoseBenefits;
-        ImageUrl = pose.UrlSvg;
-        DifficultyLink.DifficultyId = pose.DifficultyId;
-        DifficultyLink.DifficultyName = difficultyLevel;
-        CategoryLink = categoryLink;
+        ImageUrl = pose.ImageUrl;
+        DifficultyLink = pose.DifficultyLink;
+        CategoryLink = pose.CategoryLink;
     }
-    
 }

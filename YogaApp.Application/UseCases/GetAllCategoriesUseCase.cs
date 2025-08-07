@@ -1,4 +1,4 @@
-using YogaApp.Application.Interfaces;
+using YogaApp.Application.RespositoryInterfaces;
 using YogaApp.Domain.Entities;
 
 namespace YogaApp.Application.UseCases;

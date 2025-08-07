@@ -1,5 +1,5 @@
 using YogaApp.Application.DTO;
-using YogaApp.Application.Interfaces;
+using YogaApp.Application.RespositoryInterfaces;
 
 namespace YogaApp.Application.UseCases;
 

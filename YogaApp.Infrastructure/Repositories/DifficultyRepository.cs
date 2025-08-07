@@ -1,6 +1,6 @@
 using System.Data;
 using Dapper;
-using YogaApp.Application.Interfaces;
+using YogaApp.Application.RespositoryInterfaces;
 using YogaApp.Domain.Entities;
 using YogaApp.Infrastructure.DTO;
 
@@ -25,7 +25,7 @@ public class DifficultyRepository:IDifficultyRepository
     public async Task<string> GetDifficultyNameByDifficultyIdAsync(int Id)
     {
         return await _db.QuerySingleOrDefaultAsync<string>
-            ("SELECT difficulty_level FROM difficulty WHERE difficulty_id = @ Id", 
+            ("SELECT difficulty_level FROM difficulty WHERE difficulty_id = @Id", 
                 new { Id });
     }
     

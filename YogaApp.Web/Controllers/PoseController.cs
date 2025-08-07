@@ -17,9 +17,11 @@ public class PoseController : Controller
     private readonly GetAllDifficultiesUseCase _getAllDifficulties;
     private readonly CreatePoseUseCase _createPoseUseCase;
     private readonly  GetAllPosesUseCase _getAllPosesUseCase;
+    private readonly GetPoseByIdUseCase _getPoseByIdUseCase;
 
     public PoseController(ILogger<PoseController> logger, GetAllCategoriesUseCase getAllCategories,
-        GetAllDifficultiesUseCase getAllDifficulties, CreatePoseUseCase createPoseUseCase, GetAllPosesUseCase getAllPosesUseCase)
+        GetAllDifficultiesUseCase getAllDifficulties, CreatePoseUseCase createPoseUseCase, GetAllPosesUseCase getAllPosesUseCase,
+        GetPoseByIdUseCase getPoseByIdUseCase)
     {
         _logger = logger;
         
@@ -27,16 +29,27 @@ public class PoseController : Controller
         _getAllDifficulties = getAllDifficulties;
         _createPoseUseCase = createPoseUseCase;
         _getAllPosesUseCase = getAllPosesUseCase;
+        _getPoseByIdUseCase = getPoseByIdUseCase;
     }
 
     [HttpGet]
     public async Task<IActionResult> Index()
     {
+        //get list of GetAllPosesResponse DTOs
         var posesDto = await _getAllPosesUseCase.ExecuteGetAllPosesAsync();
+        //map onto View Model
         var poseViews = posesDto.Select(p =>new AllPosesViewModel(p)).ToList();
-        //map DTO to AllPosesViewModel
         //return View(model)
         return View(poseViews);
+    }
+
+    public async Task<IActionResult> Detail(int id)
+    {
+        //get GetPoseByIdResponse DTO
+        var poseDto = await _getPoseByIdUseCase.ExecuteGetPoseByIdAsync(id);
+        // map onto View Model
+        
+        return View(poseDto);
     }
     
     [HttpGet]
@@ -60,7 +73,6 @@ public class PoseController : Controller
             await PopulateDropdownsAsync(pose);
             return View("CreateNewPoseGet", pose);
         }
-        _logger.LogInformation("The model is valid");
 
         var request = new CreatePoseRequest
         {
@@ -89,6 +101,12 @@ public class PoseController : Controller
         }
         
     }
+    
+    
+    
+    
+    
+    
     //helper method
     private async Task PopulateDropdownsAsync(CreatePoseViewModel pose)
     {
@@ -96,15 +114,15 @@ public class PoseController : Controller
         var difficulties = await _getAllDifficulties.ExecuteGetAllDifficultiesAsync();
         pose.DifficultyOptions = difficulties.Select(d => new SelectListItem
         {
-            Value = d.Difficulty_Id.ToString(),
-            Text = d.Difficulty_Level
+            Value = d.DifficultyId.ToString(),
+            Text = d.DifficultyLevel
         }).ToList();
 
         var categories = await _getAllCategories.ExecuteGetAllCategoriesAsync();
         pose.CategoryOptions = categories.Select(c => new SelectListItem
         {
-            Value = c.Category_Id.ToString(),
-            Text = c.Category_Name
+            Value = c.CategoryId.ToString(),
+            Text = c.CategoryName
         }).ToList();
     }
 }

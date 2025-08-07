@@ -2,6 +2,7 @@ using Google.Protobuf.WellKnownTypes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using YogaApp.Application.DTO;
+using YogaApp.Application.UseCaseInterfaces;
 using YogaApp.Application.UseCases;
 using YogaApp.Web.Models;
 
@@ -10,32 +11,18 @@ namespace YogaApp.Web.Controllers;
 public class PoseController : Controller
 {
     private readonly ILogger<PoseController> _logger;
-
-    
-    private readonly GetAllCategoriesUseCase _getAllCategories;
-    private readonly GetAllDifficultiesUseCase _getAllDifficulties;
-    private readonly CreatePoseUseCase _createPoseUseCase;
-    private readonly  GetAllPosesUseCase _getAllPosesUseCase;
-    private readonly GetPoseByIdUseCase _getPoseByIdUseCase;
-
-    public PoseController(ILogger<PoseController> logger, GetAllCategoriesUseCase getAllCategories,
-        GetAllDifficultiesUseCase getAllDifficulties, CreatePoseUseCase createPoseUseCase, GetAllPosesUseCase getAllPosesUseCase,
-        GetPoseByIdUseCase getPoseByIdUseCase)
+    private readonly IPoseApplicationServices _poseServices;
+    public PoseController(ILogger<PoseController> logger, IPoseApplicationServices poseServices)
     {
         _logger = logger;
-        
-        _getAllCategories = getAllCategories;
-        _getAllDifficulties = getAllDifficulties;
-        _createPoseUseCase = createPoseUseCase;
-        _getAllPosesUseCase = getAllPosesUseCase;
-        _getPoseByIdUseCase = getPoseByIdUseCase;
+        _poseServices = poseServices;
     }
 
     [HttpGet]
     public async Task<IActionResult> Index()
     {
         //get list of GetAllPosesResponse DTOs
-        var posesDto = await _getAllPosesUseCase.ExecuteGetAllPosesAsync();
+        var posesDto = await _poseServices.GetAllPosesAsync();
         //map onto View Model
         var poseViews = posesDto.Select(p =>new AllPosesViewModel(p)).ToList();
         //return View(model)
@@ -45,7 +32,7 @@ public class PoseController : Controller
     public async Task<IActionResult> Detail(int id)
     {
         //get GetPoseByIdResponse DTO
-        var poseDto = await _getPoseByIdUseCase.ExecuteGetPoseByIdAsync(id);
+        var poseDto = await _poseServices.GetPoseByIdAsync(id);
         // map onto View Model
         var poseView = new PoseDetailsViewModel(poseDto);
         
@@ -55,8 +42,8 @@ public class PoseController : Controller
     [HttpGet]
     public async Task<IActionResult> CreateNewPoseGet()
     {
-        var categories = await _getAllCategories.ExecuteGetAllCategoriesAsync();
-        var difficulties = await _getAllDifficulties.ExecuteGetAllDifficultiesAsync();
+        var categories = await _poseServices.GetAllCategoriesAsync();
+        var difficulties = await _poseServices.GetAllDifficultiesAsync();
         var pose = new CreatePoseViewModel();
         await PopulateDropdownsAsync(pose);
         
@@ -89,7 +76,7 @@ public class PoseController : Controller
 
         try
         {
-            var poseId = await _createPoseUseCase.ExecuteCreatePoseAsync(request);
+            var poseId = await _poseServices.CreatePoseAsync(request);
             return RedirectToAction("Index");
         }
         catch (Exception ex)
@@ -111,14 +98,14 @@ public class PoseController : Controller
     private async Task PopulateDropdownsAsync(CreatePoseViewModel pose)
     {
         // load difficulties and categories
-        var difficulties = await _getAllDifficulties.ExecuteGetAllDifficultiesAsync();
+        var difficulties = await _poseServices.GetAllDifficultiesAsync();
         pose.DifficultyOptions = difficulties.Select(d => new SelectListItem
         {
             Value = d.DifficultyId.ToString(),
             Text = d.DifficultyLevel
         }).ToList();
 
-        var categories = await _getAllCategories.ExecuteGetAllCategoriesAsync();
+        var categories = await _poseServices.GetAllCategoriesAsync();
         pose.CategoryOptions = categories.Select(c => new SelectListItem
         {
             Value = c.CategoryId.ToString(),

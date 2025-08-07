@@ -1,6 +1,8 @@
 using System.Data;
 using MySql.Data.MySqlClient;
 using YogaApp.Application.RespositoryInterfaces;
+using YogaApp.Application.Services;
+using YogaApp.Application.UseCaseInterfaces;
 using YogaApp.Application.UseCases;
 using YogaApp.Infrastructure.Repositories;
 
@@ -14,17 +16,20 @@ builder.Services.AddScoped<IDbConnection>(s =>
     var connectionString = builder.Configuration.GetConnectionString("yogaApi");
     return new MySqlConnection(connectionString);
 });
-
+// Register repositories
 builder.Services.AddScoped<IPoseRepository, PoseRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IDifficultyRepository, DifficultyRepository>();
 
-// Register your use case
-builder.Services.AddScoped<CreatePoseUseCase>();
-builder.Services.AddScoped<GetAllCategoriesUseCase>();
-builder.Services.AddScoped<GetAllDifficultiesUseCase>();
-builder.Services.AddScoped<GetAllPosesUseCase>();
-builder.Services.AddScoped<GetPoseByIdUseCase>();
+// Register use cases
+builder.Services.AddScoped<ICreatePoseUseCase, CreatePoseUseCase>();
+builder.Services.AddScoped<IGetAllCategoriesUseCase, GetAllCategoriesUseCase>();
+builder.Services.AddScoped<IGetAllDifficultiesUseCase, GetAllDifficultiesUseCase>();
+builder.Services.AddScoped<IGetAllPosesUseCase, GetAllPosesUseCase>();
+builder.Services.AddScoped<IGetPoseByIdUseCase, GetPoseByIdUseCase>();
+
+//Register pose use case services facade
+builder.Services.AddScoped<IPoseApplicationServices, PoseApplicationService>();
 
 var app = builder.Build();
 

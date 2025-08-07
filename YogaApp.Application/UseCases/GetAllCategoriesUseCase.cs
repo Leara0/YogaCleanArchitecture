@@ -1,9 +1,11 @@
+using YogaApp.Application.DTO;
 using YogaApp.Application.RespositoryInterfaces;
+using YogaApp.Application.UseCaseInterfaces;
 using YogaApp.Domain.Entities;
 
 namespace YogaApp.Application.UseCases;
 
-public class GetAllCategoriesUseCase
+public class GetAllCategoriesUseCase : IGetAllCategoriesUseCase
 {
     private readonly ICategoryRepository _categoryRepository;
 
@@ -12,9 +14,9 @@ public class GetAllCategoriesUseCase
         _categoryRepository = categoryRepository;
     }
 
-    public async Task<List<Category>> ExecuteGetAllCategoriesAsync()
+    public async Task<List<GetAllCategoriesResponse>> ExecuteGetAllCategoriesAsync()
     {
         var categories = await _categoryRepository.GetAllCategoriesAsync();
-        return categories.ToList();
+        return categories.Select(c => new GetAllCategoriesResponse(c)).ToList();
     }
 }

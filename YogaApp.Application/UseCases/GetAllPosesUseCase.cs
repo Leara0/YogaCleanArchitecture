@@ -1,9 +1,10 @@
 using YogaApp.Application.DTO;
 using YogaApp.Application.RespositoryInterfaces;
+using YogaApp.Application.UseCaseInterfaces;
 
 namespace YogaApp.Application.UseCases;
 
-public class GetAllPosesUseCase
+public class GetAllPosesUseCase :IGetAllPosesUseCase
 {
     private readonly IPoseRepository _poseRepo;
 

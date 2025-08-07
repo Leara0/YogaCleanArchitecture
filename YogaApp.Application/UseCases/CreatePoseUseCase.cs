@@ -1,10 +1,11 @@
 using YogaApp.Application.DTO;
 using YogaApp.Application.RespositoryInterfaces;
+using YogaApp.Application.UseCaseInterfaces;
 using YogaApp.Domain.Entities;
 
 namespace YogaApp.Application.UseCases;
 
-public class CreatePoseUseCase
+public class CreatePoseUseCase : ICreatePoseUseCase
 {
     private readonly IPoseRepository _repo;
 

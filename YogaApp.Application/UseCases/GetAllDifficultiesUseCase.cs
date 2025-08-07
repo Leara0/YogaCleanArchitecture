@@ -1,9 +1,10 @@
 using YogaApp.Application.RespositoryInterfaces;
+using YogaApp.Application.UseCaseInterfaces;
 using YogaApp.Domain.Entities;
 
 namespace YogaApp.Application.UseCases;
 
-public class GetAllDifficultiesUseCase
+public class GetAllDifficultiesUseCase: IGetAllDifficultiesUseCase
 {
     private readonly IDifficultyRepository _difficultyRepository;
 

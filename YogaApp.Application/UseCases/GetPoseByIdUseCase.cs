@@ -1,10 +1,11 @@
 using YogaApp.Application.DTO;
 using YogaApp.Application.RespositoryInterfaces;
+using YogaApp.Application.UseCaseInterfaces;
 using YogaApp.Domain.Entities;
 
 namespace YogaApp.Application.UseCases;
 
-public class GetPoseByIdUseCase
+public class GetPoseByIdUseCase : IGetPoseByIdUseCase
 {
     //set up repository DI
     private readonly IPoseRepository _poseRepo;

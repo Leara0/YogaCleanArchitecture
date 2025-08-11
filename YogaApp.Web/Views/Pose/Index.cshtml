@@ -1,8 +1,10 @@
 @using YogaApp.Domain.Entities
-@model List<AllPosesViewModel>
+@model PosesByDifficultyViewModel
 
 <h2>All Poses</h2>
 <a asp-controller="Pose" asp-action="CreateNewPoseGet">Create a Pose</a>
+
+<h4>Easy Poses</h4>
 <table class="table">
     <tr>
         <th>Name</th>
@@ -10,7 +12,47 @@
         <th>Description</th>
         <th>Image</th>
     </tr>
-    @foreach (var pose in Model)
+    @foreach (var pose in Model.EasyPoses)
+    {
+        <tr>
+            <td><a asp-action="Detail" asp-controller="Pose" asp-route-id="@pose.PoseId">@pose.PoseName</a></td>
+            <td>@pose.SanskritName</td>
+            <td>@pose.PoseDescription</td>
+            <td><img src="@pose.ThumbnailUrlSvg" alt="@pose.PoseName" style="max-height: 50px"></td>
+        </tr>
+    }
+</table>
+
+<h4>Medium Poses</h4>
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Sanskrit Name</th>
+        <th>Description</th>
+        <th>Image</th>
+    </tr>
+    @foreach (var pose in Model.MediumPoses)
+    
+    {
+        <tr>
+            <td><a asp-action="Detail" asp-controller="Pose" asp-route-id="@pose.PoseId">@pose.PoseName</a></td>
+            <td>@pose.SanskritName</td>
+            <td>@pose.PoseDescription</td>
+            <td><img src="@pose.ThumbnailUrlSvg" alt="@pose.PoseName" style="max-height: 50px"></td>
+        </tr>
+    }
+</table>
+
+<h4>Hard Poses</h4>
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Sanskrit Name</th>
+        <th>Description</th>
+        <th>Image</th>
+    </tr>
+    @foreach (var pose in Model.HardPoses)
+    
     {
         <tr>
             <td><a asp-action="Detail" asp-controller="Pose" asp-route-id="@pose.PoseId">@pose.PoseName</a></td>

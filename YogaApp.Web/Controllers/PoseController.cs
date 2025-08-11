@@ -23,9 +23,24 @@ public class PoseController : Controller
     {
         //get list of GetAllPosesResponse DTOs
         var posesDto = await _services.GetAllPosesAsync();
-        //map onto View Model
-        var poseViews = posesDto.Select(p =>new AllPosesViewModel(p)).ToList();
-        //return View(model)
+        //filter by difficulty level and map to View Model
+        var easy = posesDto
+            .Where(p => p.Difficulty_Id == 1)
+            .Select(p => new AllPosesViewModel(p)).ToList();
+        var medium = posesDto
+            .Where(p => p.Difficulty_Id == 2)
+            .Select(p => new AllPosesViewModel(p)).ToList();
+        var hard = posesDto
+            .Where(p => p.Difficulty_Id == 3)
+            .Select(p => new AllPosesViewModel(p)).ToList();
+        
+        //map it to one model (PosesByDifficultyViewModel
+        var poseViews = new PosesByDifficultyViewModel()
+        {
+            EasyPoses = easy,
+            MediumPoses = medium,
+            HardPoses = hard
+        };
         return View(poseViews);
     }
 

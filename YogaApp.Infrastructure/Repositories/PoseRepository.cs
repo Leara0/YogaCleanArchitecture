@@ -15,7 +15,6 @@ public class PoseRepository : IPoseRepository
         _db = db;
     }
 
-
     public async Task<List<Pose>> GetAllPosesAsync()
     {
         var dtos = await _db.QueryAsync<PoseDto>("SELECT * FROM poses");
@@ -70,7 +69,16 @@ public class PoseRepository : IPoseRepository
     {
         throw new NotImplementedException();
     }
-
+    public async Task<List<int>> GetPoseIdsByCategoryIdAsync(int catId)
+    {
+        return (await _db.QueryAsync<int>("SELECT * FROM pose_mapping WHERE Category_id = @Id", 
+            new {Id = catId})).ToList();
+    }
+    public async Task<List<(int PoseId, string PoseName)>> GetPosesInCategoryAsync(List<int> poseIds)
+    {
+        return (await _db.QueryAsync<(int PoseId, string PoseName)>("SELECT Pose_id AS PoseId, English_Name AS PoseName FROM poses WHERE pose_id IN @PoseIds",
+            new { PoseIds = poseIds })).ToList();
+    }
     private Pose MapDtoToEntity(PoseDto dto)
     {
         var pose = new Pose(dto.English_Name);

@@ -25,17 +25,13 @@ public class GetPoseByIdUseCase : IGetPoseByIdUseCase
         //call repo to get pose entity by Id
         var pose = await _poseRepo.GetPoseByIdAsync(PoseId);
         
-        //call catrepo to get List<catIds> and Category Entities
+        //get all categories that fall in this pose and tuple that matches CatId and Name
         var categoryIds = await _catRepo.GetCategoryIdsByPoseIdAsync(PoseId);
-        var categories = await _catRepo.GetAllCategoriesAsync();
+        var catsInThisPose = await _catRepo.GetCatsInPoseAsync(categoryIds);
         
-        // use join statement to Make a list of CategoryLink 
-        var categoryLinks = categoryIds
-            .Join(categories,
-                id => id,
-                c => c.CategoryId,
-                (id, c) => new CategoryLink { CategoryId = id, CategoryName = c.CategoryName })
-            .ToList();
+        //map tuple to PoseLink class for easier data handling
+        var categoryLinks = catsInThisPose.Select(c => 
+            new CategoryLink() { CategoryId = c.CatId, CategoryName = c.CatName }).ToList();
         
         // call difficulty repo to get name of difficulty from diff id (if difficulty not null)
         string difficultyLevel = null;

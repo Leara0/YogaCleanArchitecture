@@ -10,6 +10,9 @@ public interface IPoseRepository
     Task<int> CreatePoseAsync(Pose pose);
     Task SavePoseCategoryAsync(int poseId, List<int> categories);
     Task DeletePoseByIdAsync(int id);
+    Task<List<int>> GetPoseIdsByCategoryIdAsync(int catId);
+    
+    Task<List<(int PoseId, string PoseName)>> GetPosesInCategoryAsync(List<int> poseId);
     
 
 }

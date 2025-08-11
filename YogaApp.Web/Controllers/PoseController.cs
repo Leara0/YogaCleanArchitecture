@@ -11,18 +11,18 @@ namespace YogaApp.Web.Controllers;
 public class PoseController : Controller
 {
     private readonly ILogger<PoseController> _logger;
-    private readonly IPoseApplicationServices _poseServices;
-    public PoseController(ILogger<PoseController> logger, IPoseApplicationServices poseServices)
+    private readonly IApplicationServices _services;
+    public PoseController(ILogger<PoseController> logger, IApplicationServices services)
     {
         _logger = logger;
-        _poseServices = poseServices;
+        _services = services;
     }
 
     [HttpGet]
     public async Task<IActionResult> Index()
     {
         //get list of GetAllPosesResponse DTOs
-        var posesDto = await _poseServices.GetAllPosesAsync();
+        var posesDto = await _services.GetAllPosesAsync();
         //map onto View Model
         var poseViews = posesDto.Select(p =>new AllPosesViewModel(p)).ToList();
         //return View(model)
@@ -32,7 +32,7 @@ public class PoseController : Controller
     public async Task<IActionResult> Detail(int id)
     {
         //get GetPoseByIdResponse DTO
-        var poseDto = await _poseServices.GetPoseByIdAsync(id);
+        var poseDto = await _services.GetPoseByIdAsync(id);
         // map onto View Model
         var poseView = new PoseDetailsViewModel(poseDto);
         
@@ -42,8 +42,8 @@ public class PoseController : Controller
     [HttpGet]
     public async Task<IActionResult> CreateNewPoseGet()
     {
-        var categories = await _poseServices.GetAllCategoriesAsync();
-        var difficulties = await _poseServices.GetAllDifficultiesAsync();
+        var categories = await _services.GetAllCategoriesAsync();
+        var difficulties = await _services.GetAllDifficultiesAsync();
         var pose = new CreatePoseViewModel();
         await PopulateDropdownsAsync(pose);
         
@@ -76,7 +76,7 @@ public class PoseController : Controller
 
         try
         {
-            var poseId = await _poseServices.CreatePoseAsync(request);
+            var poseId = await _services.CreatePoseAsync(request);
             return RedirectToAction("Index");
         }
         catch (Exception ex)
@@ -98,14 +98,14 @@ public class PoseController : Controller
     private async Task PopulateDropdownsAsync(CreatePoseViewModel pose)
     {
         // load difficulties and categories
-        var difficulties = await _poseServices.GetAllDifficultiesAsync();
+        var difficulties = await _services.GetAllDifficultiesAsync();
         pose.DifficultyOptions = difficulties.Select(d => new SelectListItem
         {
             Value = d.DifficultyId.ToString(),
             Text = d.DifficultyLevel
         }).ToList();
 
-        var categories = await _poseServices.GetAllCategoriesAsync();
+        var categories = await _services.GetAllCategoriesAsync();
         pose.CategoryOptions = categories.Select(c => new SelectListItem
         {
             Value = c.CategoryId.ToString(),

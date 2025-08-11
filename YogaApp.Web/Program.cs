@@ -27,9 +27,10 @@ builder.Services.AddScoped<IGetAllCategoriesUseCase, GetAllCategoriesUseCase>();
 builder.Services.AddScoped<IGetAllDifficultiesUseCase, GetAllDifficultiesUseCase>();
 builder.Services.AddScoped<IGetAllPosesUseCase, GetAllPosesUseCase>();
 builder.Services.AddScoped<IGetPoseByIdUseCase, GetPoseByIdUseCase>();
+builder.Services.AddScoped<IGetCatByCatIdUseCase, GetCatByCatIdUseCase>();
 
 //Register pose use case services facade
-builder.Services.AddScoped<IPoseApplicationServices, PoseApplicationService>();
+builder.Services.AddScoped<IApplicationServices, ApplicationService>();
 
 var app = builder.Build();
 

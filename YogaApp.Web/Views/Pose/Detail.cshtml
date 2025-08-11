@@ -15,7 +15,7 @@
 }
 @foreach (var cat in Model.CategoryLink)
 {
-    <a>@cat.CategoryName</a>
+    <a asp-action="Detail" asp-controller="Category" asp-route-id="@cat.CategoryId">@cat.CategoryName</a>
     @(cat != Model.CategoryLink.Last() ? ", " : "")
 }
 </p>

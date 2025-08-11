@@ -1,0 +1,18 @@
+@model List<AllCategoriesViewModel>
+
+<h2>All Categories</h2>
+
+<table class="table">
+    <tr>
+        <th>Category</th>
+        <th>Description</th>
+    </tr>
+    @foreach (var cat in Model)
+    {
+        <tr>
+            <td><a asp-action="Detail" asp-controller="Category" asp-route-id="@cat.CategoryId">@cat.CategoryName</a></td>
+            <td>@cat.CategoryDescription</td>
+        </tr>
+    }
+    
+</table>

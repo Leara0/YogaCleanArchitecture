@@ -10,4 +10,8 @@
       <ProjectReference Include="..\YogaApp.Domain\YogaApp.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="UseCases\" />
+    </ItemGroup>
+
 </Project>

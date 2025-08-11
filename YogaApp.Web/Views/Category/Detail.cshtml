@@ -1,0 +1,11 @@
+@model CategoryDetailViewModel
+
+<h2>@Model.CategoryName</h2>
+<p><strong>Category Description:</strong> @Model.CategoryDescription</p>
+<p><strong>Poses in this category:</strong></p>
+<ul>
+    @foreach (var pose in Model.PoseLink)
+    {
+        <li><a asp-action="Detail" asp-controller="Pose" asp-route-id="@pose.PoseId">@pose.PoseName</a></li>
+    }
+</ul>

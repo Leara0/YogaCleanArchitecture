@@ -1,6 +1,7 @@
 using YogaApp.Application.DTO;
 using YogaApp.Application.UseCaseInterfaces;
 using YogaApp.Application.UseCases;
+using YogaApp.Application.UseCases.GetDifficultyByDiffId;
 using YogaApp.Domain.Entities;
 
 namespace YogaApp.Application.Services;
@@ -13,10 +14,12 @@ public class ApplicationService :IApplicationServices
     private readonly  IGetAllPosesUseCase _getAllPosesUseCase;
     private readonly IGetPoseByIdUseCase _getPoseByIdUseCase;
     private readonly IGetCatByCatIdUseCase _getCatByCatIdUseCase;
+    private readonly IGetDifficultyByIdUseCase _getDifficultyByIdUseCase;
 
     public ApplicationService(IGetAllCategoriesUseCase getAllCategories,
         IGetAllDifficultiesUseCase getAllDifficulties, ICreatePoseUseCase createPoseUseCase, IGetAllPosesUseCase getAllPosesUseCase,
-        IGetPoseByIdUseCase getPoseByIdUseCase, IGetCatByCatIdUseCase getCatByCatIdUseCase)
+        IGetPoseByIdUseCase getPoseByIdUseCase, IGetCatByCatIdUseCase getCatByCatIdUseCase, 
+        IGetDifficultyByIdUseCase getDifficultyByIdUseCase)
     {
         _getAllCategories = getAllCategories;
         _getAllDifficulties = getAllDifficulties;
@@ -24,6 +27,7 @@ public class ApplicationService :IApplicationServices
         _getAllPosesUseCase = getAllPosesUseCase;
         _getPoseByIdUseCase = getPoseByIdUseCase;
         _getCatByCatIdUseCase = getCatByCatIdUseCase;
+        _getDifficultyByIdUseCase = getDifficultyByIdUseCase;
     }
     public async Task<Pose> CreatePoseAsync(CreatePoseRequest request)
     {
@@ -53,6 +57,11 @@ public class ApplicationService :IApplicationServices
     public async Task<GetCatByCatIdResponse> GetCatByCatIdAsync(int CatId)
     {
         return await _getCatByCatIdUseCase.ExecuteGetCatByCatIdAsync(CatId);
+    }
+
+    public async Task<GetDifficultyByIdResponse> GetDifficultyByIdAsync(int DiffId)
+    {
+        return await _getDifficultyByIdUseCase.ExecuteGetDifficultyById(DiffId);
     }
 }
 

@@ -35,15 +35,16 @@ public class PoseController : Controller
             .Select(p => new AllPosesViewModel(p)).ToList();
         
         //map it to one model (PosesByDifficultyViewModel
-        var poseViews = new PosesByDifficultyViewModel()
+        var posesView = new PosesByDifficultyViewModel()
         {
             EasyPoses = easy,
             MediumPoses = medium,
             HardPoses = hard
         };
-        return View(poseViews);
+        return View(posesView);
     }
 
+    [HttpGet]
     public async Task<IActionResult> Detail(int id)
     {
         //get GetPoseByIdResponse DTO
@@ -103,11 +104,6 @@ public class PoseController : Controller
         }
         
     }
-    
-    
-    
-    
-    
     
     //helper method
     private async Task PopulateDropdownsAsync(CreatePoseViewModel pose)

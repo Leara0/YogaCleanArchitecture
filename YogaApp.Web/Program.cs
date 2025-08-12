@@ -4,6 +4,7 @@ using YogaApp.Application.RespositoryInterfaces;
 using YogaApp.Application.Services;
 using YogaApp.Application.UseCaseInterfaces;
 using YogaApp.Application.UseCases;
+using YogaApp.Application.UseCases.GetDifficultyByDiffId;
 using YogaApp.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,6 +29,7 @@ builder.Services.AddScoped<IGetAllDifficultiesUseCase, GetAllDifficultiesUseCase
 builder.Services.AddScoped<IGetAllPosesUseCase, GetAllPosesUseCase>();
 builder.Services.AddScoped<IGetPoseByIdUseCase, GetPoseByIdUseCase>();
 builder.Services.AddScoped<IGetCatByCatIdUseCase, GetCatByCatIdUseCase>();
+builder.Services.AddScoped<IGetDifficultyByIdUseCase, GetDifficultyByIdUseCase>();
 
 //Register pose use case services facade
 builder.Services.AddScoped<IApplicationServices, ApplicationService>();

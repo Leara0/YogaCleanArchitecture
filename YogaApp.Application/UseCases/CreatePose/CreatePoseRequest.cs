@@ -10,5 +10,7 @@ public class CreatePoseRequest
     public int? DifficultyId { get; set; }
     public string? UrlSvg { get; set; }
     public string? ThumbnailUrlSvg { get; set; }
-    public List<int>? CategoryIds { get; set; } 
+    public List<int>? CategoryIds { get; set; }
+
+   
 }

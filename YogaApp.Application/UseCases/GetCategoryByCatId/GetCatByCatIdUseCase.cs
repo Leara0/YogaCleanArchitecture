@@ -21,7 +21,7 @@ public class GetCatByCatIdUseCase : IGetCatByCatIdUseCase
         
         //get all poses that fall in this category and tuple that matches poseId and Name
         var poseIdsInCat = await _poseRepo.GetPoseIdsByCategoryIdAsync(CatId);
-        var posesInCat = await _poseRepo.GetPosesInCategoryAsync(poseIdsInCat);
+        var posesInCat = await _poseRepo.GetPoseLinkByPoseId(poseIdsInCat);
         
         //map tuple to PoseLink class for easier data handling
         var links = posesInCat.Select(p => 

@@ -3,7 +3,7 @@ using YogaApp.Domain.Entities;
 
 namespace YogaApp.Application.UseCaseInterfaces;
 
-public interface ICreatePoseUseCase
+public interface ICreatePoseInDbUseCase
 {
-    Task<Pose> ExecuteCreatePoseAsync(CreatePoseRequest request);
+    Task<int> ExecuteCreatePoseAsync(CreatePoseRequest request);
 }

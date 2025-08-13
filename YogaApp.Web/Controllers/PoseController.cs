@@ -55,11 +55,24 @@ public class PoseController : Controller
         return View(poseView);
     }
     
+    
+    [HttpGet]
+    public async Task<IActionResult> UpdatePoseGet(int id)
+    {
+        _logger.LogInformation($"Getting pose {id}");
+        var poseDto = await _services.UpdatePoseAsync(id);
+        _logger.LogInformation($"Pose name is {poseDto.PoseName}");
+        var pose = new CreatePoseViewModel(poseDto);
+        
+        await PopulateDropdownsAsync(pose);
+        
+        return View(pose);
+    }
+    
     [HttpGet]
     public async Task<IActionResult> CreateNewPoseGet()
     {
-        var categories = await _services.GetAllCategoriesAsync();
-        var difficulties = await _services.GetAllDifficultiesAsync();
+        
         var pose = new CreatePoseViewModel();
         await PopulateDropdownsAsync(pose);
         
@@ -92,8 +105,8 @@ public class PoseController : Controller
 
         try
         {
-            var poseId = await _services.CreatePoseAsync(request);
-            return RedirectToAction("Index");
+            var poseId = await _services.CreatePoseInDbAsync(request);
+            return RedirectToAction("Detail", new { id = poseId });
         }
         catch (Exception ex)
         {
@@ -121,6 +134,26 @@ public class PoseController : Controller
         {
             Value = c.CategoryId.ToString(),
             Text = c.CategoryName
+        }).ToList();
+    }
+
+    private async Task PopulatePreselectedDropdownsAsync(CreatePoseViewModel pose)
+    {
+        // load difficulties and categories
+        var difficulties = await _services.GetAllDifficultiesAsync();
+        pose.DifficultyOptions = difficulties.Select(d => new SelectListItem
+        {
+            Value = d.DifficultyId.ToString(),
+            Text = d.DifficultyLevel,
+            Selected = d.DifficultyId == pose.DifficultyId
+        }).ToList();
+
+        var categories = await _services.GetAllCategoriesAsync();
+        pose.CategoryOptions = categories.Select(c => new SelectListItem
+        {
+            Value = c.CategoryId.ToString(),
+            Text = c.CategoryName,
+            Selected = pose.CategoryIds.Contains(c.CategoryId)
         }).ToList();
     }
 }

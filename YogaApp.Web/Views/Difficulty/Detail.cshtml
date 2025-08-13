@@ -1,0 +1,10 @@
+@model DifficultyDetaiViewModel
+
+<h2>@Model.DiffLink.DifficultyName</h2>
+
+<ul>
+    @foreach (var pose in @Model.PoseLinks)
+    {
+        <li><a asp-action="Detail" asp-controller="Pose" asp-route-id="@pose.PoseId">@pose.PoseName</a></li>
+    }
+</ul>

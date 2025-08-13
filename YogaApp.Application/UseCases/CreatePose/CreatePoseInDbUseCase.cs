@@ -5,16 +5,16 @@ using YogaApp.Domain.Entities;
 
 namespace YogaApp.Application.UseCases;
 
-public class CreatePoseUseCase : ICreatePoseUseCase
+public class CreatePoseInDbUseCase : ICreatePoseInDbUseCase
 {
     private readonly IPoseRepository _repo;
 
-    public CreatePoseUseCase(IPoseRepository repo)
+    public CreatePoseInDbUseCase(IPoseRepository repo)
     {
         _repo = repo;
     }
 
-    public async Task<Pose> ExecuteCreatePoseAsync(CreatePoseRequest request)
+    public async Task<int> ExecuteCreatePoseAsync(CreatePoseRequest request)
     {
         //map DTO to Entity with business validation
         var pose = new Pose(request.PoseName);
@@ -31,6 +31,6 @@ public class CreatePoseUseCase : ICreatePoseUseCase
         //Repository saves the result
         var poseId = await _repo.CreatePoseAsync(pose);
         await _repo.SavePoseCategoryAsync(poseId, pose.CategoryIds);
-        return pose;
+        return pose.PoseId;
     }
 }

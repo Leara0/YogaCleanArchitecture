@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using YogaApp.Application.UseCases.UpdatePose;
 
 namespace YogaApp.Web.Models;
 
@@ -13,7 +14,7 @@ public class CreatePoseViewModel
     public string? PoseBenefits { get; set; }
     public int? DifficultyId { get; set; }
     
-    //this code says you must either enter nothing or a file with .svg
+    //you must either enter nothing or a file with .svg
     [RegularExpression(@"^$|.*\.svg$", ErrorMessage = "Please enter a valid SVG URL or leave blank")]
     [Display(Name = "SVG Image URL")]
     public string? UrlSvg { get; set; }
@@ -25,4 +26,20 @@ public class CreatePoseViewModel
     
     public List<SelectListItem>? DifficultyOptions { get; set; }
     public List<SelectListItem>? CategoryOptions { get; set; }
+
+    public CreatePoseViewModel(UpdatePoseRequest pose)
+    {
+        PoseName = pose.PoseName;
+        SanskritName = pose.SanskritName;
+        TranslationOfName = pose.TranslationOfName;
+        PoseDescription = pose.PoseDescription;
+        PoseBenefits = pose.PoseBenefits;
+        DifficultyId = pose.DifficultyId;
+        CategoryIds = pose.CategoryIds;
+        UrlSvg = pose.UrlSvg;
+        UrlSvgAlt = pose.ThumbnailUrlSvg;
+    }
+    
+    public CreatePoseViewModel()
+    {}
 }

@@ -19,4 +19,8 @@
     @(cat != Model.CategoryLink.Last() ? ", " : "")
 }
 </p>
-<p><strong>Pose Difficulty:</strong><a> @Model.DifficultyLink.DifficultyName</a></p>
+<p><strong>Pose Difficulty:</strong>
+    <a asp-action="Detail" asp-controller="Difficulty" asp-route-diffId="@Model.DifficultyLink.DifficultyId">
+        @Model.DifficultyLink.DifficultyName
+    </a>
+</p>

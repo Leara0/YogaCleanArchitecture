@@ -5,6 +5,7 @@ using YogaApp.Application.Services;
 using YogaApp.Application.UseCaseInterfaces;
 using YogaApp.Application.UseCases;
 using YogaApp.Application.UseCases.GetDifficultyByDiffId;
+using YogaApp.Application.UseCases.UpdatePose;
 using YogaApp.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,13 +24,14 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IDifficultyRepository, DifficultyRepository>();
 
 // Register use cases
-builder.Services.AddScoped<ICreatePoseUseCase, CreatePoseUseCase>();
+builder.Services.AddScoped<ICreatePoseInDbUseCase, CreatePoseInDbUseCase>();
 builder.Services.AddScoped<IGetAllCategoriesUseCase, GetAllCategoriesUseCase>();
 builder.Services.AddScoped<IGetAllDifficultiesUseCase, GetAllDifficultiesUseCase>();
 builder.Services.AddScoped<IGetAllPosesUseCase, GetAllPosesUseCase>();
 builder.Services.AddScoped<IGetPoseByIdUseCase, GetPoseByIdUseCase>();
 builder.Services.AddScoped<IGetCatByCatIdUseCase, GetCatByCatIdUseCase>();
 builder.Services.AddScoped<IGetDifficultyByIdUseCase, GetDifficultyByIdUseCase>();
+builder.Services.AddScoped<IUpdatePoseUseCase, UpdatePoseUseCase>();
 
 //Register pose use case services facade
 builder.Services.AddScoped<IApplicationServices, ApplicationService>();

@@ -2,6 +2,7 @@ using YogaApp.Application.DTO;
 using YogaApp.Application.UseCaseInterfaces;
 using YogaApp.Application.UseCases;
 using YogaApp.Application.UseCases.GetDifficultyByDiffId;
+using YogaApp.Application.UseCases.UpdatePose;
 using YogaApp.Domain.Entities;
 
 namespace YogaApp.Application.Services;
@@ -10,28 +11,30 @@ public class ApplicationService :IApplicationServices
 {
     private readonly IGetAllCategoriesUseCase _getAllCategories;
     private readonly IGetAllDifficultiesUseCase _getAllDifficulties;
-    private readonly ICreatePoseUseCase _createPoseUseCase;
+    private readonly ICreatePoseInDbUseCase _createPoseInDbUseCase;
     private readonly  IGetAllPosesUseCase _getAllPosesUseCase;
     private readonly IGetPoseByIdUseCase _getPoseByIdUseCase;
     private readonly IGetCatByCatIdUseCase _getCatByCatIdUseCase;
     private readonly IGetDifficultyByIdUseCase _getDifficultyByIdUseCase;
+    private readonly IUpdatePoseUseCase _updatePoseUseCase;
 
     public ApplicationService(IGetAllCategoriesUseCase getAllCategories,
-        IGetAllDifficultiesUseCase getAllDifficulties, ICreatePoseUseCase createPoseUseCase, IGetAllPosesUseCase getAllPosesUseCase,
+        IGetAllDifficultiesUseCase getAllDifficulties, ICreatePoseInDbUseCase createPoseInDbUseCase, IGetAllPosesUseCase getAllPosesUseCase,
         IGetPoseByIdUseCase getPoseByIdUseCase, IGetCatByCatIdUseCase getCatByCatIdUseCase, 
-        IGetDifficultyByIdUseCase getDifficultyByIdUseCase)
+        IGetDifficultyByIdUseCase getDifficultyByIdUseCase, IUpdatePoseUseCase updatePoseUseCase)
     {
         _getAllCategories = getAllCategories;
         _getAllDifficulties = getAllDifficulties;
-        _createPoseUseCase = createPoseUseCase;
+        _createPoseInDbUseCase = createPoseInDbUseCase;
         _getAllPosesUseCase = getAllPosesUseCase;
         _getPoseByIdUseCase = getPoseByIdUseCase;
         _getCatByCatIdUseCase = getCatByCatIdUseCase;
         _getDifficultyByIdUseCase = getDifficultyByIdUseCase;
+        _updatePoseUseCase = updatePoseUseCase;
     }
-    public async Task<Pose> CreatePoseAsync(CreatePoseRequest request)
+    public async Task<int> CreatePoseInDbAsync(CreatePoseRequest request)
     {
-        return await _createPoseUseCase.ExecuteCreatePoseAsync(request);
+        return await _createPoseInDbUseCase.ExecuteCreatePoseAsync(request);
     }
 
     public async Task<List<GetAllCategoriesResponse>> GetAllCategoriesAsync()
@@ -62,6 +65,11 @@ public class ApplicationService :IApplicationServices
     public async Task<GetDifficultyByIdResponse> GetDifficultyByIdAsync(int DiffId)
     {
         return await _getDifficultyByIdUseCase.ExecuteGetDifficultyById(DiffId);
+    }
+
+    public async Task<UpdatePoseRequest> UpdatePoseAsync(int poseId)
+    {
+        return await _updatePoseUseCase.ExecuteUpdatePoseAsync(poseId);
     }
 }
 

@@ -1,6 +1,6 @@
 namespace YogaApp.Application.DTO;
 
-public class CreatePoseRequest
+public class CreatePoseRequestDto
 {
     public string PoseName { get; set; }
     public string? SanskritName { get; set; }

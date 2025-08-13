@@ -8,7 +8,7 @@ public class AllCategoriesViewModel
     public string? CategoryName { get; set; }
     public string? CategoryDescription { get; set; }
 
-    public AllCategoriesViewModel(GetAllCategoriesResponse category)
+    public AllCategoriesViewModel(GetAllCategoriesResponseDto category)
     {
         CategoryId = category.CategoryId;
         CategoryName = category.CategoryName;

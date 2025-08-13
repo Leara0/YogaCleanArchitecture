@@ -11,4 +11,9 @@
       <ProjectReference Include="..\YogaApp.Infrastructure\YogaApp.Infrastructure.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Extensions\Category\" />
+      <Folder Include="Extensions\Difficulty\" />
+    </ItemGroup>
+
 </Project>

@@ -11,13 +11,13 @@ public class AllPosesViewModel
     public int? Difficulty_Id { get; set; }
     public string? ThumbnailUrlSvg { get; set; }
 
-    public AllPosesViewModel(GetAllPosesResponse pose)
+    public AllPosesViewModel(GetAllPosesResponseDto pose)
     {
         PoseId = pose.PoseId;
         PoseName = pose.PoseName;
         SanskritName = pose.SanskritName;
         PoseDescription = pose.PoseDescription;
-        Difficulty_Id= pose.Difficulty_Id;
+        Difficulty_Id= pose.DifficultyId;
         ThumbnailUrlSvg = pose.ThumbnailUrlSvg;
     }
 }

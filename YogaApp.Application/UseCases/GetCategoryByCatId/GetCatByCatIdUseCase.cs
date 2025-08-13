@@ -14,7 +14,7 @@ public class GetCatByCatIdUseCase : IGetCatByCatIdUseCase
         _catRepo = categoryRepository;
         _poseRepo = poseRepository;
     }
-    public async Task<GetCatByCatIdResponse> ExecuteGetCatByCatIdAsync(int CatId)
+    public async Task<GetCatByCatIdResponseDto> ExecuteGetCatByCatIdAsync(int CatId)
     {
         //get all info on category
         var category = await _catRepo.GetCategoriesByCatIdAsync(CatId);
@@ -25,8 +25,8 @@ public class GetCatByCatIdUseCase : IGetCatByCatIdUseCase
         
         //map tuple to PoseLink class for easier data handling
         var links = posesInCat.Select(p => 
-            new PoseLink { PoseId = p.PoseId, PoseName = p.PoseName }).ToList();
+            new PoseLinkDto { PoseId = p.PoseId, PoseName = p.PoseName }).ToList();
         
-        return new GetCatByCatIdResponse(category, links);
+        return new GetCatByCatIdResponseDto(category, links);
     }
 }

@@ -4,5 +4,5 @@ namespace YogaApp.Application.UseCaseInterfaces;
 
 public interface IGetCatByCatIdUseCase
 {
-    Task<GetCatByCatIdResponse> ExecuteGetCatByCatIdAsync(int CatId);
+    Task<GetCatByCatIdResponseDto> ExecuteGetCatByCatIdAsync(int CatId);
 }

@@ -5,5 +5,5 @@ namespace YogaApp.Application.UseCaseInterfaces;
 
 public interface ICreatePoseInDbUseCase
 {
-    Task<int> ExecuteCreatePoseAsync(CreatePoseRequest request);
+    Task<int> ExecuteCreatePoseAsync(CreatePoseRequestDto requestDto);
 }

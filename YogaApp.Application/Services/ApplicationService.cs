@@ -1,6 +1,7 @@
 using YogaApp.Application.DTO;
 using YogaApp.Application.UseCaseInterfaces;
 using YogaApp.Application.UseCases;
+using YogaApp.Application.UseCases.GetAllPoses;
 using YogaApp.Application.UseCases.GetDifficultyByDiffId;
 using YogaApp.Application.UseCases.UpdatePose;
 using YogaApp.Domain.Entities;
@@ -32,12 +33,12 @@ public class ApplicationService :IApplicationServices
         _getDifficultyByIdUseCase = getDifficultyByIdUseCase;
         _updatePoseUseCase = updatePoseUseCase;
     }
-    public async Task<int> CreatePoseInDbAsync(CreatePoseRequest request)
+    public async Task<int> CreatePoseInDbAsync(CreatePoseRequestDto requestDto)
     {
-        return await _createPoseInDbUseCase.ExecuteCreatePoseAsync(request);
+        return await _createPoseInDbUseCase.ExecuteCreatePoseAsync(requestDto);
     }
 
-    public async Task<List<GetAllCategoriesResponse>> GetAllCategoriesAsync()
+    public async Task<List<GetAllCategoriesResponseDto>> GetAllCategoriesAsync()
     {
         return await _getAllCategories.ExecuteGetAllCategoriesAsync();
     }
@@ -47,27 +48,27 @@ public class ApplicationService :IApplicationServices
         return await _getAllDifficulties.ExecuteGetAllDifficultiesAsync();
     }
 
-    public async Task<List<GetAllPosesResponse>> GetAllPosesAsync()
+    public async Task<PosesByDifficultyDto> GetAllPosesAsync()
     {
         return await _getAllPosesUseCase.ExecuteGetAllPosesAsync();
     }
 
-    public async Task<GetPoseByIdResponse> GetPoseByIdAsync(int PoseId)
+    public async Task<GetPoseByIdResponseDto> GetPoseByIdAsync(int PoseId)
     {
         return await _getPoseByIdUseCase.ExecuteGetPoseByIdAsync(PoseId);
     }
 
-    public async Task<GetCatByCatIdResponse> GetCatByCatIdAsync(int CatId)
+    public async Task<GetCatByCatIdResponseDto> GetCatByCatIdAsync(int CatId)
     {
         return await _getCatByCatIdUseCase.ExecuteGetCatByCatIdAsync(CatId);
     }
 
-    public async Task<GetDifficultyByIdResponse> GetDifficultyByIdAsync(int DiffId)
+    public async Task<GetDifficultyByIdResponseDto> GetDifficultyByIdAsync(int DiffId)
     {
         return await _getDifficultyByIdUseCase.ExecuteGetDifficultyById(DiffId);
     }
 
-    public async Task<UpdatePoseRequest> UpdatePoseAsync(int poseId)
+    public async Task<UpdatePoseRequestDto> UpdatePoseAsync(int poseId)
     {
         return await _updatePoseUseCase.ExecuteUpdatePoseAsync(poseId);
     }

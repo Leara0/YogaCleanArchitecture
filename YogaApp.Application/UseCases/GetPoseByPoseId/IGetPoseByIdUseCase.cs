@@ -4,5 +4,5 @@ namespace YogaApp.Application.UseCaseInterfaces;
 
 public interface IGetPoseByIdUseCase
 {
-    Task<GetPoseByIdResponse> ExecuteGetPoseByIdAsync(int PoseId);
+    Task<GetPoseByIdResponseDto> ExecuteGetPoseByIdAsync(int PoseId);
 }

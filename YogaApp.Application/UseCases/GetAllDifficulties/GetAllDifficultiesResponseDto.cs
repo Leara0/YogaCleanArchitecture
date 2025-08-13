@@ -2,7 +2,7 @@ using YogaApp.Domain.Entities;
 
 namespace YogaApp.Application.DTO;
 
-public class GetAllDifficultiesResponse
+public class GetAllDifficultiesResponseDto
 {
     public int Difficulty_Id { get; set; }
     public string Difficulty_Level { get; set; }

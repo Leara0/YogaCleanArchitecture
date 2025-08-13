@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using YogaApp.Application.DTO;
 using YogaApp.Application.UseCaseInterfaces;
 using YogaApp.Application.UseCases;
+using YogaApp.Web.Extensions.Pose;
 using YogaApp.Web.Models;
 
 namespace YogaApp.Web.Controllers;
@@ -23,24 +24,10 @@ public class PoseController : Controller
     {
         //get list of GetAllPosesResponse DTOs
         var posesDto = await _services.GetAllPosesAsync();
-        //filter by difficulty level and map to View Model
-        var easy = posesDto
-            .Where(p => p.Difficulty_Id == 1)
-            .Select(p => new AllPosesViewModel(p)).ToList();
-        var medium = posesDto
-            .Where(p => p.Difficulty_Id == 2)
-            .Select(p => new AllPosesViewModel(p)).ToList();
-        var hard = posesDto
-            .Where(p => p.Difficulty_Id == 3)
-            .Select(p => new AllPosesViewModel(p)).ToList();
         
-        //map it to one model (PosesByDifficultyViewModel
-        var posesView = new PosesByDifficultyViewModel()
-        {
-            EasyPoses = easy,
-            MediumPoses = medium,
-            HardPoses = hard
-        };
+        //use extension method to map poses to view model by difficulty
+        var posesView = posesDto.ToViewAllModel();
+        
         return View(posesView);
     }
 
@@ -88,7 +75,7 @@ public class PoseController : Controller
             return View("CreateNewPoseGet", pose);
         }
 
-        var request = new CreatePoseRequest
+        var request = new CreatePoseRequestDto
         {
             PoseName = pose.PoseName,
             SanskritName = pose.SanskritName,

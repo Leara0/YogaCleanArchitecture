@@ -27,7 +27,7 @@ public class UpdatePoseViewModel
     public List<SelectListItem>? DifficultyOptions { get; set; }
     public List<SelectListItem>? CategoryOptions { get; set; }
 
-    public UpdatePoseViewModel(UpdatePoseRequest pose)
+    public UpdatePoseViewModel(UpdatePoseRequestDto pose)
     {
         PoseName = pose.PoseName;
         SanskritName = pose.SanskritName;

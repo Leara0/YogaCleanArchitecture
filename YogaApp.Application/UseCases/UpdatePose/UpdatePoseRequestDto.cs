@@ -3,7 +3,7 @@ using YogaApp.Domain.Entities;
 
 namespace YogaApp.Application.UseCases.UpdatePose;
 
-public class UpdatePoseRequest
+public class UpdatePoseRequestDto
 {
     public string PoseName { get; set; }
     public string? SanskritName { get; set; }
@@ -15,10 +15,11 @@ public class UpdatePoseRequest
     public string? ThumbnailUrlSvg { get; set; }
     public List<int>? CategoryIds { get; set; } = new List<int>();
     
-    public List<SelectOption> DifficultyOptions { get; set; } = new List<SelectOption>();
-    public List<SelectOption> CategoryOptions { get; set; } = new List<SelectOption>();
+    public List<SelectOptionDto> DifficultyOptions { get; set; } = new List<SelectOptionDto>();
+    public List<SelectOptionDto> CategoryOptions { get; set; } = new List<SelectOptionDto>();
 
-    public UpdatePoseRequest(Pose pose, List<int> categories)
+    public UpdatePoseRequestDto(Pose pose, List<int> categories, 
+        List<SelectOptionDto> difficultyOptions, List<SelectOptionDto> categoryOptions)
     {
         PoseName = pose.PoseName;
         SanskritName = pose.SanskritName;
@@ -29,5 +30,7 @@ public class UpdatePoseRequest
         UrlSvg = pose.UrlSvg;
         ThumbnailUrlSvg = pose.ThumbnailUrlSvg;
         CategoryIds = categories;
+        DifficultyOptions = difficultyOptions;
+        CategoryOptions = categoryOptions;
     }
 }

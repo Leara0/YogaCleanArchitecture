@@ -13,7 +13,7 @@ public class GetDifficultyByIdUseCase : IGetDifficultyByIdUseCase
         _diffRepo = diffRepo;
         _poseRepo = poseRepo;
     }
-    public async Task<GetDifficultyByIdResponse> ExecuteGetDifficultyById(int DiffId)
+    public async Task<GetDifficultyByIdResponseDto> ExecuteGetDifficultyById(int DiffId)
     {
         // call difficulty repo to get name of difficulty from diff id (if difficulty not null)
        string difficultyLevel = await _diffRepo.GetDifficultyNameByDifficultyIdAsync(DiffId);
@@ -24,8 +24,8 @@ public class GetDifficultyByIdUseCase : IGetDifficultyByIdUseCase
         
        //map tuple to PoseLink class for easier data handling
        var links = posesInCat.Select(p => 
-           new PoseLink { PoseId = p.PoseId, PoseName = p.PoseName }).ToList();
+           new PoseLinkDto { PoseId = p.PoseId, PoseName = p.PoseName }).ToList();
        
-       return new GetDifficultyByIdResponse(DiffId, difficultyLevel, links);
+       return new GetDifficultyByIdResponseDto(DiffId, difficultyLevel, links);
     }
 }

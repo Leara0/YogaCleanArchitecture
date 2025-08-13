@@ -14,9 +14,9 @@ public class GetAllCategoriesUseCase : IGetAllCategoriesUseCase
         _categoryRepository = categoryRepository;
     }
 
-    public async Task<List<GetAllCategoriesResponse>> ExecuteGetAllCategoriesAsync()
+    public async Task<List<GetAllCategoriesResponseDto>> ExecuteGetAllCategoriesAsync()
     {
         var categories = await _categoryRepository.GetAllCategoriesAsync();
-        return categories.Select(c => new GetAllCategoriesResponse(c)).ToList();
+        return categories.Select(c => new GetAllCategoriesResponseDto(c)).ToList();
     }
 }

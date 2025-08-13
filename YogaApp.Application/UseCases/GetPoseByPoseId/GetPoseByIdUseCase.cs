@@ -20,7 +20,7 @@ public class GetPoseByIdUseCase : IGetPoseByIdUseCase
         _diffRepo = diffRepo;
     }
 
-    public async Task<GetPoseByIdResponse> ExecuteGetPoseByIdAsync(int PoseId)
+    public async Task<GetPoseByIdResponseDto> ExecuteGetPoseByIdAsync(int PoseId)
     {
         //call repo to get pose entity by Id
         var pose = await _poseRepo.GetPoseByIdAsync(PoseId);
@@ -31,7 +31,7 @@ public class GetPoseByIdUseCase : IGetPoseByIdUseCase
         
         //map tuple to PoseLink class for easier data handling
         var categoryLinks = catsInThisPose.Select(c => 
-            new CategoryLink() { CategoryId = c.CatId, CategoryName = c.CatName }).ToList();
+            new CategoryLinkDto() { CategoryId = c.CatId, CategoryName = c.CatName }).ToList();
         
         // call difficulty repo to get name of difficulty from diff id (if difficulty not null)
         string difficultyLevel = null;
@@ -41,7 +41,7 @@ public class GetPoseByIdUseCase : IGetPoseByIdUseCase
         }
 
         //use custom constructor to map to CetPoseByIdResponse
-        return new GetPoseByIdResponse(pose, difficultyLevel, categoryLinks);
+        return new GetPoseByIdResponseDto(pose, difficultyLevel, categoryLinks);
     }
     
     

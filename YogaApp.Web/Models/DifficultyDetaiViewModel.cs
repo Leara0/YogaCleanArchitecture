@@ -5,12 +5,12 @@ namespace YogaApp.Web.Models;
 
 public class DifficultyDetaiViewModel
 {
-    public DifficultyLink DiffLink { get; set; }
-    public List<PoseLink> PoseLinks { get; set; }
+    public DifficultyLinkDto DiffLinkDto { get; set; }
+    public List<PoseLinkDto> PoseLinks { get; set; }
 
-    public DifficultyDetaiViewModel(GetDifficultyByIdResponse diff)
+    public DifficultyDetaiViewModel(GetDifficultyByIdResponseDto diff)
     {
-        DiffLink = diff.DifficultyLink;
+        DiffLinkDto = diff.DifficultyLinkDto;
         PoseLinks = diff.PoseLinks;
     }
 }

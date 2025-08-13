@@ -6,5 +6,5 @@ namespace YogaApp.Application.UseCaseInterfaces;
 
 public interface IGetAllCategoriesUseCase
 {
-    Task<List<GetAllCategoriesResponse>> ExecuteGetAllCategoriesAsync();
+    Task<List<GetAllCategoriesResponseDto>> ExecuteGetAllCategoriesAsync();
 }

@@ -14,19 +14,19 @@ public class CreatePoseInDbUseCase : ICreatePoseInDbUseCase
         _repo = repo;
     }
 
-    public async Task<int> ExecuteCreatePoseAsync(CreatePoseRequest request)
+    public async Task<int> ExecuteCreatePoseAsync(CreatePoseRequestDto requestDto)
     {
         //map DTO to Entity with business validation
-        var pose = new Pose(request.PoseName);
+        var pose = new Pose(requestDto.PoseName);
         pose.SetProperties(
-            request.SanskritName,
-            request.TranslationOfName,
-            request.PoseDescription,
-            request.PoseBenefits,
-            request.DifficultyId,
-            request.UrlSvg,
-            request.ThumbnailUrlSvg);
-        pose.CategoryIds = request.CategoryIds;
+            requestDto.SanskritName,
+            requestDto.TranslationOfName,
+            requestDto.PoseDescription,
+            requestDto.PoseBenefits,
+            requestDto.DifficultyId,
+            requestDto.UrlSvg,
+            requestDto.ThumbnailUrlSvg);
+        pose.CategoryIds = requestDto.CategoryIds;
         
         //Repository saves the result
         var poseId = await _repo.CreatePoseAsync(pose);

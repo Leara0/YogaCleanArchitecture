@@ -12,10 +12,10 @@ public class PoseDetailsViewModel
     public string? PoseDescription { get; set; }
     public string? PoseBenefits { get; set; }
     public string? ImageUrl { get; set; }
-    public DifficultyLink? DifficultyLink { get; set; } = new DifficultyLink();
-    public List<CategoryLink>? CategoryLink { get; set; }
+    public DifficultyLinkDto? DifficultyLink { get; set; } = new DifficultyLinkDto();
+    public List<CategoryLinkDto>? CategoryLink { get; set; }
 
-    public PoseDetailsViewModel(GetPoseByIdResponse pose)
+    public PoseDetailsViewModel(GetPoseByIdResponseDto pose)
     {
         PoseId = pose.PoseId;
         PoseName = pose.PoseName;

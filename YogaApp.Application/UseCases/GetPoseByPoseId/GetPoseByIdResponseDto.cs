@@ -2,7 +2,7 @@ using YogaApp.Domain.Entities;
 
 namespace YogaApp.Application.DTO;
 
-public class GetPoseByIdResponse
+public class GetPoseByIdResponseDto
 {
     public int PoseId { get; set; }
     public string PoseName { get; set; }
@@ -12,10 +12,10 @@ public class GetPoseByIdResponse
     public string? PoseBenefits { get; set; }
     
     public string? ImageUrl { get; set; }
-    public DifficultyLink? DifficultyLink { get; set; } = new DifficultyLink();
-    public List<CategoryLink>? CategoryLink { get; set; }
+    public DifficultyLinkDto? DifficultyLink { get; set; } = new DifficultyLinkDto();
+    public List<CategoryLinkDto>? CategoryLink { get; set; }
 
-    public GetPoseByIdResponse(Pose pose, string? difficultyLevel, List<CategoryLink>? categoryLink)
+    public GetPoseByIdResponseDto(Pose pose, string? difficultyLevel, List<CategoryLinkDto>? categoryLink)
     {
         PoseId = pose.PoseId;
         PoseName = pose.PoseName;

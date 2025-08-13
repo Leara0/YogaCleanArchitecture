@@ -1,3 +1,4 @@
+using YogaApp.Application.DTO;
 using YogaApp.Domain.Entities;
 
 namespace YogaApp.Application.UseCases.UpdatePose;
@@ -13,6 +14,9 @@ public class UpdatePoseRequest
     public string? UrlSvg { get; set; }
     public string? ThumbnailUrlSvg { get; set; }
     public List<int>? CategoryIds { get; set; } = new List<int>();
+    
+    public List<SelectOption> DifficultyOptions { get; set; } = new List<SelectOption>();
+    public List<SelectOption> CategoryOptions { get; set; } = new List<SelectOption>();
 
     public UpdatePoseRequest(Pose pose, List<int> categories)
     {

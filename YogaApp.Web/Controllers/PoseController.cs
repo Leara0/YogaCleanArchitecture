@@ -59,12 +59,10 @@ public class PoseController : Controller
     [HttpGet]
     public async Task<IActionResult> UpdatePoseGet(int id)
     {
-        _logger.LogInformation($"Getting pose {id}");
         var poseDto = await _services.UpdatePoseAsync(id);
-        _logger.LogInformation($"Pose name is {poseDto.PoseName}");
-        var pose = new CreatePoseViewModel(poseDto);
+        var pose = new UpdatePoseViewModel(poseDto);
         
-        await PopulateDropdownsAsync(pose);
+        await PopulatePreselectedDropdownsAsync(pose);
         
         return View(pose);
     }
@@ -137,7 +135,8 @@ public class PoseController : Controller
         }).ToList();
     }
 
-    private async Task PopulatePreselectedDropdownsAsync(CreatePoseViewModel pose)
+    //helper method
+    private async Task PopulatePreselectedDropdownsAsync(UpdatePoseViewModel pose)
     {
         // load difficulties and categories
         var difficulties = await _services.GetAllDifficultiesAsync();

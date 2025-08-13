@@ -27,19 +27,4 @@ public class CreatePoseViewModel
     public List<SelectListItem>? DifficultyOptions { get; set; }
     public List<SelectListItem>? CategoryOptions { get; set; }
 
-    public CreatePoseViewModel(UpdatePoseRequest pose)
-    {
-        PoseName = pose.PoseName;
-        SanskritName = pose.SanskritName;
-        TranslationOfName = pose.TranslationOfName;
-        PoseDescription = pose.PoseDescription;
-        PoseBenefits = pose.PoseBenefits;
-        DifficultyId = pose.DifficultyId;
-        CategoryIds = pose.CategoryIds;
-        UrlSvg = pose.UrlSvg;
-        UrlSvgAlt = pose.ThumbnailUrlSvg;
-    }
-    
-    public CreatePoseViewModel()
-    {}
 }

@@ -52,7 +52,7 @@ public class PoseRepository : IPoseRepository
             UrlSvg = pose.UrlSvg,
             ThumbnailUrlSvg = pose.ThumbnailUrlSvg
         });
-        //set the id of the entity
+        //return the id of the new entry
         return id;
     }
 

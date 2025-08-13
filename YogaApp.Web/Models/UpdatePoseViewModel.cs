@@ -6,7 +6,8 @@ namespace YogaApp.Web.Models;
 
 public class UpdatePoseViewModel
 {
-    [Required] public string PoseName { get; set; }
+    [Required] 
+    public string PoseName { get; set; }
     public string? SanskritName { get; set; }
     public string? TranslationOfName { get; set; }
     public string? PoseDescription { get; set; }
@@ -26,17 +27,4 @@ public class UpdatePoseViewModel
 
     public List<SelectListItem>? DifficultyOptions { get; set; }
     public List<SelectListItem>? CategoryOptions { get; set; }
-
-    public UpdatePoseViewModel(UpdatePoseRequestDto pose)
-    {
-        PoseName = pose.PoseName;
-        SanskritName = pose.SanskritName;
-        TranslationOfName = pose.TranslationOfName;
-        PoseDescription = pose.PoseDescription;
-        PoseBenefits = pose.PoseBenefits;
-        DifficultyId = pose.DifficultyId;
-        CategoryIds = pose.CategoryIds;
-        UrlSvg = pose.UrlSvg;
-        UrlSvgAlt = pose.ThumbnailUrlSvg;
-    }
 }

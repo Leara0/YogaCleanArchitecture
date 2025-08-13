@@ -36,8 +36,8 @@ public class PoseController : Controller
     {
         //get GetPoseByIdResponse DTO
         var poseDto = await _services.GetPoseByIdAsync(id);
-        // map onto View Model
-        var poseView = new PoseDetailsViewModel(poseDto);
+        // map onto View Model using extension
+        var poseView = poseDto.ToViewDetailModel();
         
         return View(poseView);
     }
@@ -47,11 +47,22 @@ public class PoseController : Controller
     public async Task<IActionResult> UpdatePoseGet(int id)
     {
         var poseDto = await _services.UpdatePoseAsync(id);
-        var pose = new UpdatePoseViewModel(poseDto);
-        
-        await PopulatePreselectedDropdownsAsync(pose);
+        //map to View Model using extension
+        var pose = poseDto.ToViewUpdateModel();
         
         return View(pose);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> UpdatePosePost(UpdatePoseViewModel model)
+    {
+        
+        
+        
+        
+        
+        
+        return View("Index");
     }
     
     [HttpGet]
@@ -122,24 +133,4 @@ public class PoseController : Controller
         }).ToList();
     }
 
-    //helper method
-    private async Task PopulatePreselectedDropdownsAsync(UpdatePoseViewModel pose)
-    {
-        // load difficulties and categories
-        var difficulties = await _services.GetAllDifficultiesAsync();
-        pose.DifficultyOptions = difficulties.Select(d => new SelectListItem
-        {
-            Value = d.DifficultyId.ToString(),
-            Text = d.DifficultyLevel,
-            Selected = d.DifficultyId == pose.DifficultyId
-        }).ToList();
-
-        var categories = await _services.GetAllCategoriesAsync();
-        pose.CategoryOptions = categories.Select(c => new SelectListItem
-        {
-            Value = c.CategoryId.ToString(),
-            Text = c.CategoryName,
-            Selected = pose.CategoryIds.Contains(c.CategoryId)
-        }).ToList();
-    }
 }

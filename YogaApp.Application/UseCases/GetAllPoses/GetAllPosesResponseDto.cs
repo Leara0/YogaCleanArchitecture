@@ -8,7 +8,7 @@ public class GetAllPosesResponseDto
     public string PoseName { get; set; }
     public string? SanskritName { get; set; }
     public string? PoseDescription { get; set; }
-    public int? DifficultyId { get; set; }
+    public int DifficultyId { get; set; }
     public string? ThumbnailUrlSvg { get; set; }
 
     public GetAllPosesResponseDto(Pose pose)

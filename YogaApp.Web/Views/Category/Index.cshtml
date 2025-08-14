@@ -10,7 +10,7 @@
     @foreach (var cat in Model)
     {
         <tr>
-            <td><a asp-action="Detail" asp-controller="Category" asp-route-id="@cat.CategoryId">@cat.CategoryName</a></td>
+            <td><a asp-action="Details" asp-controller="Category" asp-route-id="@cat.CategoryId">@cat.CategoryName</a></td>
             <td>@cat.CategoryDescription</td>
         </tr>
     }

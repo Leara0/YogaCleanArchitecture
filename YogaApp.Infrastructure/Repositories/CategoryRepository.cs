@@ -49,7 +49,7 @@ public class CategoryRepository:ICategoryRepository
     {
         foreach (var catId in categoryIds)
         {
-            await _db.ExecuteAsync("INSERT INTO pose_mapping (Pose_Id, Category_Id) VALUES (@poseId, @categoryId))", 
+            await _db.ExecuteAsync("INSERT INTO pose_mapping (Pose_Id, Category_Id) VALUES (@poseId, @categoryId)", 
                 new { poseId = poseId, categoryId = catId });
         }
     }

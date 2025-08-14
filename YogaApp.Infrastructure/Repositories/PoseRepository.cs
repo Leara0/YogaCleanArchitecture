@@ -30,12 +30,29 @@ public class PoseRepository : IPoseRepository
 
     public async Task UpdateToDbPoseAsync(Pose pose)
     {
-        var sql = @"UPDATE poses SET English_Name = @PoseName, Sanskrit_Name = @SanskritName, 
-                 Translation_Name = @TranslationOfName, Pose_Description = @PoseDescription,
-                 Pose_Benefits = @PoseBenefits, Difficulty_Id = @DifficultyId,
-                 Url_Svg = @UrlSvg, Url_Svg_Alt = @ThumbnailUrl Where Pose_Id = @PoseId";
-        await _db.ExecuteAsync(sql, pose);
-
+                var sql = @"UPDATE poses SET 
+                english_name = @PoseName, 
+                sanskrit_name_adapted = @SanskritName, 
+                translation_name = @TranslationOfName, 
+                pose_description = @PoseDescription,
+                pose_benefits = @PoseBenefits, 
+                difficulty_id = @DifficultyId,
+                url_svg = @UrlSvg, 
+                url_svg_alt = @ThumbnailUrlSvg 
+                WHERE pose_id = @PoseId";
+                
+        await _db.ExecuteAsync(sql, new
+        {
+            PoseId = pose.PoseId,
+            PoseName = pose.PoseName,
+            SanskritName = pose.SanskritName, 
+            TranslationOfName = pose.TranslationOfName, 
+            PoseDescription = pose.PoseDescription, 
+            PoseBenefits = pose.PoseBenefits, 
+            DifficultyId = pose.DifficultyId,
+            UrlSvg = pose.UrlSvg, 
+            ThumbnailUrlSvg = pose.ThumbnailUrlSvg
+        });
     }
 
     public async Task<int> CreatePoseAsync(Pose pose)
@@ -83,9 +100,9 @@ public class PoseRepository : IPoseRepository
     }
     private Pose MapDtoToEntity(PoseDto dto)
     {
-        var pose = new Pose(dto.English_Name);
+        var pose = new Pose(dto.English_Name, dto.Difficulty_Id);
         pose.SetProperties(dto.Sanskrit_Name, dto.Translation_Name, dto.Pose_Description, dto.Pose_Benefits,
-        dto.Difficulty_Id, dto.Url_Svg, dto.Url_Svg_Alt);
+        dto.Url_Svg, dto.Url_Svg_Alt);
         pose.PoseId = dto.Pose_Id;
         return pose;
     }

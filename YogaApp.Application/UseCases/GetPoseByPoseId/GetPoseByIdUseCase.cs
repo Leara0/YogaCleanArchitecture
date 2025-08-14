@@ -37,7 +37,7 @@ public class GetPoseByIdUseCase : IGetPoseByIdUseCase
         string difficultyLevel = null;
         if (pose.DifficultyId != null)
         {
-            difficultyLevel = await _diffRepo.GetDifficultyNameByDifficultyIdAsync(pose.DifficultyId.Value);
+            difficultyLevel = await _diffRepo.GetDifficultyNameByDifficultyIdAsync(pose.DifficultyId);
         }
 
         //use custom constructor to map to CetPoseByIdResponse

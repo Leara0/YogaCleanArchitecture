@@ -32,7 +32,7 @@ public class PoseController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> Detail(int id)
+    public async Task<IActionResult> Details(int id)
     {
         //get GetPoseByIdResponse DTO
         var poseDto = await _services.GetPoseByIdAsync(id);
@@ -54,18 +54,48 @@ public class PoseController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> UpdatePose(int id, UpdatePoseViewModel model)
+    public async Task<IActionResult> UpdatePose(UpdatePoseViewModel model)
     {
+        // Debug: Check what's being received
+        Console.WriteLine($"=== FORM DEBUG ===");
+        Console.WriteLine($"PoseId: {model.PoseId}");
+        Console.WriteLine($"PoseName: {model.PoseName}");
+        Console.WriteLine($"SelectedCategoryIds is null: {model.CategoryIds == null}");
+        Console.WriteLine($"SelectedCategoryIds count: {model.CategoryIds?.Count ?? 0}");
+        if (model.CategoryIds?.Any() == true)
+        {
+            Console.WriteLine($"Selected Categories: {string.Join(", ", model.CategoryIds)}");
+        }
+        
         if (!ModelState.IsValid)
         {
             await RepopulateFormOptions(model);
             return View(model);
         }
-        
-        
-        
-        
-        return View("Index");
+
+        try
+        {
+            //map to DTO
+            var poseDto = model.ToUpdatePoseDto();
+            
+            //send pose data to application layer
+            await _services.UpdatePoseToDbAsync(poseDto);
+            
+            return RedirectToAction("Details", new { id = poseDto.PoseId });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, ex.Message);
+            
+            //repopulate the form
+            await RepopulateFormOptions(model);
+            
+            //add error message to display to user
+            ModelState.AddModelError("", "An error occurred while updating this pose. Please try again.");
+            
+            //return to form with error message
+            return View(model);
+        }
     }
     
     [HttpGet]
@@ -81,13 +111,14 @@ public class PoseController : Controller
     [HttpPost]
     public async Task<IActionResult> CreateNewPose(CreatePoseViewModel pose)
     {
-        
+       
         if (!ModelState.IsValid)
         {
             _logger.LogInformation("Creating new pose failed. Model invalid");
             await PopulateDropdownsAsync(pose);
             return View(pose);
         }
+        
 
         var request = new CreatePoseRequestDto
         {
@@ -105,7 +136,7 @@ public class PoseController : Controller
         try
         {
             var poseId = await _services.CreatePoseInDbAsync(request);
-            return RedirectToAction("Detail", new { id = poseId });
+            return RedirectToAction("Details", new { id = poseId });
         }
         catch (Exception ex)
         {

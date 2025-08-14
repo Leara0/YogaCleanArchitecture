@@ -1,69 +1,73 @@
-
 @model UpdatePoseViewModel
 
+<!--This shows all Model state errors-->
+<div asp-validation-summary="All" class="text-danger"></div>
 
-<form asp-action="UpdatePose" asp-route-id="@Model.PoseId" asp-controller="Pose" method="post">
+<form asp-action="UpdatePose" asp-controller="Pose" method="post">
+    <input type="hidden" asp-for="PoseId" />
+    
     <!--Required field-->
     <div class="form-group">
         <label asp-for="PoseName" class="control-label">Name</label>
         <input type="text" asp-for="PoseName" class="form-control"/>
         <span asp-validation-for="PoseName" class="text-danger"></span>
     </div>
- 
+
     <div class="form-group">
         <label asp-for="SanskritName" class="control-label">Sanskrit Name</label>
         <input type="text" asp-for="SanskritName" class="form-control"/>
     </div>
-    
+
     <div class="form-group">
         <label asp-for="TranslationOfName" class="control-label">Sanskrit Name Translation</label>
         <input type="text" asp-for="TranslationOfName" class="form-control"/>
     </div>
-    
+
     <div class="form-group">
         <label asp-for="PoseDescription" class="control-label">Pose Description</label>
         <input type="text" asp-for="PoseDescription" class="form-control"/>
     </div>
-    
+
     <div class="form-group">
         <label asp-for="PoseBenefits" class="control-label">Pose Benefits</label>
         <input type="text" asp-for="PoseBenefits" class="form-control"/>
     </div>
-    
+
     <div class="form-group">
         <label asp-for="UrlSvg" class="control-label">Svg Image Url</label>
         <input type="text" asp-for="UrlSvg" class="form-control"/>
         <span asp-validation-for="UrlSvg" class="text-danger"></span>
     </div>
-    
+
     <div class="form-group">
         <label asp-for="UrlSvgAlt" class="control-label">Image for Thumbnail</label>
         <input type="text" asp-for="UrlSvgAlt" class="form-control"/>
         <span asp-validation-for="UrlSvgAlt" class="text-danger"></span>
     </div>
-    
+
     <div class="form-group">
         <label asp-for="DifficultyId" class="control-label">Difficulty</label>
         <select asp-for="DifficultyId" asp-items="Model.DifficultyOptions" class="form-control">
             <option value="">-- Select Difficulty --</option>
         </select>
+        <span asp-validation-for="DifficultyId" class="text-danger"></span>
     </div>
-    
+
     <div class="form-group">
         <label class="control-label">Categories</label>
         @foreach (var cat in Model.CategoryOptions)
         {
             <div class="form-check">
-                <input type="checkbox" 
-                       class="form-check-input" 
-                       name="SelectedCategoryIds" 
+                <input type="checkbox"
+                       class="form-check-input"
+                       name="CategoryIds"
                        value="@cat.Value"
-                       @(cat.Selected ? "checked" : "") />
+                       @(cat.Selected ? "checked" : "")/>
                 <label class="form-check-label">@cat.Text</label>
             </div>
         }
     </div>
-    
+
     <button type="submit" class="btn btn-primary">Update Pose</button>
 </form>
 

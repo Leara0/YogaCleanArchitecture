@@ -22,7 +22,7 @@ public class CategoryController : Controller
         return View(model);
     }
 
-    public async Task<IActionResult> Detail(int id)
+    public async Task<IActionResult> Details(int id)
     {
         var categoriesDto = await _applicationServices.GetCatByCatIdAsync(id);
         var model = new CategoryDetailViewModel(categoriesDto);

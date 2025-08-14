@@ -15,7 +15,7 @@
     @foreach (var pose in Model.EasyPoses)
     {
         <tr>
-            <td><a asp-action="Detail" asp-controller="Pose" asp-route-id="@pose.PoseId">@pose.PoseName</a></td>
+            <td><a asp-action="Details" asp-controller="Pose" asp-route-id="@pose.PoseId">@pose.PoseName</a></td>
             <td>@pose.SanskritName</td>
             <td>@pose.PoseDescription</td>
             <td><img src="@pose.ThumbnailUrlSvg" alt="@pose.PoseName" style="max-height: 50px"></td>
@@ -35,7 +35,7 @@
     
     {
         <tr>
-            <td><a asp-action="Detail" asp-controller="Pose" asp-route-id="@pose.PoseId">@pose.PoseName</a></td>
+            <td><a asp-action="Details" asp-controller="Pose" asp-route-id="@pose.PoseId">@pose.PoseName</a></td>
             <td>@pose.SanskritName</td>
             <td>@pose.PoseDescription</td>
             <td><img src="@pose.ThumbnailUrlSvg" alt="@pose.PoseName" style="max-height: 50px"></td>
@@ -55,7 +55,7 @@
     
     {
         <tr>
-            <td><a asp-action="Detail" asp-controller="Pose" asp-route-id="@pose.PoseId">@pose.PoseName</a></td>
+            <td><a asp-action="Details" asp-controller="Pose" asp-route-id="@pose.PoseId">@pose.PoseName</a></td>
             <td>@pose.SanskritName</td>
             <td>@pose.PoseDescription</td>
             <td><img src="@pose.ThumbnailUrlSvg" alt="@pose.PoseName" style="max-height: 50px"></td>

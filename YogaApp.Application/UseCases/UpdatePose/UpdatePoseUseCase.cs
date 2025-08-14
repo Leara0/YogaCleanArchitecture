@@ -44,31 +44,30 @@ public class UpdatePoseUseCase : IUpdatePoseUseCase
         return new UpdatePoseResponseDto(pose, categories, difficultyOptions, categoryOptions);
     }
 
-    public async Task<int> ExecuteUpdatePoseToDbAsync(UpdatePoseResponseDto dto)
+    public async Task ExecuteUpdatePoseToDbAsync(UpdatePoseRequestToDbDto dto)
     {
         //map to pose entity
-        var pose = new Pose(dto.PoseName);
+        var pose = new Pose(dto.PoseName, dto.DifficultyId);
         pose.SetProperties(
             dto.SanskritName,
             dto.TranslationOfName,
             dto.PoseDescription,
             dto.PoseBenefits,
-            dto.DifficultyId,
             dto.UrlSvg,
             dto.ThumbnailUrlSvg);
         pose.PoseId = dto.PoseId;
         pose.CategoryIds = dto.CategoryIds;
         
+        
         //call pose repo to update pose
         await _poseRepo.UpdateToDbPoseAsync(pose);
         
-        //call cat repo to delete category rows
+        //call cat repo to delete category rows so we can start fresh
         await _catRepo.DeleteCategoriesByPoseIdAsync(pose.PoseId);
         
         //call cat repo to write new category rows
         if(pose.CategoryIds?.Any() == true)
             await _catRepo.AddCategoryByPoseIdAsync(pose.PoseId, pose.CategoryIds);
-        return pose.PoseId;
     }
 
     

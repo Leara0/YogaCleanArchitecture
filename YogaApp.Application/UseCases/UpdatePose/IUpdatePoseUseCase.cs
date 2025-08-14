@@ -4,5 +4,5 @@ public interface IUpdatePoseUseCase
 {
     Task<UpdatePoseResponseDto> ExecuteUpdatePoseAsync(int PoseId);
     
-    Task<int> ExecuteUpdatePoseToDbAsync(UpdatePoseResponseDto dto);
+    Task ExecuteUpdatePoseToDbAsync(UpdatePoseRequestToDbDto dto);
 }

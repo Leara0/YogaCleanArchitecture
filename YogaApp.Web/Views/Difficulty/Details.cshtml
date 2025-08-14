@@ -5,6 +5,6 @@
 <ul>
     @foreach (var pose in @Model.PoseLinks)
     {
-        <li><a asp-action="Detail" asp-controller="Pose" asp-route-id="@pose.PoseId">@pose.PoseName</a></li>
+        <li><a asp-action="Details" asp-controller="Pose" asp-route-id="@pose.PoseId">@pose.PoseName</a></li>
     }
 </ul>

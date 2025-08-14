@@ -5,7 +5,7 @@ namespace YogaApp.Application.UseCases.GetDifficultyByDiffId;
 public class GetDifficultyByIdResponseDto
 {
     public DifficultyLinkDto DifficultyLinkDto { get; set; } = new DifficultyLinkDto();
-    public List<PoseLinkDto> PoseLinks { get; set; }
+    public List<PoseLinkDto> PoseLinks { get; set; } = new List<PoseLinkDto>();
 
     public GetDifficultyByIdResponseDto(int DiffId, string difficultyName, List<PoseLinkDto> poseLinks)
     {

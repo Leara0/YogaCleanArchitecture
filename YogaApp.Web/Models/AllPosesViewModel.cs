@@ -8,6 +8,6 @@ public class AllPosesViewModel
     public string PoseName { get; set; }
     public string? SanskritName { get; set; }
     public string? PoseDescription { get; set; }
-    public int? Difficulty_Id { get; set; }
+    public int Difficulty_Id { get; set; }
     public string? ThumbnailUrlSvg { get; set; }
 }

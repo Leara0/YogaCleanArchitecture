@@ -75,4 +75,21 @@ public static class PoseMappingExtensions
         }).ToList();
         return pose;
     }
+
+    public static UpdatePoseRequestToDbDto ToUpdatePoseDto(this UpdatePoseViewModel pose)
+    {
+        return new UpdatePoseRequestToDbDto()
+        {
+            PoseId = pose.PoseId,
+            PoseName = pose.PoseName,
+            SanskritName = pose.SanskritName,
+            TranslationOfName = pose.TranslationOfName,
+            PoseDescription = pose.PoseDescription,
+            PoseBenefits = pose.PoseBenefits,
+            DifficultyId = pose.DifficultyId,
+            CategoryIds = pose.CategoryIds,
+            UrlSvg = pose.UrlSvg,
+            ThumbnailUrlSvg = pose.UrlSvgAlt
+        };
+    }
 }

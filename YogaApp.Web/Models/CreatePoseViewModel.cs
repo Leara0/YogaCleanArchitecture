@@ -6,13 +6,14 @@ namespace YogaApp.Web.Models;
 
 public class CreatePoseViewModel
 {
-    [Required]
+    [Required(ErrorMessage = "Pose name is required")]
     public string PoseName { get; set; }
     public string? SanskritName { get; set; }
     public string? TranslationOfName { get; set; }
     public string? PoseDescription { get; set; }
     public string? PoseBenefits { get; set; }
-    public int? DifficultyId { get; set; }
+    [Required(ErrorMessage = "Please select a difficulty level")]
+    public int DifficultyId { get; set; }
     
     //you must either enter nothing or a file with .svg
     [RegularExpression(@"^$|.*\.svg$", ErrorMessage = "Please enter a valid SVG URL or leave blank")]

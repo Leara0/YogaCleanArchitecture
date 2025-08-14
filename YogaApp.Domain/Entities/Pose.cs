@@ -8,15 +8,16 @@ public class Pose
     public string? TranslationOfName { get; set; }
     public string? PoseDescription { get; set; }
     public string? PoseBenefits { get; set; }
-    public int? DifficultyId { get; set; }
+    public int DifficultyId { get; set; }
     public Difficulty Difficulty { get; set; }
     public List<int>? CategoryIds { get; set; }
     public string? UrlSvg { get; set; }
     public string? ThumbnailUrlSvg { get; set; }
 
-    public Pose(string Name)
+    public Pose(string Name, int DifficultyId)
     {
        SetName(Name);
+       SetDifficulty(DifficultyId);
     }
 
     public void SetName(string newName)
@@ -24,6 +25,13 @@ public class Pose
         if (string.IsNullOrWhiteSpace(newName))
             throw new ArgumentException("Name cannot be empty!");
         PoseName = newName;
+    }
+
+    public void SetDifficulty(int newDifficulty)
+    {
+        if(newDifficulty == null || newDifficulty == 0)
+            throw new ArgumentException("Difficulty cannot be empty!");
+        DifficultyId = newDifficulty;
     }
 
     public void SetUrlSvg(string url)
@@ -47,7 +55,6 @@ public class Pose
         string? translationOfName,
         string? description,
         string? benefits,
-        int? difficultyId,
         string? urlSvg,
         string? thumbnailUrlSvg) 
     {
@@ -55,7 +62,6 @@ public class Pose
         TranslationOfName = translationOfName;
         PoseDescription = description;
         PoseBenefits = benefits;
-        DifficultyId = difficultyId;
         if (!string.IsNullOrEmpty(urlSvg))
             SetUrlSvg(urlSvg);
     

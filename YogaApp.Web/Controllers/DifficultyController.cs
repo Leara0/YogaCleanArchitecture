@@ -17,7 +17,7 @@ public class DifficultyController : Controller
     
     // GET
     [HttpGet]
-    public async Task<IActionResult> Detail(int diffId)
+    public async Task<IActionResult> Details(int diffId)
     {
         var difficulty = await _appServices.GetDifficultyByIdAsync(diffId);
         var diffModel = new DifficultyDetaiViewModel(difficulty);

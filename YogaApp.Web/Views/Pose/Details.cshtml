@@ -2,6 +2,7 @@
 <h2>@Model.PoseName Pose:</h2>
 
 <!-- Add update product link -->
+<a asp-action="UpdatePose" asp-controller="Pose" asp-route-id="@Model.PoseId">Update Pose</a>
 <!--Add delete product link here -->
 <img src="@Model.ImageUrl" alt="@Model.PoseName" height="500px">
 <p><strong>Sanskrit Name:</strong> @Model.SanskritName</p>
@@ -13,14 +14,17 @@
 {
     @:No categories are associated with this pose yet. 
 }
-@foreach (var cat in Model.CategoryLink)
+else
 {
-    <a asp-action="Detail" asp-controller="Category" asp-route-id="@cat.CategoryId">@cat.CategoryName</a>
-    @(cat != Model.CategoryLink.Last() ? ", " : "")
+    @foreach (var cat in Model.CategoryLink)
+    {
+        <a asp-action="Details" asp-controller="Category" asp-route-id="@cat.CategoryId">@cat.CategoryName</a>
+        @(cat != Model.CategoryLink.Last() ? ", " : "")
+    }
 }
 </p>
 <p><strong>Pose Difficulty:</strong>
-    <a asp-action="Detail" asp-controller="Difficulty" asp-route-diffId="@Model.DifficultyLink.DifficultyId">
+    <a asp-action="Details" asp-controller="Difficulty" asp-route-diffId="@Model.DifficultyLink.DifficultyId">
         @Model.DifficultyLink.DifficultyName
     </a>
 </p>

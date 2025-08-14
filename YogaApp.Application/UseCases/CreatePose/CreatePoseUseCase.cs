@@ -17,13 +17,12 @@ public class CreatePoseUseCase : ICreatePoseUseCase
     public async Task<int> ExecuteCreatePoseInDbAsync(CreatePoseRequestDto requestDto)
     {
         //map DTO to Entity with business validation
-        var pose = new Pose(requestDto.PoseName);
+        var pose = new Pose(requestDto.PoseName, requestDto.DifficultyId);
         pose.SetProperties(
             requestDto.SanskritName,
             requestDto.TranslationOfName,
             requestDto.PoseDescription,
             requestDto.PoseBenefits,
-            requestDto.DifficultyId,
             requestDto.UrlSvg,
             requestDto.ThumbnailUrlSvg);
         pose.CategoryIds = requestDto.CategoryIds;

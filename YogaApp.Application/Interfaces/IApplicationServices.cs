@@ -16,5 +16,6 @@ public interface IApplicationServices
     Task<GetCatByCatIdResponseDto> GetCatByCatIdAsync(int CatId);
     Task<GetDifficultyByIdResponseDto> GetDifficultyByIdAsync(int DifficultyId);
     Task<UpdatePoseResponseDto> UpdatePoseAsync(int poseId);
+    Task UpdatePoseToDbAsync(UpdatePoseRequestToDbDto requestDto);
     
 }

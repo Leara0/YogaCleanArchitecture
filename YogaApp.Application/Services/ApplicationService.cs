@@ -72,5 +72,10 @@ public class ApplicationService :IApplicationServices
     {
         return await _updatePoseUseCase.ExecuteUpdatePoseAsync(poseId);
     }
+
+    public async Task UpdatePoseToDbAsync(UpdatePoseRequestToDbDto requestDto)
+    {
+        await _updatePoseUseCase.ExecuteUpdatePoseToDbAsync(requestDto);
+    }
 }
 

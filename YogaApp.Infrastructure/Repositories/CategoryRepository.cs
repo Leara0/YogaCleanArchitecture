@@ -35,8 +35,23 @@ public class CategoryRepository:ICategoryRepository
 
     public async Task<List<(int CatId, string CatName)>> GetCatsInPoseAsync(List<int> catIds)
     {
-        return (await _db.QueryAsync<(int CatId, string CatName)>("SELECT Category_Id AS CatId, Category_Name AS CatName FROM categories WHERE category_Id IN @CatIds",
+        return (await _db.QueryAsync<(int CatId, string CatName)>
+        ("SELECT Category_Id AS CatId, Category_Name AS CatName FROM categories WHERE category_Id IN @CatIds",
             new { CatIds = catIds })).ToList();
+    }
+
+    public async Task DeleteCategoriesByPoseIdAsync(int poseId)
+    {
+        await _db.ExecuteAsync("DELETE from pose_mapping WHERE pose_Id = @poseId", new { poseId });
+    }
+
+    public async Task AddCategoryByPoseIdAsync(int poseId, List<int> categoryIds)
+    {
+        foreach (var catId in categoryIds)
+        {
+            await _db.ExecuteAsync("INSERT INTO pose_mapping (Pose_Id, Category_Id) VALUES (@poseId, @categoryId))", 
+                new { poseId = poseId, categoryId = catId });
+        }
     }
 
 

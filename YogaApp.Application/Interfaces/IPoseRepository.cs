@@ -6,7 +6,7 @@ public interface IPoseRepository
 {
     Task<List<Pose>> GetAllPosesAsync();
     Task<Pose> GetPoseByIdAsync(int id);
-    Task<Pose> UpdatePoseAsync(Pose pose);
+    Task UpdateToDbPoseAsync(Pose pose);
     Task<int> CreatePoseAsync(Pose pose);
     Task SavePoseCategoryAsync(int poseId, List<int> categories);//assists in creating a new pose by adding to pose mapping
     Task DeletePoseByIdAsync(int id);

@@ -1,9 +1,7 @@
-@using System.Security.Claims
-@using Microsoft.AspNetCore.Authentication.OAuth.Claims
-@model UpdatePoseViewModel
+@model CreatePoseViewModel
 
 
-<form asp-action="UpdatePosePost" asp-controller="Pose" method="post">
+<form asp-action="CreateNewPose" asp-controller="Pose" method="post">
     <!--Required field-->
     <div class="form-group">
         <label asp-for="PoseName" class="control-label">Name</label>
@@ -55,17 +53,13 @@
         @foreach (var cat in Model.CategoryOptions)
         {
             <div class="form-check">
-                <input type="checkbox" 
-                       class="form-check-input" 
-                       name="SelectedCategoryIds" 
-                       value="@cat.Value"
-                       @(cat.Selected ? "checked" : "") />
+                <input type="checkbox" class="form-check-input" name="SelectedCategoryIds" value="@cat.Value"/>
                 <label class="form-check-label">@cat.Text</label>
             </div>
         }
     </div>
     
-    <button type="submit" class="btn btn-primary">Update Pose</button>
+    <button type="submit" class="btn btn-primary">Create Pose</button>
 </form>
 
 @section Scripts {

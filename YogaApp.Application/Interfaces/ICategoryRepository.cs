@@ -8,4 +8,6 @@ public interface ICategoryRepository
     Task<List<int>> GetCategoryIdsByPoseIdAsync(int poseId);
     Task<Category> GetCategoriesByCatIdAsync(int catId);
     Task<List<(int CatId, string CatName)>> GetCatsInPoseAsync(List<int> catIds);
+    Task DeleteCategoriesByPoseIdAsync(int poseId);
+    Task AddCategoryByPoseIdAsync(int poseId, List<int> categoryIds);
 }

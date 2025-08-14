@@ -44,10 +44,11 @@ public static class PoseMappingExtensions
             CategoryLink = dto.CategoryLink,
         }; 
     }
-    public static UpdatePoseViewModel ToViewUpdateModel(this UpdatePoseRequestDto dto)
+    public static UpdatePoseViewModel ToViewUpdateModel(this UpdatePoseResponseDto dto)
     {
         var pose = new UpdatePoseViewModel
         {
+            PoseId = dto.PoseId,
             PoseName = dto.PoseName,
             SanskritName = dto.SanskritName,
             TranslationOfName = dto.TranslationOfName,

@@ -24,7 +24,7 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IDifficultyRepository, DifficultyRepository>();
 
 // Register use cases
-builder.Services.AddScoped<ICreatePoseInDbUseCase, CreatePoseInDbUseCase>();
+builder.Services.AddScoped<ICreatePoseUseCase, CreatePoseUseCase>();
 builder.Services.AddScoped<IGetAllCategoriesUseCase, GetAllCategoriesUseCase>();
 builder.Services.AddScoped<IGetAllDifficultiesUseCase, GetAllDifficultiesUseCase>();
 builder.Services.AddScoped<IGetAllPosesUseCase, GetAllPosesUseCase>();

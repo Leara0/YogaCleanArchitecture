@@ -44,7 +44,7 @@ public class PoseController : Controller
     
     
     [HttpGet]
-    public async Task<IActionResult> UpdatePoseGet(int id)
+    public async Task<IActionResult> UpdatePose(int id)
     {
         var poseDto = await _services.UpdatePoseAsync(id);
         //map to View Model using extension
@@ -54,10 +54,13 @@ public class PoseController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> UpdatePosePost(UpdatePoseViewModel model)
+    public async Task<IActionResult> UpdatePose(int id, UpdatePoseViewModel model)
     {
-        
-        
+        if (!ModelState.IsValid)
+        {
+            await RepopulateFormOptions(model);
+            return View(model);
+        }
         
         
         
@@ -66,7 +69,7 @@ public class PoseController : Controller
     }
     
     [HttpGet]
-    public async Task<IActionResult> CreateNewPoseGet()
+    public async Task<IActionResult> CreateNewPose()
     {
         
         var pose = new CreatePoseViewModel();
@@ -76,7 +79,7 @@ public class PoseController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateNewPosePost(CreatePoseViewModel pose)
+    public async Task<IActionResult> CreateNewPose(CreatePoseViewModel pose)
     {
         
         if (!ModelState.IsValid)
@@ -114,7 +117,7 @@ public class PoseController : Controller
         
     }
     
-    //helper method
+    //helper method to rebuild dropdown/checkbox options in failed Creates
     private async Task PopulateDropdownsAsync(CreatePoseViewModel pose)
     {
         // load difficulties and categories
@@ -130,6 +133,26 @@ public class PoseController : Controller
         {
             Value = c.CategoryId.ToString(),
             Text = c.CategoryName
+        }).ToList();
+    }
+    
+    // Helper method to rebuild dropdown/checkbox options in failed Updates
+    private async Task RepopulateFormOptions(UpdatePoseViewModel viewModel)
+    {
+        var difficulties = await _services.GetAllDifficultiesAsync();
+        viewModel.DifficultyOptions = difficulties.Select(d => new SelectListItem
+        {
+            Value = d.DifficultyId.ToString(),
+            Text = d.DifficultyLevel,
+            Selected = d.DifficultyId == viewModel.DifficultyId // Preserve user's selection
+        }).ToList();
+
+        var categories = await _services.GetAllCategoriesAsync();
+        viewModel.CategoryOptions = categories.Select(c => new SelectListItem
+        {
+            Value = c.CategoryId.ToString(),
+            Text = c.CategoryName,
+            Selected = viewModel.CategoryIds?.Contains(c.CategoryId) == true
         }).ToList();
     }
 

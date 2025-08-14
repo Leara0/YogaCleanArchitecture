@@ -6,6 +6,7 @@ namespace YogaApp.Web.Models;
 
 public class UpdatePoseViewModel
 {
+    public int PoseId { get; set; }
     [Required] 
     public string PoseName { get; set; }
     public string? SanskritName { get; set; }

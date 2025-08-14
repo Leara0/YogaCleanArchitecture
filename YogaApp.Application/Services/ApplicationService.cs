@@ -12,7 +12,7 @@ public class ApplicationService :IApplicationServices
 {
     private readonly IGetAllCategoriesUseCase _getAllCategories;
     private readonly IGetAllDifficultiesUseCase _getAllDifficulties;
-    private readonly ICreatePoseInDbUseCase _createPoseInDbUseCase;
+    private readonly ICreatePoseUseCase _createPoseUseCase;
     private readonly  IGetAllPosesUseCase _getAllPosesUseCase;
     private readonly IGetPoseByIdUseCase _getPoseByIdUseCase;
     private readonly IGetCatByCatIdUseCase _getCatByCatIdUseCase;
@@ -20,13 +20,13 @@ public class ApplicationService :IApplicationServices
     private readonly IUpdatePoseUseCase _updatePoseUseCase;
 
     public ApplicationService(IGetAllCategoriesUseCase getAllCategories,
-        IGetAllDifficultiesUseCase getAllDifficulties, ICreatePoseInDbUseCase createPoseInDbUseCase, IGetAllPosesUseCase getAllPosesUseCase,
+        IGetAllDifficultiesUseCase getAllDifficulties, ICreatePoseUseCase createPoseUseCase, IGetAllPosesUseCase getAllPosesUseCase,
         IGetPoseByIdUseCase getPoseByIdUseCase, IGetCatByCatIdUseCase getCatByCatIdUseCase, 
         IGetDifficultyByIdUseCase getDifficultyByIdUseCase, IUpdatePoseUseCase updatePoseUseCase)
     {
         _getAllCategories = getAllCategories;
         _getAllDifficulties = getAllDifficulties;
-        _createPoseInDbUseCase = createPoseInDbUseCase;
+        _createPoseUseCase = createPoseUseCase;
         _getAllPosesUseCase = getAllPosesUseCase;
         _getPoseByIdUseCase = getPoseByIdUseCase;
         _getCatByCatIdUseCase = getCatByCatIdUseCase;
@@ -35,7 +35,7 @@ public class ApplicationService :IApplicationServices
     }
     public async Task<int> CreatePoseInDbAsync(CreatePoseRequestDto requestDto)
     {
-        return await _createPoseInDbUseCase.ExecuteCreatePoseAsync(requestDto);
+        return await _createPoseUseCase.ExecuteCreatePoseInDbAsync(requestDto);
     }
 
     public async Task<List<GetAllCategoriesResponseDto>> GetAllCategoriesAsync()
@@ -68,7 +68,7 @@ public class ApplicationService :IApplicationServices
         return await _getDifficultyByIdUseCase.ExecuteGetDifficultyById(DiffId);
     }
 
-    public async Task<UpdatePoseRequestDto> UpdatePoseAsync(int poseId)
+    public async Task<UpdatePoseResponseDto> UpdatePoseAsync(int poseId)
     {
         return await _updatePoseUseCase.ExecuteUpdatePoseAsync(poseId);
     }

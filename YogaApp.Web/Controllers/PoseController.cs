@@ -86,7 +86,7 @@ public class PoseController : Controller
         {
             _logger.LogInformation("Creating new pose failed. Model invalid");
             await PopulateDropdownsAsync(pose);
-            return View("CreateNewPoseGet", pose);
+            return View(pose);
         }
 
         var request = new CreatePoseRequestDto
@@ -112,7 +112,7 @@ public class PoseController : Controller
             _logger.LogError(ex, ex.Message);
             ModelState.AddModelError("", ex.Message);
             await PopulateDropdownsAsync(pose);
-            return View("CreateNewPoseGet", pose);
+            return View(pose);
         }
         
     }

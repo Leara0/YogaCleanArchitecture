@@ -1,9 +1,18 @@
 @model PoseDetailViewModel
 <h2>@Model.PoseName Pose:</h2>
 
-<!-- Add update product link -->
+<!-- update product -->
 <a asp-action="UpdatePose" asp-controller="Pose" asp-route-id="@Model.PoseId">Update Pose</a>
-<!--Add delete product link here -->
+<!-- delete product link -->
+<div style="display: block">
+    <form asp-action="DeletePose" asp-controller="Pose" asp-route-id="@Model.PoseId" method="post">
+        <input asp-for="PoseId" type="hidden"/>
+        <input type="submit" class="btn btn-primary" onclick="return confirm('Are you sure?')" value="Delete this pose"/>
+    </form>
+</div>
+
+
+
 <img src="@Model.ImageUrl" alt="@Model.PoseName" height="500px">
 <p><strong>Sanskrit Name:</strong> @Model.SanskritName</p>
 <p><strong>Sanskrit Name Translation:</strong> @Model.TranslationOfName</p>

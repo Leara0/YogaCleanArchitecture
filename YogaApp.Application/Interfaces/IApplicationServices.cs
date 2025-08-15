@@ -17,5 +17,6 @@ public interface IApplicationServices
     Task<GetDifficultyByIdResponseDto> GetDifficultyByIdAsync(int DifficultyId);
     Task<UpdatePoseResponseDto> UpdatePoseAsync(int poseId);
     Task UpdatePoseToDbAsync(UpdatePoseRequestToDbDto requestDto);
-    
+    Task DeletePoseAsync(int poseId);
+
 }

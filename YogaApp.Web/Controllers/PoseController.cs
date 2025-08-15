@@ -130,6 +130,13 @@ public class PoseController : Controller
         }
         
     }
+
+    [HttpPost]
+    public async Task<IActionResult> DeletePose(int id)
+    {
+        await _services.DeletePoseAsync(id);
+        return RedirectToAction("Index");
+    }
     
     //helper method to rebuild dropdown/checkbox options in failed Creates
     private async Task PopulateDropdownsAsync(CreatePoseViewModel pose)

@@ -1,6 +1,7 @@
 using YogaApp.Application.DTO;
 using YogaApp.Application.UseCaseInterfaces;
 using YogaApp.Application.UseCases;
+using YogaApp.Application.UseCases.DeletePose;
 using YogaApp.Application.UseCases.GetAllPoses;
 using YogaApp.Application.UseCases.GetDifficultyByDiffId;
 using YogaApp.Application.UseCases.UpdatePose;
@@ -18,11 +19,13 @@ public class ApplicationService :IApplicationServices
     private readonly IGetCatByCatIdUseCase _getCatByCatIdUseCase;
     private readonly IGetDifficultyByIdUseCase _getDifficultyByIdUseCase;
     private readonly IUpdatePoseUseCase _updatePoseUseCase;
+    private readonly IDeletePoseByPoseIdUseCase _deletePoseByPoseIdUseCase;
 
     public ApplicationService(IGetAllCategoriesUseCase getAllCategories,
         IGetAllDifficultiesUseCase getAllDifficulties, ICreatePoseUseCase createPoseUseCase, IGetAllPosesUseCase getAllPosesUseCase,
         IGetPoseByIdUseCase getPoseByIdUseCase, IGetCatByCatIdUseCase getCatByCatIdUseCase, 
-        IGetDifficultyByIdUseCase getDifficultyByIdUseCase, IUpdatePoseUseCase updatePoseUseCase)
+        IGetDifficultyByIdUseCase getDifficultyByIdUseCase, IUpdatePoseUseCase updatePoseUseCase,
+        IDeletePoseByPoseIdUseCase deletePoseByPoseIdUseCase)
     {
         _getAllCategories = getAllCategories;
         _getAllDifficulties = getAllDifficulties;
@@ -32,6 +35,7 @@ public class ApplicationService :IApplicationServices
         _getCatByCatIdUseCase = getCatByCatIdUseCase;
         _getDifficultyByIdUseCase = getDifficultyByIdUseCase;
         _updatePoseUseCase = updatePoseUseCase;
+        _deletePoseByPoseIdUseCase = deletePoseByPoseIdUseCase;
     }
     public async Task<int> CreatePoseInDbAsync(CreatePoseRequestDto requestDto)
     {
@@ -78,6 +82,11 @@ public class ApplicationService :IApplicationServices
     public async Task UpdatePoseToDbAsync(UpdatePoseRequestToDbDto requestDto)
     {
         await _updatePoseUseCase.ExecuteUpdatePoseToDbAsync(requestDto);
+    }
+
+    public async Task DeletePoseAsync(int poseId)
+    {
+        await _deletePoseByPoseIdUseCase.ExecuteDeletePoseByPoseIdAsync(poseId);
     }
 }
 

@@ -77,10 +77,6 @@ public class PoseRepository : IPoseRepository
         }
     }
 
-    public Task DeletePoseByIdAsync(int id)
-    {
-        throw new NotImplementedException();
-    }
     public async Task<List<int>> GetPoseIdsByCategoryIdAsync(int catId)
     {
         return (await _db.QueryAsync<int>("SELECT pose_id FROM pose_mapping WHERE Category_id = @Id", 
@@ -99,9 +95,9 @@ public class PoseRepository : IPoseRepository
             new { PoseIds = poseIds })).ToList();
     }
 
-    public Task DeletePoseByPoseIdAsync(int poseId)
+    public async Task DeletePoseByPoseIdAsync(int poseId)
     {
-        throw new NotImplementedException();
+        await _db.ExecuteAsync("DELETE FROM poses WHERE pose_id = @poseId", new { poseId });
     }
 
     private Pose MapDtoToEntity(PoseDto dto)

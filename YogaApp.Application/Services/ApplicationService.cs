@@ -35,7 +35,9 @@ public class ApplicationService :IApplicationServices
     }
     public async Task<int> CreatePoseInDbAsync(CreatePoseRequestDto requestDto)
     {
-        return await _createPoseUseCase.ExecuteCreatePoseInDbAsync(requestDto);
+        var poseId = await _createPoseUseCase.ExecuteCreatePoseInDbAsync(requestDto);
+        Console.WriteLine($"Application services returning Id: {poseId}");
+        return poseId;
     }
 
     public async Task<List<GetAllCategoriesResponseDto>> GetAllCategoriesAsync()

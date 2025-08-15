@@ -92,4 +92,20 @@ public static class PoseMappingExtensions
             ThumbnailUrlSvg = pose.UrlSvgAlt
         };
     }
+
+    public static CreatePoseRequestDto ToCreatePoseRequestDto(this CreatePoseViewModel pose)
+    {
+        return new CreatePoseRequestDto()
+        {
+            PoseName = pose.PoseName,
+            SanskritName = pose.SanskritName,
+            TranslationOfName = pose.TranslationOfName,
+            PoseDescription = pose.PoseDescription,
+            PoseBenefits = pose.PoseBenefits,
+            DifficultyId = pose.DifficultyId,
+            UrlSvg = pose.UrlSvg,
+            ThumbnailUrlSvg = pose.UrlSvgAlt,
+            CategoryIds = pose.CategoryIds
+        };
+    }
 }

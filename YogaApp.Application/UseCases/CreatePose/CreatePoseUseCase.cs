@@ -30,6 +30,7 @@ public class CreatePoseUseCase : ICreatePoseUseCase
         //Repository saves the result
         var poseId = await _repo.CreatePoseAsync(pose);
         await _repo.SavePoseCategoryAsync(poseId, pose.CategoryIds);
-        return pose.PoseId;
+        Console.WriteLine($"Use case if returning Id: {poseId}");
+        return poseId;
     }
 }

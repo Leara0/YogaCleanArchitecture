@@ -13,7 +13,8 @@ public interface IPoseRepository
     Task<List<int>> GetPoseIdsByCategoryIdAsync(int catId);
     Task<List<int>> GetPoseIdsByDifficultyIdAsync(int difficultyId);
     
-    Task<List<(int PoseId, string PoseName)>> GetPoseLinkByPoseId(List<int> poseId);
+    Task<List<(int PoseId, string PoseName)>> GetPoseLinkByPoseIdAsync(List<int> poseId);
+    Task DeletePoseByPoseIdAsync(int poseId);
     
 
 }

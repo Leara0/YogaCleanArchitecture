@@ -1,9 +1,7 @@
-using Google.Protobuf.WellKnownTypes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using YogaApp.Application.DTO;
 using YogaApp.Application.UseCaseInterfaces;
-using YogaApp.Application.UseCases;
 using YogaApp.Web.Extensions.Pose;
 using YogaApp.Web.Models;
 
@@ -56,23 +54,12 @@ public class PoseController : Controller
     [HttpPost]
     public async Task<IActionResult> UpdatePose(UpdatePoseViewModel model)
     {
-        // Debug: Check what's being received
-        Console.WriteLine($"=== FORM DEBUG ===");
-        Console.WriteLine($"PoseId: {model.PoseId}");
-        Console.WriteLine($"PoseName: {model.PoseName}");
-        Console.WriteLine($"SelectedCategoryIds is null: {model.CategoryIds == null}");
-        Console.WriteLine($"SelectedCategoryIds count: {model.CategoryIds?.Count ?? 0}");
-        if (model.CategoryIds?.Any() == true)
-        {
-            Console.WriteLine($"Selected Categories: {string.Join(", ", model.CategoryIds)}");
-        }
-        
+        _logger.LogInformation("Updating pose");
         if (!ModelState.IsValid)
         {
             await RepopulateFormOptions(model);
             return View(model);
         }
-
         try
         {
             //map to DTO
@@ -91,7 +78,7 @@ public class PoseController : Controller
             await RepopulateFormOptions(model);
             
             //add error message to display to user
-            ModelState.AddModelError("", "An error occurred while updating this pose. Please try again.");
+            ModelState.AddModelError("", ex.Message);
             
             //return to form with error message
             return View(model);
@@ -111,31 +98,27 @@ public class PoseController : Controller
     [HttpPost]
     public async Task<IActionResult> CreateNewPose(CreatePoseViewModel pose)
     {
-       
         if (!ModelState.IsValid)
         {
-            _logger.LogInformation("Creating new pose failed. Model invalid");
             await PopulateDropdownsAsync(pose);
             return View(pose);
         }
-        
-
-        var request = new CreatePoseRequestDto
-        {
-            PoseName = pose.PoseName,
-            SanskritName = pose.SanskritName,
-            TranslationOfName = pose.TranslationOfName,
-            PoseDescription = pose.PoseDescription,
-            PoseBenefits = pose.PoseBenefits,
-            DifficultyId = pose.DifficultyId,
-            UrlSvg = pose.UrlSvg,
-            ThumbnailUrlSvg = pose.UrlSvgAlt,
-            CategoryIds = pose.CategoryIds
-        };
 
         try
         {
+            //map from View Model to Request DTO
+            var request = pose.ToCreatePoseRequestDto();
+            Console.WriteLine($"About to call application service...");
+            //call services to create pose in DB
             var poseId = await _services.CreatePoseInDbAsync(request);
+            Console.WriteLine($"Application service returned: {poseId}");
+            Console.WriteLine($"Type of newPoseId: {poseId.GetType()}");
+            Console.WriteLine($"newPoseId == 0: {poseId == 0}");
+        
+            if (poseId == 0)
+            {
+                Console.WriteLine("ERROR: newPoseId is 0!");
+            }
             return RedirectToAction("Details", new { id = poseId });
         }
         catch (Exception ex)

@@ -20,7 +20,7 @@ public class GetDifficultyByIdUseCase : IGetDifficultyByIdUseCase
        
        //get all poses that fall in this difficulty and tuple that matches poseId and Name
        var poseIdsInDiff = await _poseRepo.GetPoseIdsByDifficultyIdAsync(DiffId);
-       var posesInCat = await _poseRepo.GetPoseLinkByPoseId(poseIdsInDiff);
+       var posesInCat = await _poseRepo.GetPoseLinkByPoseIdAsync(poseIdsInDiff);
         
        //map tuple to PoseLink class for easier data handling
        var links = posesInCat.Select(p => 

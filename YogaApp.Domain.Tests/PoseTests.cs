@@ -99,5 +99,5 @@ public class PoseTests
         Assert.Equal(benefits, pose.PoseBenefits);
         Assert.Equal(urlSvg, pose.UrlSvg);
         Assert.Equal(thumbnailUrlSvg, pose.ThumbnailUrlSvg);
-    }
+    }  
 }

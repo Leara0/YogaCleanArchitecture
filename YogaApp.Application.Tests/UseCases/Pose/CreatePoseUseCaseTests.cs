@@ -68,8 +68,10 @@ public class CreatePoseUseCaseTests
       mockCatRepo.Verify(x=>x.AddCategoryByPoseIdAsync(5, dto.CategoryIds), Times.Once);
    }
 
-   [Fact]
-   public async Task ExecuteCreatePoseInDbAsync_DoesNotCallAssCategory_WhenNoCategoriesExist()
+   [Theory]
+   [InlineData(null)]
+   [InlineData(new int[0])]
+   public async Task ExecuteCreatePoseInDbAsync_DoesNotCallAssCategory_WhenNoCategoriesExist(int[] categoryIds)
    {
       //ARRANGE
       //set up mock repos
@@ -85,7 +87,7 @@ public class CreatePoseUseCaseTests
       {
          PoseName = "Mountain",
          DifficultyId = 1,
-         CategoryIds = null
+         CategoryIds = categoryIds?.ToList()
       };
       
       //ACT - run the use case
@@ -96,6 +98,28 @@ public class CreatePoseUseCaseTests
       mockPoseRepo.Verify(p=> p.CreatePoseAsync(It.IsAny<Domain.Entities.Pose>()), Times.Once);
       mockCatRepo.Verify(c => c.AddCategoryByPoseIdAsync(It.IsAny<int>(), It.IsAny<List<int>>()), Times.Never);
    }
-   
+
    [Fact]
+   public async Task ExecuteCreatePoseInDbAsync_ThrowsException_WhenDomainValidationFails()
+   {
+      //ARRANGE
+      var mockPoseRepo = new Mock<IPoseRepository>();
+      var mockCatRepo = new Mock<ICategoryRepository>();
+      var useCase = new CreatePoseUseCase(mockPoseRepo.Object, mockCatRepo.Object);
+      
+      //create dto with no name (invalid - should throw exception)
+      var dto = new CreatePoseRequestDto
+      {
+         PoseName = "",
+         DifficultyId = 1
+      };
+      
+      //ACT & ASSERT 
+      await Assert.ThrowsAsync<ArgumentException>(() => useCase.ExecuteCreatePoseInDbAsync(dto));
+      
+      //Verify repository were never called due to validation failure
+      mockPoseRepo.Verify(p => p.CreatePoseAsync(It.IsAny<Domain.Entities.Pose>()), Times.Never);
+      mockCatRepo.Verify(c => c.AddCategoryByPoseIdAsync(It.IsAny<int>(), 
+         It.IsAny<List<int>>()), Times.Never);
+   }
 }

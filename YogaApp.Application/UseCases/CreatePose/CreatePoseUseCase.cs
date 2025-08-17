@@ -8,10 +8,12 @@ namespace YogaApp.Application.UseCases;
 public class CreatePoseUseCase : ICreatePoseUseCase
 {
     private readonly IPoseRepository _repo;
+    private readonly ICategoryRepository _catRepo;
 
-    public CreatePoseUseCase(IPoseRepository repo)
+    public CreatePoseUseCase(IPoseRepository repo, ICategoryRepository catRepo)
     {
         _repo = repo;
+        _catRepo = catRepo;
     }
 
     public async Task<int> ExecuteCreatePoseInDbAsync(CreatePoseRequestDto requestDto)
@@ -29,8 +31,9 @@ public class CreatePoseUseCase : ICreatePoseUseCase
         
         //Repository saves the result
         var poseId = await _repo.CreatePoseAsync(pose);
-        await _repo.SavePoseCategoryAsync(poseId, pose.CategoryIds);
-        Console.WriteLine($"Use case if returning Id: {poseId}");
+        if(pose.CategoryIds != null && pose.CategoryIds.Any())
+            await _catRepo.AddCategoryByPoseIdAsync(poseId, pose.CategoryIds);
+        
         return poseId;
     }
 }

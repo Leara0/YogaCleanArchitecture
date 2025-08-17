@@ -67,16 +67,7 @@ public class PoseRepository : IPoseRepository
         //return the id of the new entry
         return id;
     }
-
-    public async Task SavePoseCategoryAsync(int poseId, List<int> categoryIds)
-    {
-        foreach (var categoryId in categoryIds)
-        {
-            await _db.ExecuteAsync("INSERT INTO pose_mapping (Pose_id, Category_id) VALUES (@PoseId, @CategoryId)",
-                new { PoseId = poseId, CategoryId = categoryId });
-        }
-    }
-
+    
     public async Task<List<int>> GetPoseIdsByCategoryIdAsync(int catId)
     {
         return (await _db.QueryAsync<int>("SELECT pose_id FROM pose_mapping WHERE Category_id = @Id", 

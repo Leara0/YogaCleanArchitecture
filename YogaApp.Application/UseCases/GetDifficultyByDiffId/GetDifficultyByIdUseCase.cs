@@ -16,7 +16,12 @@ public class GetDifficultyByIdUseCase : IGetDifficultyByIdUseCase
     public async Task<GetDifficultyByIdResponseDto> ExecuteGetDifficultyById(int DiffId)
     {
         // call difficulty repo to get name of difficulty from diff id (if difficulty not null)
-       string difficultyLevel = await _diffRepo.GetDifficultyNameByDifficultyIdAsync(DiffId);
+       string difficultyLevel = DiffId switch
+       {
+           1 => "Beginner",
+           2 => "Intermediate",
+           3 => "Advanced",
+       };
        
        //get all poses that fall in this difficulty and tuple that matches poseId and Name
        var poseIdsInDiff = await _poseRepo.GetPoseIdsByDifficultyIdAsync(DiffId);

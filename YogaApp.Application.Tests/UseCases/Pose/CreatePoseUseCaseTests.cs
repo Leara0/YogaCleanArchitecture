@@ -71,7 +71,7 @@ public class CreatePoseUseCaseTests
    [Theory]
    [InlineData(null)]
    [InlineData(new int[0])]
-   public async Task ExecuteCreatePoseInDbAsync_DoesNotCallAssCategory_WhenNoCategoriesExist(int[] categoryIds)
+   public async Task ExecuteCreatePoseInDbAsync_DoesNotCallAddCategory_WhenNoCategoriesExist(int[] categoryIds)
    {
       //ARRANGE
       //set up mock repos

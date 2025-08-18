@@ -5,6 +5,4 @@ namespace YogaApp.Application.RespositoryInterfaces;
 public interface IDifficultyRepository
 {
     Task<List<Difficulty>> GetAllDifficultiesAsync();
-    
-    Task<string> GetDifficultyNameByDifficultyIdAsync(int Id);
 }

@@ -33,16 +33,19 @@ public class GetPoseByIdUseCase : IGetPoseByIdUseCase
         var categoryLinks = catsInThisPose.Select(c => 
             new CategoryLinkDto() { CategoryId = c.CatId, CategoryName = c.CatName }).ToList();
         
-        // call difficulty repo to get name of difficulty from diff id (if difficulty not null)
+        // use switch statement to assign difficulty level based on difficulty Id
         string difficultyLevel = null;
         if (pose.DifficultyId != null)
         {
-            difficultyLevel = await _diffRepo.GetDifficultyNameByDifficultyIdAsync(pose.DifficultyId);
+            difficultyLevel = pose.DifficultyId switch
+            {
+                1 => "Beginner",
+                2 => "Intermediate",
+                3 => "Advanced",
+            };
         }
 
         //use custom constructor to map to CetPoseByIdResponse
         return new GetPoseByIdResponseDto(pose, difficultyLevel, categoryLinks);
     }
-    
-    
 }

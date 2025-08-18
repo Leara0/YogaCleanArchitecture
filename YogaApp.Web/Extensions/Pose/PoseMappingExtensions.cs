@@ -20,9 +20,9 @@ public static class PoseMappingExtensions
             ThumbnailUrlSvg = dto.ThumbnailUrlSvg,
         };
     }
-    public static PosesByDifficultyViewModel ToViewAllModel(this PosesByDifficultyDto dto)
+    public static AllPosesByDifficultyViewModel ToViewAllModel(this PosesByDifficultyDto dto)
     {
-        return new PosesByDifficultyViewModel
+        return new AllPosesByDifficultyViewModel
         {
             EasyPoses = dto.EasyPoses.Select(p => p.ToAllPosesViewModel()).ToList(),
             MediumPoses = dto.MediumPoses.Select(p => p.ToAllPosesViewModel()).ToList(),

@@ -22,12 +22,6 @@ public class DifficultyRepository:IDifficultyRepository
         return dtos.Select(MapDtoToEntity).ToList();
     }
 
-    public async Task<string> GetDifficultyNameByDifficultyIdAsync(int Id)
-    {
-        return await _db.QuerySingleOrDefaultAsync<string>
-            ("SELECT difficulty_level FROM difficulty WHERE difficulty_id = @Id", 
-                new { Id });
-    }
     
     private Difficulty MapDtoToEntity(DifficultyDto dto)
     {

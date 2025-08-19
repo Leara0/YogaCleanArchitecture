@@ -29,7 +29,7 @@ public class GetDifficultyByIdUseCase : IGetDifficultyByIdUseCase
         
        //map tuple to PoseLink class for easier data handling
        var links = posesInCat.Select(p => 
-           new PoseLinkDto { PoseId = p.PoseId, PoseName = p.PoseName }).ToList();
+           new PoseLinkDto { PoseId = p.PoseId, PoseName = p.PoseName, ThumbnailSvg = p.ThumbnailSvg}).ToList();
        
        return new GetDifficultyByIdResponseDto(DiffId, difficultyLevel, links);
     }

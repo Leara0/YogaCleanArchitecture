@@ -80,9 +80,10 @@ public class PoseRepository : IPoseRepository
             new {Id = difficultyId})).ToList();
     }
 
-    public async Task<List<(int PoseId, string PoseName)>> GetPoseLinkByPoseIdAsync(List<int> poseIds)
+    public async Task<List<(int PoseId, string PoseName, string ThumbnailSvg)>> GetPoseLinkByPoseIdAsync(List<int> poseIds)
     {
-        return (await _db.QueryAsync<(int PoseId, string PoseName)>("SELECT Pose_id AS PoseId, English_Name AS PoseName FROM poses WHERE pose_id IN @PoseIds",
+        return (await _db.QueryAsync<(int PoseId, string PoseName, string ThumbnailSvg)>
+        ("SELECT Pose_id AS PoseId, English_Name AS PoseName, Url_Svg_Alt As ThumbnailSvg FROM poses WHERE pose_id IN @PoseIds",
             new { PoseIds = poseIds })).ToList();
     }
 

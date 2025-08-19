@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using YogaApp.Application.DTO;
 using YogaApp.Application.UseCaseInterfaces;
-using YogaApp.Web.Extensions.Pose;
+using YogaApp.Web.Extensions;
 using YogaApp.Web.Models;
 
 namespace YogaApp.Web.Controllers;

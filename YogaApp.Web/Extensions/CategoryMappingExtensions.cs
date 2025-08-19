@@ -1,0 +1,27 @@
+using YogaApp.Application.DTO;
+using YogaApp.Web.Models;
+
+namespace YogaApp.Web.Extensions;
+
+public static class CategoryMappingExtensions
+{
+    public static AllCategoriesViewModel ToAllCategoriesViewModel(this GetAllCategoriesResponseDto dto)
+    {
+        return new AllCategoriesViewModel
+        {
+            CategoryId = dto.CategoryId,
+            CategoryName = dto.CategoryName,
+            CategoryDescription = dto.CategoryDescription
+        };
+    }
+    public static CategoryDetailViewModel ToAllPosesViewModel(this GetCatByCatIdResponseDto dto)
+    {
+        return new CategoryDetailViewModel
+        {
+            CategoryId = dto.CategoryId,
+            CategoryName = dto.CategoryName,
+            CategoryDescription = dto.CategoryDescription,
+            PoseLink = dto.PoseLink
+        };
+    }
+}

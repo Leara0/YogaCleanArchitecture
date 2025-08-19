@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using YogaApp.Application.UseCaseInterfaces;
+using YogaApp.Web.Extensions;
 using YogaApp.Web.Models;
 
 namespace YogaApp.Web.Controllers;
@@ -20,7 +21,7 @@ public class DifficultyController : Controller
     public async Task<IActionResult> Details(int diffId)
     {
         var difficulty = await _appServices.GetDifficultyByIdAsync(diffId);
-        var diffModel = new DifficultyDetaiViewModel(difficulty);
+        var diffModel = difficulty.ToDifficultyViewModel();
         return View(diffModel);
     }
 }

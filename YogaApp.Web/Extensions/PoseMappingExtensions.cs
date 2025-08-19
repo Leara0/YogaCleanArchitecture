@@ -4,7 +4,7 @@ using YogaApp.Application.UseCases.GetAllPoses;
 using YogaApp.Application.UseCases.UpdatePose;
 using YogaApp.Web.Models;
 
-namespace YogaApp.Web.Extensions.Pose;
+namespace YogaApp.Web.Extensions;
 
 public static class PoseMappingExtensions
 {

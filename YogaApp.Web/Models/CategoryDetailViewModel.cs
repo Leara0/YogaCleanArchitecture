@@ -10,11 +10,4 @@ public class CategoryDetailViewModel
     public string? CategoryDescription { get; set; }
     public List<PoseLinkDto> PoseLink { get; set; }
 
-    public CategoryDetailViewModel(GetCatByCatIdResponseDto cat)
-    {
-        CategoryId = cat.CategoryId;
-        CategoryName = cat.CategoryName;
-        CategoryDescription = cat.CategoryDescription;
-        PoseLink = cat.PoseLink;
-    }
 }

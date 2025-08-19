@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using YogaApp.Application.UseCaseInterfaces;
+using YogaApp.Web.Extensions;
 using YogaApp.Web.Models;
 
 namespace YogaApp.Web.Controllers;
@@ -18,14 +19,17 @@ public class CategoryController : Controller
     public async Task<IActionResult> Index()
     {
         var categoriesDto = await _applicationServices.GetAllCategoriesAsync();
-        var model = categoriesDto.Select(c => new AllCategoriesViewModel(c)).ToList();
+
+        //use extension method to map dto to view model
+        var model = categoriesDto
+            .Select(c => c.ToAllCategoriesViewModel()).ToList();
         return View(model);
     }
 
     public async Task<IActionResult> Details(int id)
     {
         var categoriesDto = await _applicationServices.GetCatByCatIdAsync(id);
-        var model = new CategoryDetailViewModel(categoriesDto);
+        var model = categoriesDto.ToAllPosesViewModel();
         return View(model);
     }
 }

@@ -39,8 +39,6 @@ public class UpdatePoseUseCase : IUpdatePoseUseCase
             Text = c.CategoryName,
         }).ToList();
         
-
-
         return new UpdatePoseResponseDto(pose, categories, difficultyOptions, categoryOptions);
     }
 
@@ -69,6 +67,4 @@ public class UpdatePoseUseCase : IUpdatePoseUseCase
         if(pose.CategoryIds?.Any() == true)
             await _catRepo.AddCategoryByPoseIdAsync(pose.PoseId, pose.CategoryIds);
     }
-
-    
 }

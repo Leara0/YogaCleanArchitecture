@@ -3,6 +3,7 @@ using YogaApp.Application.DTO;
 using YogaApp.Application.UseCases.GetAllPoses;
 using YogaApp.Application.UseCases.UpdatePose;
 using YogaApp.Web.Models;
+using YogaApp.Web.Models.HelperViews;
 
 namespace YogaApp.Web.Extensions;
 
@@ -41,8 +42,16 @@ public static class PoseMappingExtensions
             PoseDescription = dto.PoseDescription,
             PoseBenefits = dto.PoseBenefits,
             ImageUrl = dto.ImageUrl,
-            DifficultyLink = dto.DifficultyLink,
-            CategoryLink = dto.CategoryLink,
+            DifficultyLink = new DifficultyLinkViewModel
+            {
+                DifficultyId = dto.DifficultyLink.DifficultyId,
+                DifficultyName = dto.DifficultyLink.DifficultyName,
+            },
+            CategoryLink = dto.CategoryLink.Select(c=> new CategoryLinkViewModel
+            {
+                CategoryId = c.CategoryId,
+                CategoryName = c.CategoryName
+            }).ToList()?? new List<CategoryLinkViewModel>(),
         }; 
     }
     public static UpdatePoseViewModel ToViewUpdateModel(this UpdatePoseResponseDto dto)

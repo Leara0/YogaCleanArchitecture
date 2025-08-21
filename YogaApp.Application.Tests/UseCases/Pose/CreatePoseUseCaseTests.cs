@@ -68,39 +68,32 @@ public class CreatePoseUseCaseTests
       mockCatRepo.Verify(x=>x.AddCategoryByPoseIdAsync(5, dto.CategoryIds), Times.Once);
    }
 
-   [Theory]
-   [InlineData(null)]
-   [InlineData(new int[0])]
-   public async Task ExecuteCreatePoseInDbAsync_DoesNotCallAddCategory_WhenNoCategoriesExist(int[] categoryIds)
+   [Fact]
+   public async Task ExecuteCreatePoseInDbAsync_ThrowsException_WhenInvalidDifficultyId()
    {
       //ARRANGE
-      //set up mock repos
       var mockPoseRepo = new Mock<IPoseRepository>();
       var mockCatRepo = new Mock<ICategoryRepository>();
-      
-      //tell mock repo how to respond when given data
-      mockPoseRepo.Setup(p => p.CreatePoseAsync(It.IsAny<Domain.Entities.Pose>())).ReturnsAsync(16);
-      
-      //set up use case instance and give sample pose data
       var useCase = new CreatePoseUseCase(mockPoseRepo.Object, mockCatRepo.Object);
+    
+      //create dto with invalid difficulty (should throw exception)
       var dto = new CreatePoseRequestDto
       {
-         PoseName = "Mountain",
-         DifficultyId = 1,
-         CategoryIds = categoryIds?.ToList()
+         PoseName = "Test Pose",
+         DifficultyId = 0  // Invalid - should be > 0
       };
-      
-      //ACT - run the use case
-      await useCase.ExecuteCreatePoseInDbAsync(dto);
-      
-      //ASSERT
-      //check pose repo was called one time and that cat repo was never called
-      mockPoseRepo.Verify(p=> p.CreatePoseAsync(It.IsAny<Domain.Entities.Pose>()), Times.Once);
-      mockCatRepo.Verify(c => c.AddCategoryByPoseIdAsync(It.IsAny<int>(), It.IsAny<List<int>>()), Times.Never);
+    
+      //ACT & ASSERT 
+      await Assert.ThrowsAsync<ArgumentException>(() => useCase.ExecuteCreatePoseInDbAsync(dto));
+    
+      //Verify repositories were never called due to validation failure
+      mockPoseRepo.Verify(p => p.CreatePoseAsync(It.IsAny<Domain.Entities.Pose>()), Times.Never);
+      mockCatRepo.Verify(c => c.AddCategoryByPoseIdAsync(It.IsAny<int>(), 
+         It.IsAny<List<int>>()), Times.Never);
    }
 
    [Fact]
-   public async Task ExecuteCreatePoseInDbAsync_ThrowsException_WhenDomainValidationFails()
+   public async Task ExecuteCreatePoseInDbAsync_ThrowsException_WhenInvalidName()
    {
       //ARRANGE
       var mockPoseRepo = new Mock<IPoseRepository>();

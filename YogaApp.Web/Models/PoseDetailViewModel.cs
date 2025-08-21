@@ -1,5 +1,6 @@
 using YogaApp.Application.DTO;
 using YogaApp.Domain.Entities;
+using YogaApp.Web.Models.HelperViews;
 
 namespace YogaApp.Web.Models;
 
@@ -12,6 +13,6 @@ public class PoseDetailViewModel
     public string? PoseDescription { get; set; }
     public string? PoseBenefits { get; set; }
     public string? ImageUrl { get; set; }
-    public DifficultyLinkDto? DifficultyLink { get; set; } = new DifficultyLinkDto();
-    public List<CategoryLinkDto>? CategoryLink { get; set; }
+    public DifficultyLinkViewModel DifficultyLink { get; set; } 
+    public List<CategoryLinkViewModel>? CategoryLink { get; set; }
 }

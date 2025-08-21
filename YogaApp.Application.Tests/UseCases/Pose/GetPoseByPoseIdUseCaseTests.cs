@@ -108,4 +108,33 @@ public class GetPoseByPoseIdUseCaseTests
         Assert.NotNull(standingYogaLink);
         Assert.Equal("Standing Yoga", standingYogaLink.CategoryName);
     }
+    
+    [Fact]
+    public async Task ExecuteGetPoseByIdAsync_HandlesNoCategoriesGracefully()
+    {
+        //ARRANGE
+        var mockPoseRepo = new Mock<IPoseRepository>();
+        var mockCatRepo = new Mock<ICategoryRepository>();
+        var mockDiffRepo = new Mock<IDifficultyRepository>();
+
+        var pose = new Domain.Entities.Pose("Test Pose", 1);
+    
+        //tell mock repos to return empty category data
+        mockPoseRepo.Setup(p => p.GetPoseByIdAsync(It.IsAny<int>()))
+            .ReturnsAsync(pose);
+        mockCatRepo.Setup(c => c.GetCategoryIdsByPoseIdAsync(It.IsAny<int>()))
+            .ReturnsAsync(new List<int>()); // Empty list
+        mockCatRepo.Setup(c => c.GetCatsInPoseAsync(It.IsAny<List<int>>()))
+            .ReturnsAsync(new List<(int CatId, string CatName)>()); // Empty list
+
+        var useCase = new GetPoseByIdUseCase(mockCatRepo.Object, mockPoseRepo.Object, mockDiffRepo.Object);
+    
+        //ACT
+        var result = await useCase.ExecuteGetPoseByIdAsync(1);
+    
+        //ASSERT
+        Assert.NotNull(result);
+        Assert.NotNull(result.CategoryLink);
+        Assert.Empty(result.CategoryLink);
+    }
 }

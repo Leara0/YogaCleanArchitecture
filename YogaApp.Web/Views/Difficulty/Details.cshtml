@@ -6,7 +6,17 @@
     @foreach (var pose in @Model.PoseLinks)
     {
         <li><a asp-action="Details" asp-controller="Pose" asp-route-id="@pose.PoseId">
-                <img src="@pose.ThumbnailSvg" alt="@pose.PoseName" height="40px">
+                @if (!string.IsNullOrEmpty(pose.ThumbnailLocalPath))
+                {
+                    <img src="@pose.ThumbnailLocalPath" alt="@pose.PoseName"
+                         onerror="this.src='@pose.ThumbnailSvg';" loading="lazy"
+                         height="40px"/>
+                }
+                else
+                {
+                    <img src="@pose.ThumbnailSvg" alt="@pose.PoseName" loading="lazy"
+                         height="40px"/>
+                }
             @pose.PoseName
         </a></li>
     }

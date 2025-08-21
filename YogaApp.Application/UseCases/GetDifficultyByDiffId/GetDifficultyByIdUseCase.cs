@@ -23,13 +23,18 @@ public class GetDifficultyByIdUseCase : IGetDifficultyByIdUseCase
            3 => "Advanced",
        };
        
-       //get all poses that fall in this difficulty and tuple that matches poseId, Name, and a Thumbnail Image
+       //get id for poses that fall in this category and then complete Pose info for those poses
        var poseIdsInDiff = await _poseRepo.GetPoseIdsByDifficultyIdAsync(DiffId);
-       var posesInCat = await _poseRepo.GetPoseLinkByPoseIdAsync(poseIdsInDiff);
+       var posesInCat = await _poseRepo.GetPosesByPoseIdsAsync(poseIdsInDiff);
         
-       //map tuple to PoseLink class for easier data handling
-       var links = posesInCat.Select(p => 
-           new PoseLinkDto { PoseId = p.PoseId, PoseName = p.PoseName, ThumbnailSvg = p.ThumbnailSvg}).ToList();
+       //map Pose to PoseLink class for easier data handling
+       var links = posesInCat.Select(p => new PoseLinkDto
+       {
+           PoseId = p.PoseId, 
+           PoseName = p.PoseName, 
+           ThumbnailSvg = p.ThumbnailUrlSvg,
+           ThumbnailLocalPath = p.ThumbnailLocalPath
+       }).ToList();
        
        return new GetDifficultyByIdResponseDto(DiffId, difficultyLevel, links);
     }

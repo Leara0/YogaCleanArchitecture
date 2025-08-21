@@ -12,8 +12,6 @@ public class PoseDto
     public int Difficulty_Id { get; set; }
     public string Url_Svg { get; set; }
     public string Url_Svg_Alt { get; set; }
-    
-    public string Difficulty_Level { get; set; }
     public string Thumbnail { get; set; }
 
 

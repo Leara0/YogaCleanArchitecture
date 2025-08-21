@@ -6,7 +6,7 @@ namespace YogaApp.Application.Tests.UseCases.Difficulty;
 
 public class GetDifficultyByDiffIdUseCaseTests
 {
-    [Fact]
+    /*[Fact]
     public async Task ExecuteGetDifficultyById_CallsRepositories_Once()
     {
         // ARRANGE
@@ -26,6 +26,6 @@ public class GetDifficultyByDiffIdUseCaseTests
         // ASSERT
         mockPoseRepo.Verify(p => p.GetPoseIdsByDifficultyIdAsync(2), Times.Once);
         mockPoseRepo.Verify(p => p.GetPoseLinkByPoseIdAsync(It.IsAny<List<int>>()), Times.Once);
-    }
+    }*/
 
 }

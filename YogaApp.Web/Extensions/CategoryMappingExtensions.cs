@@ -1,5 +1,6 @@
 using YogaApp.Application.DTO;
 using YogaApp.Web.Models;
+using YogaApp.Web.Models.HelperViews;
 
 namespace YogaApp.Web.Extensions;
 
@@ -21,7 +22,13 @@ public static class CategoryMappingExtensions
             CategoryId = dto.CategoryId,
             CategoryName = dto.CategoryName,
             CategoryDescription = dto.CategoryDescription,
-            PoseLink = dto.PoseLink
+            PoseLink = dto.PoseLink.Select(p => new PoseLinkViewModel
+            {
+                PoseId = p.PoseId,
+                PoseName = p.PoseName,
+                ThumbnailSvg = p.ThumbnailSvg,
+                ThumbnailLocalPath = p.ThumbnailLocalPath
+            }).ToList()
         };
     }
 }

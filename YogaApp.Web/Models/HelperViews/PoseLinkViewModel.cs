@@ -1,6 +1,6 @@
-namespace YogaApp.Application.DTO;
+namespace YogaApp.Web.Models.HelperViews;
 
-public class PoseLinkDto
+public class PoseLinkViewModel
 {
     public int PoseId { get; set; }
     public string PoseName { get; set; }

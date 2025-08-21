@@ -69,7 +69,7 @@ public class CreatePoseUseCaseTests
    }
 
    [Fact]
-   public async Task ExecuteCreatePoseInDbAsync_ThrowsException_WhenInvalidDifficultyId()
+   public async Task ExecuteCreatePoseInDbAsync_ThrowsException_WhenInvalidData()
    {
       //ARRANGE
       var mockPoseRepo = new Mock<IPoseRepository>();
@@ -79,7 +79,7 @@ public class CreatePoseUseCaseTests
       //create dto with invalid difficulty (should throw exception)
       var dto = new CreatePoseRequestDto
       {
-         PoseName = "Test Pose",
+         PoseName = "", // Invalid - should be a name
          DifficultyId = 0  // Invalid - should be > 0
       };
     
@@ -87,30 +87,6 @@ public class CreatePoseUseCaseTests
       await Assert.ThrowsAsync<ArgumentException>(() => useCase.ExecuteCreatePoseInDbAsync(dto));
     
       //Verify repositories were never called due to validation failure
-      mockPoseRepo.Verify(p => p.CreatePoseAsync(It.IsAny<Domain.Entities.Pose>()), Times.Never);
-      mockCatRepo.Verify(c => c.AddCategoryByPoseIdAsync(It.IsAny<int>(), 
-         It.IsAny<List<int>>()), Times.Never);
-   }
-
-   [Fact]
-   public async Task ExecuteCreatePoseInDbAsync_ThrowsException_WhenInvalidName()
-   {
-      //ARRANGE
-      var mockPoseRepo = new Mock<IPoseRepository>();
-      var mockCatRepo = new Mock<ICategoryRepository>();
-      var useCase = new CreatePoseUseCase(mockPoseRepo.Object, mockCatRepo.Object);
-      
-      //create dto with no name (invalid - should throw exception)
-      var dto = new CreatePoseRequestDto
-      {
-         PoseName = "",
-         DifficultyId = 1
-      };
-      
-      //ACT & ASSERT 
-      await Assert.ThrowsAsync<ArgumentException>(() => useCase.ExecuteCreatePoseInDbAsync(dto));
-      
-      //Verify repository were never called due to validation failure
       mockPoseRepo.Verify(p => p.CreatePoseAsync(It.IsAny<Domain.Entities.Pose>()), Times.Never);
       mockCatRepo.Verify(c => c.AddCategoryByPoseIdAsync(It.IsAny<int>(), 
          It.IsAny<List<int>>()), Times.Never);

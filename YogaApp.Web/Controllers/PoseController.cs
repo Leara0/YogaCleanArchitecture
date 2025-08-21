@@ -26,6 +26,7 @@ public class PoseController : Controller
         //use extension method to map poses to view model by difficulty
         var posesView = posesDto.ToViewAllModel();
         
+        _logger.LogInformation("View all poses was called");
         return View(posesView);
     }
 
@@ -37,6 +38,7 @@ public class PoseController : Controller
         // map onto View Model using extension
         var poseView = poseDto.ToViewDetailModel();
         
+        _logger.LogInformation("View single pose was called");
         return View(poseView);
     }
     

@@ -64,7 +64,7 @@ public class GetPoseByPoseIdUseCaseTests
     }
 
     [Fact]
-    public async Task ExecuteGetPoseByIdAsync_MapsCategoriesToLinks()
+    public async Task ExecuteGetPoseByIdAsync_MapsCategoriesCorrectly()
     {
         //ARRANGE
         var mockPoseRepo = new Mock<IPoseRepository>();

@@ -27,7 +27,7 @@ public class CategoryRepository:ICategoryRepository
         return cat.ToList();
     }
 
-    public async Task<Category> GetCategoriesByCatIdAsync(int catId)
+    public async Task<Category> GetCategoryByCatIdAsync(int catId)
     {
         var cat = await _db.QuerySingleOrDefaultAsync<CategoryDto>("SELECT * FROM categories WHERE Category_Id = @catId", new { catId });
         return MapDtoToEntity(cat);

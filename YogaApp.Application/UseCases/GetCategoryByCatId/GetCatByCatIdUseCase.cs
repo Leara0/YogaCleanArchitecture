@@ -17,7 +17,7 @@ public class GetCatByCatIdUseCase : IGetCatByCatIdUseCase
     public async Task<GetCatByCatIdResponseDto> ExecuteGetCatByCatIdAsync(int CatId)
     {
         //get all info on category
-        var category = await _catRepo.GetCategoriesByCatIdAsync(CatId);
+        var category = await _catRepo.GetCategoryByCatIdAsync(CatId);
         
         //get all poses that fall in this category and tuple that matches poseId and Name
         var poseIdsInCat = await _poseRepo.GetPoseIdsByCategoryIdAsync(CatId);

@@ -97,6 +97,7 @@ public class PoseRepository : IPoseRepository
         var pose = new Pose(dto.English_Name, dto.Difficulty_Id);
         pose.SetProperties(dto.Sanskrit_Name, dto.Translation_Name, dto.Pose_Description, dto.Pose_Benefits,
         dto.Url_Svg, dto.Url_Svg_Alt);
+        pose.ThumbnailLocalPath = dto.Thumbnail;//set separately because create pose won't have this
         pose.PoseId = dto.Pose_Id;
         return pose;
     }

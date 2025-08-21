@@ -1,4 +1,5 @@
 using YogaApp.Application.DTO;
+using YogaApp.Application.UseCases.GetAllDifficulties;
 using YogaApp.Application.UseCases.GetAllPoses;
 using YogaApp.Application.UseCases.GetDifficultyByDiffId;
 using YogaApp.Application.UseCases.UpdatePose;
@@ -10,7 +11,7 @@ public interface IApplicationServices
 {
     Task<int> CreatePoseInDbAsync(CreatePoseRequestDto requestDto);
     Task<List<GetAllCategoriesResponseDto>> GetAllCategoriesAsync();
-    Task<List<Difficulty>> GetAllDifficultiesAsync();
+    Task<List<GetAllDifficultiesResponseDto>> GetAllDifficultiesAsync();
     Task<PosesByDifficultyDto> GetAllPosesAsync();
     Task<GetPoseByIdResponseDto> GetPoseByIdAsync(int PoseId);
     Task<GetCatByCatIdResponseDto> GetCatByCatIdAsync(int CatId);

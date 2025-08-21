@@ -14,6 +14,7 @@ public class PoseDto
     public string Url_Svg_Alt { get; set; }
     
     public string Difficulty_Level { get; set; }
+    public string Thumbnail { get; set; }
 
 
 }

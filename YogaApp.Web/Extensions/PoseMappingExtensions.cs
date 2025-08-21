@@ -18,6 +18,7 @@ public static class PoseMappingExtensions
             PoseDescription = dto.PoseDescription,
             Difficulty_Id = dto.DifficultyId,
             ThumbnailUrlSvg = dto.ThumbnailUrlSvg,
+            ThumbnailLocalPath = dto.ThumbnailLocalPath,
         };
     }
     public static AllPosesByDifficultyViewModel ToViewAllModel(this PosesByDifficultyDto dto)

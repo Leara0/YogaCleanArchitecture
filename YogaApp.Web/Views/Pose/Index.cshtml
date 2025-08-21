@@ -18,7 +18,17 @@
             <td><a asp-action="Details" asp-controller="Pose" asp-route-id="@pose.PoseId">@pose.PoseName</a></td>
             <td>@pose.SanskritName</td>
             <td>@pose.PoseDescription</td>
-            <td><img src="@pose.ThumbnailUrlSvg" alt="@pose.PoseName" style="max-height: 50px"></td>
+            <td>
+                @if (!string.IsNullOrEmpty(pose.ThumbnailLocalPath))
+                {
+                    <img src="@pose.ThumbnailLocalPath" alt="@pose.PoseName"
+                         onerror="this.src='@pose.ThumbnailUrlSvg';" loading="lazy"/>
+                }
+                else
+                {
+                    <img src="@pose.ThumbnailUrlSvg" alt="@pose.PoseName" loading="lazy"/>
+                }
+            </td>
         </tr>
     }
 </table>
@@ -38,7 +48,17 @@
             <td><a asp-action="Details" asp-controller="Pose" asp-route-id="@pose.PoseId">@pose.PoseName</a></td>
             <td>@pose.SanskritName</td>
             <td>@pose.PoseDescription</td>
-            <td><img src="@pose.ThumbnailUrlSvg" alt="@pose.PoseName" style="max-height: 50px"></td>
+            <td>
+                @if (!string.IsNullOrEmpty(pose.ThumbnailLocalPath))
+                {
+                    <img src="@pose.ThumbnailLocalPath" alt="@pose.PoseName"
+                         onerror="this.src='@pose.ThumbnailUrlSvg';" loading="lazy"/>
+                }
+                else
+                {
+                    <img src="@pose.ThumbnailUrlSvg" alt="@pose.PoseName" loading="lazy"/>
+                }
+            </td>
         </tr>
     }
 </table>
@@ -58,7 +78,17 @@
             <td><a asp-action="Details" asp-controller="Pose" asp-route-id="@pose.PoseId">@pose.PoseName</a></td>
             <td>@pose.SanskritName</td>
             <td>@pose.PoseDescription</td>
-            <td><img src="@pose.ThumbnailUrlSvg" alt="@pose.PoseName" style="max-height: 50px"></td>
+            <td>
+                @if (!string.IsNullOrEmpty(pose.ThumbnailLocalPath))
+                {
+                    <img src="@pose.ThumbnailLocalPath" alt="@pose.PoseName"
+                         onerror="this.src='@pose.ThumbnailUrlSvg';" loading="lazy"/>
+                }
+                else
+                {
+                    <img src="@pose.ThumbnailUrlSvg" alt="@pose.PoseName" loading="lazy"/>
+                }
+            </td>
         </tr>
     }
 </table>

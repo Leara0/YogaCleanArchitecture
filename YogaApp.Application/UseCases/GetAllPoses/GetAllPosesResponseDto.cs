@@ -10,6 +10,7 @@ public class GetAllPosesResponseDto
     public string? PoseDescription { get; set; }
     public int DifficultyId { get; set; }
     public string? ThumbnailUrlSvg { get; set; }
+    public string? ThumbnailLocalPath { get; set; }
 
     public GetAllPosesResponseDto(Pose pose)
     {
@@ -19,5 +20,6 @@ public class GetAllPosesResponseDto
         PoseDescription = pose.PoseDescription;
         DifficultyId = pose.DifficultyId;
         ThumbnailUrlSvg = pose.ThumbnailUrlSvg;
+        ThumbnailLocalPath = pose.ThumbnailLocalPath;
     }
 }

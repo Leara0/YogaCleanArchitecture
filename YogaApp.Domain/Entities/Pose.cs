@@ -13,6 +13,7 @@ public class Pose
     public List<int>? CategoryIds { get; set; }
     public string? UrlSvg { get; set; }
     public string? ThumbnailUrlSvg { get; set; }
+    public string? ThumbnailLocalPath { get; set; }
 
     public Pose(string Name, int DifficultyId)
     {
@@ -29,7 +30,7 @@ public class Pose
 
     public void SetDifficulty(int newDifficulty)
     {
-        if(newDifficulty == null || newDifficulty == 0)
+        if(newDifficulty <= 0)
             throw new ArgumentException("Difficulty cannot be empty!");
         DifficultyId = newDifficulty;
     }

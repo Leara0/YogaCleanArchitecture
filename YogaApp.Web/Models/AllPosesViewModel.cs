@@ -10,4 +10,6 @@ public class AllPosesViewModel
     public string? PoseDescription { get; set; }
     public int Difficulty_Id { get; set; }
     public string? ThumbnailUrlSvg { get; set; }
+    
+    public string? ThumbnailLocalPath { get; set; }
 }

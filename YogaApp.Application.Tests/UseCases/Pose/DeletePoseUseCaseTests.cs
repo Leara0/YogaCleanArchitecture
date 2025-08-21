@@ -7,30 +7,6 @@ namespace YogaApp.Application.Tests.UseCases.Pose;
 public class DeletePoseUseCaseTests
 {
     [Fact]
-    public async Task ExecuteDeletePoseByPoseIdAsync_CallsBothRepos()
-    {
-        //ARRANGE
-        //set up mock repos
-        var mockPoseRepo = new Mock<IPoseRepository>();
-        var mockCatRepo = new Mock<ICategoryRepository>();
-        
-        //tell mock repos how to react
-        mockPoseRepo.Setup(p => p.DeletePoseByPoseIdAsync(It.IsAny<int>()))
-            .Returns(Task.CompletedTask);
-        mockCatRepo.Setup(c => c.DeleteCategoriesByPoseIdAsync(It.IsAny<int>()))
-            .Returns(Task.CompletedTask);
-
-        var useCase = new DeletePoseByPoseIdUseCase(mockPoseRepo.Object, mockCatRepo.Object);
-        
-        //ACT - call the method
-        await useCase.ExecuteDeletePoseByPoseIdAsync(5);
-        
-        //ASSERT - checks each repo was called exactly 1 time
-        mockCatRepo.Verify(c => c.DeleteCategoriesByPoseIdAsync(5), Times.Once);
-        mockPoseRepo.Verify(p => p.DeletePoseByPoseIdAsync(5), Times.Once);
-    }
-
-    [Fact]
     public async Task ExecuteDeletePoseByPoseIdAsync_CallsCatRepoFirst_ThenPoseRepo()
     {
         //ARRANGE

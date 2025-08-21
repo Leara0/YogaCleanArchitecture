@@ -6,8 +6,27 @@ using PoseEntity = YogaApp.Domain.Entities.Pose;  // Create alias
 
 namespace YogaApp.Application.Tests.UseCases.Pose;
 
-public class GetAllPosesUseCaseTests2
+public class GetAllPosesUseCaseTests
 {
+    [Fact]
+    public async Task ExecuteGetAllPosesAsync_CallsRepository_Once()
+    {
+        // ARRANGE
+        var mockPoseRepo = new Mock<IPoseRepository>();
+        
+        mockPoseRepo.Setup(p => p.GetAllPosesAsync())
+            .ReturnsAsync(new List<PoseEntity>());
+
+        var useCase = new GetAllPosesUseCase(mockPoseRepo.Object);
+
+        // ACT
+        await useCase.ExecuteGetAllPosesAsync();
+
+        // ASSERT
+        mockPoseRepo.Verify(p => p.GetAllPosesAsync(), Times.Once);
+    }
+
+    
     [Fact]
     public async Task ExecuteGetAllPoses_GroupsPosesByDifficulty()
     {

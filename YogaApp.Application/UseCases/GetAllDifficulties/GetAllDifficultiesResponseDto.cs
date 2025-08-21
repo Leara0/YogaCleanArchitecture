@@ -1,10 +1,15 @@
 using YogaApp.Domain.Entities;
 
-namespace YogaApp.Application.DTO;
+namespace YogaApp.Application.UseCases.GetAllDifficulties;
 
 public class GetAllDifficultiesResponseDto
 {
-    public int Difficulty_Id { get; set; }
-    public string Difficulty_Level { get; set; }
-    public List<Pose> EasyPoses { get; set; }
+    public int DifficultyId { get; set; }
+    public string DifficultyLevel { get; set; }
+
+    public GetAllDifficultiesResponseDto(Difficulty difficulty)
+    {
+        DifficultyId = difficulty.DifficultyId;
+        DifficultyLevel = difficulty.DifficultyLevel;
+    }
 }

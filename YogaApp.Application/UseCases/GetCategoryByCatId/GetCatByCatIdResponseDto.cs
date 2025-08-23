@@ -17,4 +17,7 @@ public class GetCatByCatIdResponseDto
         if (poseLink != null && poseLink.Any())
             PoseLink = poseLink;
     }
+    //empty constructor for testing 
+    public GetCatByCatIdResponseDto()
+    { }
 }

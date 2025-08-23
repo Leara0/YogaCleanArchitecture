@@ -110,17 +110,10 @@ public class PoseController : Controller
         {
             //map from View Model to Request DTO
             var request = pose.ToCreatePoseRequestDto();
-            Console.WriteLine($"About to call application service...");
+            
             //call services to create pose in DB
             var poseId = await _services.CreatePoseInDbAsync(request);
-            Console.WriteLine($"Application service returned: {poseId}");
-            Console.WriteLine($"Type of newPoseId: {poseId.GetType()}");
-            Console.WriteLine($"newPoseId == 0: {poseId == 0}");
-        
-            if (poseId == 0)
-            {
-                Console.WriteLine("ERROR: newPoseId is 0!");
-            }
+            
             return RedirectToAction("Details", new { id = poseId });
         }
         catch (Exception ex)

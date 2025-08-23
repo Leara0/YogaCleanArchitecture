@@ -35,4 +35,7 @@ public class UpdatePoseResponseDto
         DifficultyOptions = difficultyOptions;
         CategoryOptions = categoryOptions;
     }
+    //empty constructor for use in testing
+    public UpdatePoseResponseDto()
+    {}
 }

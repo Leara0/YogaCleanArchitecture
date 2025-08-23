@@ -28,5 +28,8 @@ public class GetPoseByIdResponseDto
         DifficultyLink.DifficultyName = difficultyLevel;
         CategoryLink = categoryLink;
     }
-    
+    //parameterless constructor for use in testing
+    public GetPoseByIdResponseDto()
+    {}
+
 }

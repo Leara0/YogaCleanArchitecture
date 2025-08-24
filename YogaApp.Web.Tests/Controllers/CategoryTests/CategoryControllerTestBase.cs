@@ -5,7 +5,7 @@ using YogaApp.Web.Controllers;
 
 namespace YogaApp.Web.Tests.Controllers.CategoryTests;
 
-public class CategoryControllerTestBase
+public abstract class CategoryControllerTestBase
 {
     protected readonly Mock<IApplicationServices> MockServices;
     protected readonly Mock<ILogger<CategoryController>> MockLogger;

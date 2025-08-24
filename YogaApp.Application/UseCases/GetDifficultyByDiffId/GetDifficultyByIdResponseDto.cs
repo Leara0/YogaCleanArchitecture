@@ -14,4 +14,8 @@ public class GetDifficultyByIdResponseDto
         if (poseLinks != null && poseLinks.Any())
             PoseLinks = poseLinks;
     }
+    
+    //empty constructor for tests
+    public GetDifficultyByIdResponseDto()
+    {}
 }

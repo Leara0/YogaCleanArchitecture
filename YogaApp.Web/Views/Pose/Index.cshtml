@@ -1,94 +1,85 @@
 @using YogaApp.Domain.Entities
 @model AllPosesByDifficultyViewModel
 
-<h2>All Poses</h2>
+<h1>All Poses</h1>
 <a asp-controller="Pose" asp-action="CreateNewPose">Create a Pose</a>
 
-<h4>Easy Poses</h4>
-<table class="table">
-    <tr>
-        <th>Name</th>
-        <th>Sanskrit Name</th>
-        <th>Description</th>
-        <th>Image</th>
-    </tr>
-    @foreach (var pose in Model.EasyPoses)
-    {
-        <tr>
-            <td><a asp-action="Details" asp-controller="Pose" asp-route-id="@pose.PoseId">@pose.PoseName</a></td>
-            <td>@pose.SanskritName</td>
-            <td>@pose.PoseDescription</td>
-            <td>
-                @if (!string.IsNullOrEmpty(pose.ThumbnailLocalPath))
-                {
-                    <img src="@pose.ThumbnailLocalPath" alt="@pose.PoseName"
-                         onerror="this.src='@pose.ThumbnailUrlSvg';" loading="lazy"/>
-                }
-                else
-                {
-                    <img src="@pose.ThumbnailUrlSvg" alt="@pose.PoseName" loading="lazy"/>
-                }
-            </td>
-        </tr>
-    }
-</table>
+<div class="section">
+    <div class="difficulty-section">
+        <div class="difficulty-header">
+            <h2>Beginner Poses</h2>
+        </div>
+        <div class="grid grid-2">
+            @foreach(var pose in Model.EasyPoses)
+            {
+                <div class="card pose-card">
+                    <img src="@(!string.IsNullOrEmpty(pose.ThumbnailLocalPath) ? pose.ThumbnailLocalPath : pose.ThumbnailUrlSvg)"
+                         alt="@pose.PoseName"
+                         class="pose-thumbnail" />
+                    <div class="pose-info">
+                        <h3>@pose.PoseName</h3>
+                        @if(!string.IsNullOrEmpty(pose.SanskritName))
+                        {
+                            <p class="pose-sanskrit">@pose.SanskritName</p>
+                        }
+                        <div class="mt-sm">
+                            <a href="@Url.Action("Details", "Pose", new { id = pose.PoseId })" class="btn btn-outline">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
 
-<h4>Medium Poses</h4>
-<table class="table">
-    <tr>
-        <th>Name</th>
-        <th>Sanskrit Name</th>
-        <th>Description</th>
-        <th>Image</th>
-    </tr>
-    @foreach (var pose in Model.MediumPoses)
-    
-    {
-        <tr>
-            <td><a asp-action="Details" asp-controller="Pose" asp-route-id="@pose.PoseId">@pose.PoseName</a></td>
-            <td>@pose.SanskritName</td>
-            <td>@pose.PoseDescription</td>
-            <td>
-                @if (!string.IsNullOrEmpty(pose.ThumbnailLocalPath))
-                {
-                    <img src="@pose.ThumbnailLocalPath" alt="@pose.PoseName"
-                         onerror="this.src='@pose.ThumbnailUrlSvg';" loading="lazy"/>
-                }
-                else
-                {
-                    <img src="@pose.ThumbnailUrlSvg" alt="@pose.PoseName" loading="lazy"/>
-                }
-            </td>
-        </tr>
-    }
-</table>
+    <div class="difficulty-section">
+        <div class="difficulty-header">
+            <h2>Intermediate Poses</h2>
+        </div>
+        <div class="grid grid-2">
+            @foreach(var pose in Model.MediumPoses)
+            {
+                <div class="card pose-card">
+                    <img src="@(!string.IsNullOrEmpty(pose.ThumbnailLocalPath) ? pose.ThumbnailLocalPath : pose.ThumbnailUrlSvg)"
+                         alt="@pose.PoseName"
+                         class="pose-thumbnail" />
+                    <div class="pose-info">
+                        <h3>@pose.PoseName</h3>
+                        @if(!string.IsNullOrEmpty(pose.SanskritName))
+                        {
+                            <p class="pose-sanskrit">@pose.SanskritName</p>
+                        }
+                        <div class="mt-sm">
+                            <a href="@Url.Action("Details", "Pose", new { id = pose.PoseId })" class="btn btn-outline">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
 
-<h4>Hard Poses</h4>
-<table class="table">
-    <tr>
-        <th>Name</th>
-        <th>Sanskrit Name</th>
-        <th>Description</th>
-        <th>Image</th>
-    </tr>
-    @foreach (var pose in Model.HardPoses)
-    
-    {
-        <tr>
-            <td><a asp-action="Details" asp-controller="Pose" asp-route-id="@pose.PoseId">@pose.PoseName</a></td>
-            <td>@pose.SanskritName</td>
-            <td>@pose.PoseDescription</td>
-            <td>
-                @if (!string.IsNullOrEmpty(pose.ThumbnailLocalPath))
-                {
-                    <img src="@pose.ThumbnailLocalPath" alt="@pose.PoseName"
-                         onerror="this.src='@pose.ThumbnailUrlSvg';" loading="lazy"/>
-                }
-                else
-                {
-                    <img src="@pose.ThumbnailUrlSvg" alt="@pose.PoseName" loading="lazy"/>
-                }
-            </td>
-        </tr>
-    }
-</table>
+    <div class="difficulty-section">
+        <div class="difficulty-header">
+            <h2>Advanced Poses</h2>
+        </div>
+        <div class="grid grid-2">
+            @foreach(var pose in Model.HardPoses)
+            {
+                <div class="card pose-card">
+                    <img src="@(!string.IsNullOrEmpty(pose.ThumbnailLocalPath) ? pose.ThumbnailLocalPath : pose.ThumbnailUrlSvg)"
+                         alt="@pose.PoseName"
+                         class="pose-thumbnail" />
+                    <div class="pose-info">
+                        <h3>@pose.PoseName</h3>
+                        @if(!string.IsNullOrEmpty(pose.SanskritName))
+                        {
+                            <p class="pose-sanskrit">@pose.SanskritName</p>
+                        }
+                        <div class="mt-sm">
+                            <a href="@Url.Action("Details", "Pose", new { id = pose.PoseId })" class="btn btn-outline">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -12,21 +12,20 @@
         <div class="grid grid-2">
             @foreach(var pose in Model.EasyPoses)
             {
-                <div class="card pose-card">
-                    <img src="@(!string.IsNullOrEmpty(pose.ThumbnailLocalPath) ? pose.ThumbnailLocalPath : pose.ThumbnailUrlSvg)"
-                         alt="@pose.PoseName"
-                         class="pose-thumbnail" />
-                    <div class="pose-info">
-                        <h3>@pose.PoseName</h3>
-                        @if(!string.IsNullOrEmpty(pose.SanskritName))
-                        {
-                            <p class="pose-sanskrit">@pose.SanskritName</p>
-                        }
-                        <div class="mt-sm">
-                            <a href="@Url.Action("Details", "Pose", new { id = pose.PoseId })" class="btn btn-outline">View Details</a>
+                <a href="@Url.Action("Details", "Pose", new { id = pose.PoseId })" class="card-link">
+                    <div class="card pose-card">
+                        <img src="@(!string.IsNullOrEmpty(pose.ThumbnailLocalPath) ? pose.ThumbnailLocalPath : pose.ThumbnailUrlSvg)"
+                             alt="@pose.PoseName"
+                             class="pose-thumbnail" />
+                        <div class="pose-info">
+                            <h3>@pose.PoseName</h3>
+                            @if(!string.IsNullOrEmpty(pose.SanskritName))
+                            {
+                                <p class="pose-sanskrit">@pose.SanskritName</p>
+                            }
                         </div>
                     </div>
-                </div>
+                </a>
             }
         </div>
     </div>

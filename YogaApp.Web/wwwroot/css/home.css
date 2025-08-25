@@ -1,0 +1,15 @@
+.hero-section .lead {
+    font-size: 1.2rem;
+    color: var(--warm-gray); 
+    max-width: 800px; 
+    margin: 0 auto;
+}
+
+.navigation-guide .card {
+    text-align: center;
+}
+
+.add-pose {
+    background: var(--soft-white); 
+    color: var(--charcoal);" 
+}

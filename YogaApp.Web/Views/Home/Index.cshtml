@@ -1,8 +1,52 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<link rel="stylesheet" href="~/css/home.css" asp-append-version="true">
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="hero-section text-center mb-lg">
+    <h1 class="fade-in">Welcome to the Yoga Pose Compendium</h1>
+    <p class="lead fade-in" >
+        Discover the ancient practice of yoga through our comprehensive pose library.
+        Whether you're a beginner taking your first steps or an advanced practitioner
+        deepening your practice, learn about the perfect poses for your journey.
+    </p>
 </div>
+
+<div class="navigation-guide">
+    <div class="section text-center mb-lg">
+        <h2>Explore Your Practice</h2>
+        <p>Navigate through our organized collection to find exactly what you need:</p>
+    </div>
+
+    <div class="grid grid-2 mb-xl">
+        <div class="card fade-in">
+            <h3>📚 Pose Library</h3>
+            <p>
+                Browse our main <strong>Pose Table</strong> where all yoga poses are thoughtfully
+                organized by difficulty level - from gentle beginner poses to challenging
+                advanced asanas. Each pose is presented with clear information to guide your practice.
+            </p>
+            <a href="@Url.Action("Index", "Pose")" class="btn btn-primary">Explore Poses</a>
+        </div>
+
+        <div class="card fade-in">
+            <h3>🎯 Category Insights</h3>
+            <p>
+                Discover poses by their purpose and benefits in our <strong>Category Table</strong>.
+                Whether you're looking for strength-building poses, flexibility enhancers,
+                or calming restorative positions, find what serves your practice. More information can be found by
+                clicking the pose card.
+            </p>
+            <a href="@Url.Action("Index", "Category")" class="btn btn-primary">View Categories</a>
+        </div>
+    </div>
+
+   <div class="contribute-section section">
+        <div class="card text-center fade-in add-pose">
+            <h3>Share Your Knowledge</h3>
+            <p>Have a favorite pose that's not in our library? Help grow our community by contributing your own yoga poses!</p>
+            <a href="@Url.Action("CreateNewPose", "Pose")" class="btn btn-primary">Add New Pose</a>
+        </div>
+    </div>
+</div>
+

@@ -1,7 +1,9 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-<link rel="stylesheet" href="~/css/home.css" asp-append-version="true">
+@section Styles {
+    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true">
+}
 
 <div class="hero-section text-center mb-lg">
     <h1 class="fade-in">Welcome to the Yoga Pose Compendium</h1>

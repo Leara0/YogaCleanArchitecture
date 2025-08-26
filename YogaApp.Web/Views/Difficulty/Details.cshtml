@@ -1,23 +1,23 @@
 @model DifficultyDetailViewModel
 
-<h2>@Model.DiffLinkDto.DifficultyName</h2>
+@section Styles {
+    <link rel="stylesheet" href="~/css/pose-tables.css" asp-append-version="true">
+}
 
-<ul>
-    @foreach (var pose in @Model.PoseLinks)
+<h2 class="title">@Model.DiffLinkDto.DifficultyName</h2>
+
+<div class="grid grid-2">
+    @foreach (var pose in Model.PoseLinks)
     {
-        <li><a asp-action="Details" asp-controller="Pose" asp-route-id="@pose.PoseId">
-                @if (!string.IsNullOrEmpty(pose.ThumbnailLocalPath))
-                {
-                    <img src="@pose.ThumbnailLocalPath" alt="@pose.PoseName"
-                         onerror="this.src='@pose.ThumbnailSvg';" loading="lazy"
-                         height="40px"/>
-                }
-                else
-                {
-                    <img src="@pose.ThumbnailSvg" alt="@pose.PoseName" loading="lazy"
-                         height="40px"/>
-                }
-            @pose.PoseName
-        </a></li>
+        <a href="@Url.Action("Details", "Pose", new { id = pose.PoseId })" class="card-link">
+            <div class="card" id="table-card">
+                <img src="@(!string.IsNullOrEmpty(pose.ThumbnailLocalPath) ? pose.ThumbnailLocalPath : pose.ThumbnailSvg)"
+                     alt="@pose.PoseName"
+                     class="pose-thumbnail" />
+                <div class="pose-info">
+                    <h3>@pose.PoseName</h3>
+                </div>
+            </div>
+        </a>
     }
-</ul>
+</div>

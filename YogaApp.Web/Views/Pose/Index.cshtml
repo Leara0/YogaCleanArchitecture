@@ -1,43 +1,19 @@
 @using YogaApp.Domain.Entities
 @model AllPosesByDifficultyViewModel
 
-<h1>All Poses</h1>
-<a asp-controller="Pose" asp-action="CreateNewPose">Create a Pose</a>
+@section Styles {
+    <link rel="stylesheet" href="~/css/pose-tables.css" asp-append-version="true">
+}
+
+<h1 class="title">All Poses</h1>
 
 <div class="section">
-    <div class="difficulty-section">
-        <div class="difficulty-header">
-            <h2>Beginner Poses</h2>
-        </div>
-        <div class="grid grid-2">
-            @foreach(var pose in Model.EasyPoses)
-            {
-                <a href="@Url.Action("Details", "Pose", new { id = pose.PoseId })" class="card-link">
-                    <div class="card pose-card">
-                        <img src="@(!string.IsNullOrEmpty(pose.ThumbnailLocalPath) ? pose.ThumbnailLocalPath : pose.ThumbnailUrlSvg)"
-                             alt="@pose.PoseName"
-                             class="pose-thumbnail" />
-                        <div class="pose-info">
-                            <h3>@pose.PoseName</h3>
-                            @if(!string.IsNullOrEmpty(pose.SanskritName))
-                            {
-                                <p class="pose-sanskrit">@pose.SanskritName</p>
-                            }
-                        </div>
-                    </div>
-                </a>
-            }
-        </div>
-    </div>
-
-    <div class="difficulty-section">
-        <div class="difficulty-header">
-            <h2>Intermediate Poses</h2>
-        </div>
-        <div class="grid grid-2">
-            @foreach(var pose in Model.MediumPoses)
-            {
-                <div class="card pose-card">
+    <h2 class="table-heading">Beginner Poses</h2>
+    <div class="grid grid-2">
+        @foreach(var pose in Model.EasyPoses)
+        {
+            <a href="@Url.Action("Details", "Pose", new { id = pose.PoseId })" class="card-link">
+                <div class="card" id="table-card">
                     <img src="@(!string.IsNullOrEmpty(pose.ThumbnailLocalPath) ? pose.ThumbnailLocalPath : pose.ThumbnailUrlSvg)"
                          alt="@pose.PoseName"
                          class="pose-thumbnail" />
@@ -47,23 +23,19 @@
                         {
                             <p class="pose-sanskrit">@pose.SanskritName</p>
                         }
-                        <div class="mt-sm">
-                            <a href="@Url.Action("Details", "Pose", new { id = pose.PoseId })" class="btn btn-outline">View Details</a>
-                        </div>
                     </div>
                 </div>
-            }
-        </div>
+            </a>
+        }
     </div>
+    
 
-    <div class="difficulty-section">
-        <div class="difficulty-header">
-            <h2>Advanced Poses</h2>
-        </div>
-        <div class="grid grid-2">
-            @foreach(var pose in Model.HardPoses)
-            {
-                <div class="card pose-card">
+    <h2 class="table-heading">Intermediate Poses</h2>
+    <div class="grid grid-2">
+        @foreach(var pose in Model.MediumPoses)
+        {
+            <a href="@Url.Action("Details", "Pose", new { id = pose.PoseId })" class="card-link">
+                <div class="card" id="table-card">
                     <img src="@(!string.IsNullOrEmpty(pose.ThumbnailLocalPath) ? pose.ThumbnailLocalPath : pose.ThumbnailUrlSvg)"
                          alt="@pose.PoseName"
                          class="pose-thumbnail" />
@@ -73,12 +45,32 @@
                         {
                             <p class="pose-sanskrit">@pose.SanskritName</p>
                         }
-                        <div class="mt-sm">
-                            <a href="@Url.Action("Details", "Pose", new { id = pose.PoseId })" class="btn btn-outline">View Details</a>
-                        </div>
                     </div>
                 </div>
-            }
-        </div>
+            </a>
+        }
+    </div>
+    
+    <h2 class="table-heading">Advanced Poses</h2>
+    <div class="grid grid-2">
+        @foreach(var pose in Model.HardPoses)
+        {
+            <a href="@Url.Action("Details", "Pose", new { id = pose.PoseId })" class="card-link">
+                <div class="card" id="table-card">
+                    <img src="@(!string.IsNullOrEmpty(pose.ThumbnailLocalPath) ? pose.ThumbnailLocalPath : pose.ThumbnailUrlSvg)"
+                         alt="@pose.PoseName"
+                         class="pose-thumbnail" />
+                    <div class="pose-info">
+                        <h3>@pose.PoseName</h3>
+                        @if(!string.IsNullOrEmpty(pose.SanskritName))
+                        {
+                            <p class="pose-sanskrit">@pose.SanskritName</p>
+                        }
+                    </div>
+                </div>
+            </a>
+        }
     </div>
 </div>
+
+

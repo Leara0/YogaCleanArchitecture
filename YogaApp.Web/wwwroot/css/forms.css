@@ -1,0 +1,64 @@
+/*Input Fields*/
+.form-control:focus, .form-select:focus {
+    border-color: var(--forest-green);
+    box-shadow: 0 0 0 0.2rem rgba(var(--forest-green-rgb), 0.25);
+}
+
+/*Checkboxes*/
+.form-check-input:checked {
+    background-color: var(--forest-green);
+    border-color: var(--charcoal);
+}
+
+.form-check-input:focus {
+    border-color: var(--charcoal);
+    box-shadow: 0 0 0 0.2rem rgba(var(--forest-green-rgb), 0.25);
+}
+
+/*Dropdown Options*/
+select option:checked {
+    background-color: var(--forest-green) !important;
+    color: white !important;
+}
+
+select option:hover {
+    background-color: var(--sage-green) !important;
+    color: white !important;
+}
+
+.form-group {
+    margin-bottom: var(--space-md);
+}
+
+.form-label {
+    display: block;
+    margin-bottom: var(--space-xs);
+    font-weight: 400;
+    color: var(--charcoal);
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid var(--warm-beige);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--sage-green);
+    box-shadow: 0 0 0 3px rgba(139, 157, 131, 0.1);
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.form-select {
+    background: var(--pure-white);
+    cursor: pointer;
+}

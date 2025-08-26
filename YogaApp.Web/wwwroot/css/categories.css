@@ -1,0 +1,12 @@
+.grid {
+    display: grid;
+    gap: var(--space-md);
+    align-items: stretch; /* Makes all grid items same height */
+}
+
+/* Make the card content fill the full height */
+.category-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Fill the grid cell */
+}

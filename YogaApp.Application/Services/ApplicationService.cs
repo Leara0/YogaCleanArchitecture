@@ -15,7 +15,7 @@ public class ApplicationService :IApplicationServices
     private readonly IGetAllCategoriesUseCase _getAllCategories;
     private readonly IGetAllDifficultiesUseCase _getAllDifficulties;
     private readonly ICreatePoseUseCase _createPoseUseCase;
-    private readonly  IGetAllPosesUseCase _getAllPosesUseCase;
+    private readonly IGetAllPosesUseCase _getAllPosesUseCase;
     private readonly IGetPoseByIdUseCase _getPoseByIdUseCase;
     private readonly IGetCatByCatIdUseCase _getCatByCatIdUseCase;
     private readonly IGetDifficultyByIdUseCase _getDifficultyByIdUseCase;

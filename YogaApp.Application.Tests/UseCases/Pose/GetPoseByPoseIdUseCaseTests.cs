@@ -47,7 +47,6 @@ public class GetPoseByPoseIdUseCaseTests
         
         var pose = new Domain.Entities.Pose("Test Pose", difficultyId);
         
-        //tell the mock repos how to respond
         mockPoseRepo.Setup(p => p.GetPoseByIdAsync(It.IsAny<int>())).ReturnsAsync(pose);
         mockCatRepo.Setup(c => c.GetCategoryIdsByPoseIdAsync(It.IsAny<int>()))
             .ReturnsAsync(new List<int>());

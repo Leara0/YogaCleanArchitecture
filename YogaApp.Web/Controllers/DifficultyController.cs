@@ -22,6 +22,7 @@ public class DifficultyController : Controller
     {
         var difficulty = await _appServices.GetDifficultyByIdAsync(diffId);
         var diffModel = difficulty.ToDifficultyViewModel();
+        _logger.LogInformation("Difficulty Details was called");
         return View(diffModel);
     }
 }

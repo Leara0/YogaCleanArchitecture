@@ -49,6 +49,7 @@ public class PoseController : Controller
         var poseDto = await _services.UpdatePoseAsync(id);
         //map to View Model using extension
         var pose = poseDto.ToViewUpdateModel();
+        _logger.LogInformation("UpdatePose Get was called");
         
         return View(pose);
     }
@@ -56,9 +57,10 @@ public class PoseController : Controller
     [HttpPost]
     public async Task<IActionResult> UpdatePose(UpdatePoseViewModel model)
     {
-        _logger.LogInformation("Updating pose");
+        _logger.LogInformation("UpdatePose POST was called");
         if (!ModelState.IsValid)
         {
+            _logger.LogInformation("Model state is invalid");
             await RepopulateFormOptions(model);
             return View(model);
         }
@@ -93,6 +95,7 @@ public class PoseController : Controller
         
         var pose = new CreatePoseViewModel();
         await PopulateDropdownsAsync(pose);
+        _logger.LogInformation("CreateNewPose GET was called");
         
         return View(pose);
     }
@@ -100,8 +103,10 @@ public class PoseController : Controller
     [HttpPost]
     public async Task<IActionResult> CreateNewPose(CreatePoseViewModel pose)
     {
+        _logger.LogInformation("CreateNewPose POST was called");
         if (!ModelState.IsValid)
         {
+            _logger.LogInformation("Model state is invalid");
             await PopulateDropdownsAsync(pose);
             return View(pose);
         }
@@ -130,6 +135,7 @@ public class PoseController : Controller
     public async Task<IActionResult> DeletePose(int id)
     {
         await _services.DeletePoseAsync(id);
+        _logger.LogInformation("DeletePose was called");
         return RedirectToAction("Index");
     }
     

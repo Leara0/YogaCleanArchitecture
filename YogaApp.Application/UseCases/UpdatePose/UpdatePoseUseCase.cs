@@ -23,7 +23,7 @@ public class UpdatePoseUseCase : IUpdatePoseUseCase
     {
         var pose = await _poseRepo.GetPoseByIdAsync(PoseId);
         var categories = await _catRepo.GetCategoryIdsByPoseIdAsync(PoseId);
-        
+
         //map out the SelectOptionsDto to prep for the SelectListOptions
         var difficulties = await _diffRepo.GetAllDifficultiesAsync();
         var difficultyOptions = difficulties.Select(d => new SelectOptionDto
@@ -31,14 +31,14 @@ public class UpdatePoseUseCase : IUpdatePoseUseCase
             Value = d.DifficultyId.ToString(),
             Text = d.DifficultyLevel,
         }).ToList();
-        
+
         var categoriesOpt = await _catRepo.GetAllCategoriesAsync();
         var categoryOptions = categoriesOpt.Select(c => new SelectOptionDto
         {
             Value = c.CategoryId.ToString(),
             Text = c.CategoryName,
         }).ToList();
-        
+
         return new UpdatePoseResponseDto(pose, categories, difficultyOptions, categoryOptions);
     }
 
@@ -55,16 +55,18 @@ public class UpdatePoseUseCase : IUpdatePoseUseCase
             dto.ThumbnailUrlSvg);
         pose.PoseId = dto.PoseId;
         pose.CategoryIds = dto.CategoryIds;
-        
-        
+
+
         //call pose repo to update pose
         await _poseRepo.UpdateToDbPoseAsync(pose);
-        
-        //call cat repo to delete category rows so we can start fresh
-        await _catRepo.DeleteCategoriesByPoseIdAsync(pose.PoseId);
-        
-        //call cat repo to write new category rows
-        if(pose.CategoryIds?.Any() == true)
+
+        if (pose.CategoryIds?.Any() == true)
+        {
+            //call cat repo to delete category rows so we can start fresh
+            await _catRepo.DeleteCategoriesByPoseIdAsync(pose.PoseId);
+
+            //call cat repo to write new category rows
             await _catRepo.AddCategoryByPoseIdAsync(pose.PoseId, pose.CategoryIds);
+        }
     }
 }

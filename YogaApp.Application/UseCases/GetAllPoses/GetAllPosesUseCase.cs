@@ -19,6 +19,7 @@ public class GetAllPosesUseCase :IGetAllPosesUseCase
         var poses = await _poseRepo.GetAllPosesAsync();
         
         var posesDto = poses.Select(p => new GetAllPosesResponseDto(p)).ToList();
+        
         return new PosesByDifficultyDto
         {
             EasyPoses = posesDto.Where(p => p.DifficultyId == 1).ToList(),

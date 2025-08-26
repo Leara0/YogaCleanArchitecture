@@ -29,7 +29,7 @@ public class GetPoseByIdUseCase : IGetPoseByIdUseCase
         var categoryIds = await _catRepo.GetCategoryIdsByPoseIdAsync(PoseId);
         var catsInThisPose = await _catRepo.GetCatsInPoseAsync(categoryIds);
         
-        //map tuple to PoseLink class for easier data handling
+        //map tuple to CategoryLink class for easier data handling
         var categoryLinks = catsInThisPose.Select(c => 
             new CategoryLinkDto() { CategoryId = c.CatId, CategoryName = c.CatName }).ToList();
         

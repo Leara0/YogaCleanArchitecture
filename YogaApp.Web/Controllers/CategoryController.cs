@@ -23,6 +23,7 @@ public class CategoryController : Controller
         //use extension method to map dto to view model
         var model = categoriesDto
             .Select(c => c.ToAllCategoriesViewModel()).ToList();
+        _logger.LogInformation("Categories Index was called");
         return View(model);
     }
 
@@ -30,6 +31,7 @@ public class CategoryController : Controller
     {
         var categoriesDto = await _applicationServices.GetCatByCatIdAsync(id);
         var model = categoriesDto.ToAllPosesViewModel();
+        _logger.LogInformation("Categories Details was called");
         return View(model);
     }
 }

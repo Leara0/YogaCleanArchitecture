@@ -31,6 +31,7 @@ Data Attribution
   - Adapted table structure for Clean Architecture implementation
   - Maintained all original Sanskrit names, descriptions and pose benefits
   - Restructured relationships for optimal MVC usage
+  - Extracted and stored original SVG pose illustrations locally within project assets to optimize loading times and reduce external dependencies
 - Special thanks to Alex Cumplido for compiling this comprehensive collection of yoga pose information
 
 Database Schema

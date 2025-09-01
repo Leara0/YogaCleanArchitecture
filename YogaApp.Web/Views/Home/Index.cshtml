@@ -3,6 +3,7 @@
 }
 @section Styles {
     <link rel="stylesheet" href="~/css/home.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/forms.css" asp-append-version="true">
 }
 
 <div class="hero-section text-center mb-lg">
@@ -15,12 +16,22 @@
 </div>
 
 <div class="navigation-guide">
-    <div class="section text-center mb-lg">
+    <div class="home-section text-center">
         <h2>Explore Your Practice</h2>
-        <p>Navigate through our organized collection to find exactly what you need:</p>
+        <p>Navigate through our organized collection or search to find exactly what you need:</p>
+    </div>
+    <div class="search-section mb-xl">
+        <div class="search-bar mb-xl">
+            <form asp-controller="Search" asp-action="Index" method="get">
+                <div class="input-group">
+                    <input class="form-control form-control-lg" name="searchTerm" placeholder="Search poses, descriptions, benefits, categories..." />
+                    <button class="btn btn-secondary" type="submit">Search</button>
+                </div>
+            </form>
+        </div>
     </div>
 
-    <div class="grid grid-2 mb-xl">
+    <div class="grid grid-2 mb-lg">
         <div class="card fade-in">
             <h3>Pose Library</h3>
             <p>
@@ -43,7 +54,7 @@
         </div>
     </div>
 
-   <div class="contribute-section section">
+   <div class="contribute-section home-section">
         <div class="card text-center fade-in add-pose">
             <h3>Share Your Knowledge</h3>
             <p>Have a favorite pose that's not in our library? Help grow our community by contributing your own yoga poses!</p>

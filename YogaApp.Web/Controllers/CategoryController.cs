@@ -31,7 +31,7 @@ public class CategoryController : Controller
     {
         var categoriesDto = await _applicationServices.GetCatByCatIdAsync(id);
         var model = categoriesDto.ToAllPosesViewModel();
-        _logger.LogInformation("Categories Details was called");
+        _logger.LogInformation("Categories Details was called");  
         return View(model);
     }
 }

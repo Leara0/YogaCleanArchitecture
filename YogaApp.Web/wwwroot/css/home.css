@@ -13,3 +13,7 @@
     background: var(--soft-white); 
     color: var(--charcoal);" 
 }
+
+.home-section {
+    padding: var(--space-md) 0;
+}

@@ -62,3 +62,14 @@ select option:hover {
     background: var(--pure-white);
     cursor: pointer;
 }
+
+.search-bar {
+    border-radius: 12px;
+    box-shadow: var(--shadow-soft);
+    border-left: 3px solid var(--warm-beige);
+}
+.search-bar:focus, .search-bar:focus {
+    border-color: var(--forest-green);
+    box-shadow: 0 0 0 0.2rem rgba(var(--forest-green-rgb), 0.25);
+}
+

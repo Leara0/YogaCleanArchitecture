@@ -1,4 +1,5 @@
 using YogaApp.Application.DTO;
+using YogaApp.Application.Interfaces;
 using YogaApp.Application.RespositoryInterfaces;
 using YogaApp.Application.UseCaseInterfaces;
 
@@ -7,12 +8,12 @@ namespace YogaApp.Application.UseCases;
 public class GetCatByCatIdUseCase : IGetCatByCatIdUseCase
 {
     public readonly ICategoryRepository _catRepo;
-    public readonly IPoseRepository _poseRepo;
+    public readonly IPoseSearchServices _searchServices;
 
-    public GetCatByCatIdUseCase(ICategoryRepository categoryRepository, IPoseRepository poseRepository)
+    public GetCatByCatIdUseCase(ICategoryRepository categoryRepository, IPoseSearchServices searchServices)
     {
         _catRepo = categoryRepository;
-        _poseRepo = poseRepository;
+        _searchServices = searchServices;
     }
     public async Task<GetCatByCatIdResponseDto> ExecuteGetCatByCatIdAsync(int CatId)
     {
@@ -20,8 +21,8 @@ public class GetCatByCatIdUseCase : IGetCatByCatIdUseCase
         var category = await _catRepo.GetCategoryByCatIdAsync(CatId);
         
         //get all poses that fall in this category and tuple that matches poseId and Name
-        var poseIdsInCat = await _poseRepo.GetPoseIdsByCategoryIdAsync(CatId);
-        var posesInCat = await _poseRepo.GetPosesByPoseIdsAsync(poseIdsInCat);
+        var poseIdsInCat = await _searchServices.GetPoseIdsByCategoryIdAsync(CatId);
+        var posesInCat = await _searchServices.GetPosesByPoseIdsAsync(poseIdsInCat);
         
         //map Pose to PoseLink class for clean data handling
         var links = posesInCat.Select(p => new PoseLinkDto 

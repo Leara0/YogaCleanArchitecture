@@ -1,11 +1,13 @@
 using System.Data;
 using MySql.Data.MySqlClient;
+using YogaApp.Application.Interfaces;
 using YogaApp.Application.RespositoryInterfaces;
 using YogaApp.Application.Services;
 using YogaApp.Application.UseCaseInterfaces;
 using YogaApp.Application.UseCases;
 using YogaApp.Application.UseCases.DeletePose;
 using YogaApp.Application.UseCases.GetDifficultyByDiffId;
+using YogaApp.Application.UseCases.Search;
 using YogaApp.Application.UseCases.UpdatePose;
 using YogaApp.Infrastructure.Repositories;
 
@@ -23,6 +25,7 @@ builder.Services.AddScoped<IDbConnection>(s =>
 builder.Services.AddScoped<IPoseRepository, PoseRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IDifficultyRepository, DifficultyRepository>();
+builder.Services.AddScoped<IPoseSearchServices, PoseSearchServices>();
 
 // Register use cases
 builder.Services.AddScoped<ICreatePoseUseCase, CreatePoseUseCase>();
@@ -34,6 +37,7 @@ builder.Services.AddScoped<IGetCatByCatIdUseCase, GetCatByCatIdUseCase>();
 builder.Services.AddScoped<IGetDifficultyByIdUseCase, GetDifficultyByIdUseCase>();
 builder.Services.AddScoped<IUpdatePoseUseCase, UpdatePoseUseCase>();
 builder.Services.AddScoped<IDeletePoseByPoseIdUseCase, DeletePoseByPoseIdUseCase>();
+builder.Services.AddScoped<ISearchUseCase, SearchUseCase>();
 
 //Register pose use case services facade
 builder.Services.AddScoped<IApplicationServices, ApplicationService>();

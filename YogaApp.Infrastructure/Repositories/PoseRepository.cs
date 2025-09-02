@@ -68,27 +68,7 @@ public class PoseRepository : IPoseRepository
         return id;
     }
     
-    public async Task<List<int>> GetPoseIdsByCategoryIdAsync(int catId)
-    {
-        return (await _db.QueryAsync<int>("SELECT pose_id FROM pose_mapping WHERE Category_id = @Id", 
-            new {Id = catId})).ToList();
-    }
-
-    public async Task<List<int>> GetPoseIdsByDifficultyIdAsync(int difficultyId)
-    {
-        return (await _db.QueryAsync<int>("SELECT pose_id FROM poses WHERE Difficulty_Id = @Id",
-            new {Id = difficultyId})).ToList();
-    }
-
-    public async Task<List<Pose>> GetPosesByPoseIdsAsync(List<int> poseIds)
-    {
-        if (!poseIds.Any()) return new List<Pose>();
-    
-        var dto = await _db.QueryAsync<PoseDto>("SELECT * FROM poses WHERE pose_id IN @poseIds",
-            new {poseIds});
-        return dto.Select(MapDtoToEntity).ToList();
-    }
-
+   
 
     public async Task DeletePoseByPoseIdAsync(int poseId)
     {

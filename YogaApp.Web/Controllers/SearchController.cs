@@ -14,8 +14,17 @@ public class SearchController : Controller
         _services = services;
     }
     // GET
-    public IActionResult Index()
+    public async Task<IActionResult> Index(string searchString)
     {
+        //deals with empty search
+        if (string.IsNullOrEmpty(searchString))
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
+        //var result = await _services.Search(searchString);
+        //var poseView = result.ToSearchViewModel;
+        //return View(poseView);
         return View();
     }
 }

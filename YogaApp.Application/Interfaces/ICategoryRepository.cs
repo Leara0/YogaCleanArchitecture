@@ -10,4 +10,5 @@ public interface ICategoryRepository
     Task<List<(int CatId, string CatName)>> GetCatsInPoseAsync(List<int> catIds);
     Task DeleteCategoriesByPoseIdAsync(int poseId);
     Task AddCategoryByPoseIdAsync(int poseId, List<int> categoryIds);//assists in creating a new pose by adding to pose mapping
+    Task<List<(int CatId, string CatName)>> SearchByCategoryAsync(string searchString);
 }

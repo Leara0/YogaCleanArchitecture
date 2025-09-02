@@ -1,4 +1,5 @@
 using Moq;
+using YogaApp.Application.Interfaces;
 using YogaApp.Application.RespositoryInterfaces;
 using YogaApp.Application.UseCases.GetDifficultyByDiffId;
 
@@ -10,22 +11,21 @@ public class GetDifficultyByDiffIdUseCaseTests
     public async Task ExecuteGetDifficultyById_CallsRepositories_Once()
     {
         // ARRANGE
-        var mockDiffRepo = new Mock<IDifficultyRepository>();
-        var mockPoseRepo = new Mock<IPoseRepository>();
+        var mockSearchServices = new Mock<IPoseSearchServices>();
     
-        mockPoseRepo.Setup(p => p.GetPoseIdsByDifficultyIdAsync(It.IsAny<int>()))
+        mockSearchServices.Setup(p => p.GetPoseIdsByDifficultyIdAsync(It.IsAny<int>()))
             .ReturnsAsync(new List<int>());
-        mockPoseRepo.Setup(p => p.GetPosesByPoseIdsAsync(It.IsAny<List<int>>()))
+        mockSearchServices.Setup(p => p.GetPosesByPoseIdsAsync(It.IsAny<List<int>>()))
             .ReturnsAsync(new List<Domain.Entities.Pose>());
 
-        var useCase = new GetDifficultyByIdUseCase(mockDiffRepo.Object, mockPoseRepo.Object);
+        var useCase = new GetDifficultyByIdUseCase(mockSearchServices.Object);
 
         // ACT
         await useCase.ExecuteGetDifficultyById(2);
 
         // ASSERT
-        mockPoseRepo.Verify(p => p.GetPoseIdsByDifficultyIdAsync(2), Times.Once);
-        mockPoseRepo.Verify(p => p.GetPosesByPoseIdsAsync(It.IsAny<List<int>>()), Times.Once);
+        mockSearchServices.Verify(p => p.GetPoseIdsByDifficultyIdAsync(2), Times.Once);
+        mockSearchServices.Verify(p => p.GetPosesByPoseIdsAsync(It.IsAny<List<int>>()), Times.Once);
     }
 
     [Theory]
@@ -35,15 +35,14 @@ public class GetDifficultyByDiffIdUseCaseTests
     public async Task ExecuteGetDifficultyById_MapsDifficultyCorrectly(int diffId, string expectedName)
     {
         //ARRANGE
-        var mockDiffRepo = new Mock<IDifficultyRepository>();
-        var mockPoseRepo = new Mock<IPoseRepository>();
+        var mockSearchServices = new Mock<IPoseSearchServices>();
 
-        mockPoseRepo.Setup(p => p.GetPoseIdsByDifficultyIdAsync(It.IsAny<int>()))
+        mockSearchServices.Setup(p => p.GetPoseIdsByDifficultyIdAsync(It.IsAny<int>()))
             .ReturnsAsync(new List<int>());
-        mockPoseRepo.Setup(p => p.GetPosesByPoseIdsAsync(It.IsAny<List<int>>()))
+        mockSearchServices.Setup(p => p.GetPosesByPoseIdsAsync(It.IsAny<List<int>>()))
             .ReturnsAsync(new List<Domain.Entities.Pose>());
         
-        var useCase = new GetDifficultyByIdUseCase(mockDiffRepo.Object, mockPoseRepo.Object);
+        var useCase = new GetDifficultyByIdUseCase(mockSearchServices.Object);
         
         //ACT
         var result = await useCase.ExecuteGetDifficultyById(diffId);
@@ -55,8 +54,7 @@ public class GetDifficultyByDiffIdUseCaseTests
     [Fact]
     public async Task ExecuteGetDifficultyById_MapsPosesToPoseLinksCorrectly()
     {
-        var mockDiffRepo = new Mock<IDifficultyRepository>();
-        var mockPoseRepo = new Mock<IPoseRepository>();
+        var mockSearchServices = new Mock<IPoseSearchServices>();
 
         var poses = new List<Domain.Entities.Pose>
         {
@@ -64,12 +62,12 @@ public class GetDifficultyByDiffIdUseCaseTests
             new Domain.Entities.Pose("Warrior II", 2) { PoseId = 2, ThumbnailUrlSvg = "url2.svg" }
         };
 
-        mockPoseRepo.Setup(p => p.GetPoseIdsByDifficultyIdAsync(It.IsAny<int>()))
+        mockSearchServices.Setup(p => p.GetPoseIdsByDifficultyIdAsync(It.IsAny<int>()))
             .ReturnsAsync(new List<int> { 1, 2 });
-        mockPoseRepo.Setup(p => p.GetPosesByPoseIdsAsync(It.IsAny<List<int>>()))
+        mockSearchServices.Setup(p => p.GetPosesByPoseIdsAsync(It.IsAny<List<int>>()))
             .ReturnsAsync(poses);
         
-        var useCase = new GetDifficultyByIdUseCase(mockDiffRepo.Object, mockPoseRepo.Object);
+        var useCase = new GetDifficultyByIdUseCase(mockSearchServices.Object);
         
         //ACT
         var result = await useCase.ExecuteGetDifficultyById(2);

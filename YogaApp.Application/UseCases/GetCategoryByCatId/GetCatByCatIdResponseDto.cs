@@ -4,11 +4,6 @@ namespace YogaApp.Application.DTO;
 
 public class GetCatByCatIdResponseDto
 {
-    public int CategoryId { get; set; }
-    public string? CategoryName { get; set; }
-    public string? CategoryDescription { get; set; }
-    public List<PoseLinkDto> PoseLink { get; set; } = new List<PoseLinkDto>();
-
     public GetCatByCatIdResponseDto(Category category, List<PoseLinkDto> poseLink)
     {
         CategoryId = category.CategoryId;
@@ -20,4 +15,9 @@ public class GetCatByCatIdResponseDto
     //empty constructor for testing 
     public GetCatByCatIdResponseDto()
     { }
+    
+    public int CategoryId { get; set; }
+    public string? CategoryName { get; set; }
+    public string? CategoryDescription { get; set; }
+    public List<PoseLinkDto> PoseLink { get; set; } = new List<PoseLinkDto>();
 }

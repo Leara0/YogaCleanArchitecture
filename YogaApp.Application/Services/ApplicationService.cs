@@ -5,6 +5,7 @@ using YogaApp.Application.UseCases.DeletePose;
 using YogaApp.Application.UseCases.GetAllDifficulties;
 using YogaApp.Application.UseCases.GetAllPoses;
 using YogaApp.Application.UseCases.GetDifficultyByDiffId;
+using YogaApp.Application.UseCases.Search;
 using YogaApp.Application.UseCases.UpdatePose;
 using YogaApp.Domain.Entities;
 
@@ -21,12 +22,13 @@ public class ApplicationService :IApplicationServices
     private readonly IGetDifficultyByIdUseCase _getDifficultyByIdUseCase;
     private readonly IUpdatePoseUseCase _updatePoseUseCase;
     private readonly IDeletePoseByPoseIdUseCase _deletePoseByPoseIdUseCase;
+    private readonly ISearchUseCase _searchUseCase;
 
     public ApplicationService(IGetAllCategoriesUseCase getAllCategories,
         IGetAllDifficultiesUseCase getAllDifficulties, ICreatePoseUseCase createPoseUseCase, IGetAllPosesUseCase getAllPosesUseCase,
         IGetPoseByIdUseCase getPoseByIdUseCase, IGetCatByCatIdUseCase getCatByCatIdUseCase, 
         IGetDifficultyByIdUseCase getDifficultyByIdUseCase, IUpdatePoseUseCase updatePoseUseCase,
-        IDeletePoseByPoseIdUseCase deletePoseByPoseIdUseCase)
+        IDeletePoseByPoseIdUseCase deletePoseByPoseIdUseCase, ISearchUseCase searchUseCase)
     {
         _getAllCategories = getAllCategories;
         _getAllDifficulties = getAllDifficulties;
@@ -37,6 +39,7 @@ public class ApplicationService :IApplicationServices
         _getDifficultyByIdUseCase = getDifficultyByIdUseCase;
         _updatePoseUseCase = updatePoseUseCase;
         _deletePoseByPoseIdUseCase = deletePoseByPoseIdUseCase;
+        _searchUseCase = searchUseCase;
     }
     public async Task<int> CreatePoseInDbAsync(CreatePoseRequestDto requestDto)
     {
@@ -88,6 +91,11 @@ public class ApplicationService :IApplicationServices
     public async Task DeletePoseAsync(int poseId)
     {
         await _deletePoseByPoseIdUseCase.ExecuteDeletePoseByPoseIdAsync(poseId);
+    }
+
+    public async Task<SearchResponseDto> SearchAsync(string searchString)
+    {
+        return await _searchUseCase.ExecuteSearchAsync(searchString);
     }
 }
 

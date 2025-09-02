@@ -1,4 +1,5 @@
 using Moq;
+using YogaApp.Application.Interfaces;
 using YogaApp.Application.RespositoryInterfaces;
 using YogaApp.Application.UseCases;
 
@@ -11,24 +12,24 @@ public class GetCategoryByCatIdUseCaseTests
     {
         //ARRANGE
         var mockCatRepo = new Mock<ICategoryRepository>();
-        var mockPoseRepo = new Mock<IPoseRepository>();
+        var mockSearchServices = new Mock<IPoseSearchServices>();
 
         mockCatRepo.Setup(c => c.GetCategoryByCatIdAsync(It.IsAny<int>()))
             .ReturnsAsync(new Domain.Entities.Category());
-        mockPoseRepo.Setup(p => p.GetPoseIdsByCategoryIdAsync(It.IsAny<int>()))
+        mockSearchServices.Setup(p => p.GetPoseIdsByCategoryIdAsync(It.IsAny<int>()))
             .ReturnsAsync(new List<int>());
-        mockPoseRepo.Setup(p => p.GetPosesByPoseIdsAsync(It.IsAny<List<int>>()))
+        mockSearchServices.Setup(p => p.GetPosesByPoseIdsAsync(It.IsAny<List<int>>()))
             .ReturnsAsync(new List<Domain.Entities.Pose>());
 
-        var useCase = new GetCatByCatIdUseCase(mockCatRepo.Object, mockPoseRepo.Object);
+        var useCase = new GetCatByCatIdUseCase(mockCatRepo.Object, mockSearchServices.Object);
         
         //ACT
         var result = await useCase.ExecuteGetCatByCatIdAsync(5);
         
         //ASSERT
         mockCatRepo.Verify(c => c.GetCategoryByCatIdAsync(5), Times.Once);
-        mockPoseRepo.Verify(p=> p.GetPoseIdsByCategoryIdAsync(5), Times.Once);
-        mockPoseRepo.Verify(p=> p.GetPosesByPoseIdsAsync(It.IsAny<List<int>>()), Times.Once);
+        mockSearchServices.Verify(p=> p.GetPoseIdsByCategoryIdAsync(5), Times.Once);
+        mockSearchServices.Verify(p=> p.GetPosesByPoseIdsAsync(It.IsAny<List<int>>()), Times.Once);
     }
 
     [Fact]
@@ -36,7 +37,7 @@ public class GetCategoryByCatIdUseCaseTests
     {
         //ARRANGE
         var mockCatRepo = new Mock<ICategoryRepository>();
-        var mockPoseRepo = new Mock<IPoseRepository>();
+        var mockSearchServices = new Mock<IPoseSearchServices>();
 
         var poses = new List<Domain.Entities.Pose>
         {
@@ -46,12 +47,12 @@ public class GetCategoryByCatIdUseCaseTests
 
         mockCatRepo.Setup(c => c.GetCategoryByCatIdAsync(It.IsAny<int>()))
             .ReturnsAsync(new Domain.Entities.Category());
-        mockPoseRepo.Setup(p => p.GetPoseIdsByCategoryIdAsync(It.IsAny<int>()))
+        mockSearchServices.Setup(p => p.GetPoseIdsByCategoryIdAsync(It.IsAny<int>()))
             .ReturnsAsync(new List<int> { 1, 2 });
-        mockPoseRepo.Setup(p => p.GetPosesByPoseIdsAsync(It.IsAny<List<int>>()))
+        mockSearchServices.Setup(p => p.GetPosesByPoseIdsAsync(It.IsAny<List<int>>()))
             .ReturnsAsync(poses);
         
-        var useCase = new GetCatByCatIdUseCase(mockCatRepo.Object, mockPoseRepo.Object);
+        var useCase = new GetCatByCatIdUseCase(mockCatRepo.Object, mockSearchServices.Object);
         
         //ACT
         var result = await useCase.ExecuteGetCatByCatIdAsync(3);

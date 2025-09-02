@@ -54,6 +54,11 @@ public class CategoryRepository:ICategoryRepository
         }
     }
 
+    public Task<List<(int CatId, string CatName)>> SearchByCategoryAsync(string searchString)
+    {
+        throw new NotImplementedException();
+    }
+
     private Category MapDtoToEntity(CategoryDto dto)
     {
         var category = new Category();

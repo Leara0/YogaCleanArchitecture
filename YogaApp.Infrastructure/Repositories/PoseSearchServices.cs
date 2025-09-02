@@ -14,19 +14,30 @@ public class PoseSearchServices: IPoseSearchServices
     {
         _db = db;
     }
-    public Task<List<Pose>> SearchByNameAsync(string name)
+    public async Task<List<Pose>> SearchByNameAsync(string name)
     {
-        throw new NotImplementedException();
+        //use wildcards in the parameter so it will find search term anywhere in the name
+        var poseDto = (await _db.QueryAsync<PoseDto>("SELECT * FROM poses WHERE English_Name LIKE @name",
+            new { name = $"%{name}%" })).ToList();
+        return poseDto.Select(MapDtoToEntity).ToList();
     }
 
-    public Task<List<Pose>> SearchByBenefitsAsync(string benefits)
+    public async Task<List<Pose>> SearchByBenefitsAsync(string benefits)
     {
-        throw new NotImplementedException();
+        //use wildcards in the parameter so it will find search term anywhere in the benefits
+        var poseDto = (await _db.QueryAsync<PoseDto>
+            ("SELECT * FROM poses WHERE Pose_Benefits LIKE @benefits", 
+                new { benefits = $"%{benefits}%" })).ToList();
+        return poseDto.Select(MapDtoToEntity).ToList();
     }
 
-    public Task<List<Pose>> SearchByDescriptionAsync(string description)
+    public async Task<List<Pose>> SearchByDescriptionAsync(string description)
     {
-        throw new NotImplementedException();
+         //use wildcards in the parameter so it will find search term anywhere in the description
+         var poseDto = (await _db.QueryAsync<PoseDto>
+             ("SELECT * FROM poses WHERE Pose_Description LIKE @description", 
+                 new { description = $"%{description}%"})).ToList();
+             return poseDto.Select(MapDtoToEntity).ToList();
     }
 
     public async Task<List<int>> GetPoseIdsByCategoryIdAsync(int catId)

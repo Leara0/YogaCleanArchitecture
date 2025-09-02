@@ -54,9 +54,12 @@ public class CategoryRepository:ICategoryRepository
         }
     }
 
-    public Task<List<(int CatId, string CatName)>> SearchByCategoryAsync(string searchString)
+    public async Task<List<(int CatId, string CatName)>> SearchByCategoryAsync(string searchString)
     {
-        throw new NotImplementedException();
+        //use wildcard in parameter so it will find search term in any part of the category
+        return (await _db.QueryAsync<(int CatId, string CatName)>
+        ("SELECT Category_Id AS CatId, Category_Name AS CatName FROM categories WHERE Category_Name LIKE @searchString",
+            new { searchString = $"%{searchString}%" })).ToList();
     }
 
     private Category MapDtoToEntity(CategoryDto dto)

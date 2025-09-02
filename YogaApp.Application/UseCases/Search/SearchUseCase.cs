@@ -57,6 +57,6 @@ public class SearchUseCase: ISearchUseCase
         }).ToList();
 
 
-        return new SearchResponseDto();
+        return new SearchResponseDto(namePoseLinks, descPoseLinks, benePoseLinks, categoryLinks);
     }
 }

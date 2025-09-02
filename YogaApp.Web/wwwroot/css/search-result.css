@@ -1,0 +1,15 @@
+
+/* styling for nav links on search page*/
+.nav-tabs .nav-link {
+    color: var(--forest-green) !important;
+}
+
+.nav-tabs .nav-link:focus,
+.nav-tabs .nav-link:hover {
+    color: var(--forest-green) !important;
+}
+
+/* Active tab - make it charcoal to stand out */
+.nav-tabs .nav-link.active {
+    color: var(--charcoal) !important;
+}

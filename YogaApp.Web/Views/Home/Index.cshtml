@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="~/css/forms.css" asp-append-version="true">
 }
 
+
 <div class="hero-section text-center mb-lg">
     <h1 class="fade-in">Welcome to the Yoga Pose Compendium</h1>
     <p class="lead fade-in" >
@@ -24,7 +25,7 @@
         <div class="search-bar mb-xl">
             <form asp-controller="Search" asp-action="Index" method="get">
                 <div class="input-group">
-                    <input class="form-control form-control-lg" name="searchTerm" placeholder="Search poses, descriptions, benefits, categories..." />
+                    <input class="form-control form-control-lg" type="text" name="searchTerm" placeholder="Search poses, descriptions, benefits, categories..." />
                     <button class="btn btn-secondary" type="submit">Search</button>
                 </div>
             </form>

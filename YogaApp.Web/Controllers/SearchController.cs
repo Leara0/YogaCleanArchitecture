@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using YogaApp.Application.UseCaseInterfaces;
+using YogaApp.Web.Extensions;
 
 namespace YogaApp.Web.Controllers;
 
@@ -14,17 +15,23 @@ public class SearchController : Controller
         _services = services;
     }
     // GET
-    public async Task<IActionResult> Index(string searchString)
+    public async Task<IActionResult> Index(string searchTerm)
     {
         //deals with empty search
-        if (string.IsNullOrEmpty(searchString))
+        _logger.LogInformation($"failed to capture search string: {searchTerm}");
+        if (string.IsNullOrEmpty(searchTerm))
         {
             return RedirectToAction("Index", "Home");
         }
 
-        //var result = await _services.Search(searchString);
-        //var poseView = result.ToSearchViewModel;
-        //return View(poseView);
-        return View();
+        _logger.LogInformation($"Searching for {searchTerm}");
+        
+        //call use case to search repos for search string
+        var resultDto = await _services.SearchAsync(searchTerm);
+        //use mapping extension to map DTO to view model
+        var viewModel = resultDto.ToSearchViewModel();
+        viewModel.SearchTerm = searchTerm;
+       
+        return View(viewModel);
     }
 }

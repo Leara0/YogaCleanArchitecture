@@ -1,18 +1,107 @@
+<div class="container">
 
+    @section Styles {
+        <link rel="stylesheet" href="~/css/pose-tables.css" asp-append-version="true">
+        <link rel="stylesheet" href="~/css/categories.css" asp-append-version="true">
+        <link rel="stylesheet" href="~/css/search-result.css" asp-append-version="true"/>
+    }
+ 
+    <h2>Search Results for "@Model.SearchTerm"</h2>
 
-@{
-    Layout = null;
-}
+    <!-- Tab Navigation -->
+    <ul class="nav nav-tabs" id="searchResultTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#pose-names" id="pose-name-tab">
+                Pose Names (@Model.NameLinks.Count)
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#descriptions" id="descriptions-tab">
+                Descriptions (@Model.DescriptionLinks.Count)
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#benefits" id="benefits-tab">
+                Benefits (@Model.BenePoseLinks.Count)
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#categories" id="categories-tab">
+                Categories (@Model.CategoryLinks.Count)
+            </button>
+        </li>
+    </ul>
 
-<!DOCTYPE html>
+    <!-- Tab Content -->
+    <div class="tab-content" id="searchResultTabsContent">
+        <div class="tab-pane fade show active grid grid-3" id="pose-names">
+            <div class="grid grid-2">
+                @foreach (var pose in Model.NameLinks)
+                {
+                    <a href="@Url.Action("Details", "Pose", new { id = pose.PoseId })" class="card-link">
+                        <div class="card" id="table-card">
+                            <img src="@(!string.IsNullOrEmpty(pose.ThumbnailLocalPath) ? pose.ThumbnailLocalPath : pose.ThumbnailUrlSvg)"
+                                 alt="@pose.PoseName"
+                                 class="pose-thumbnail"/>
+                            <div class="pose-info">
+                                <h3>@pose.PoseName</h3>
+                            </div>
+                        </div>
+                    </a>
+                }
+            </div>
+        </div>
 
-<html>
-<head>
-    <title>title</title>
-</head>
-<body>
-<div>
-      
+        <div class="tab-pane fade grid grid-3" id="descriptions">
+            <div class="grid grid-2">
+                @foreach (var pose in Model.DescriptionLinks)
+                {
+                    <a href="@Url.Action("Details", "Pose", new { id = pose.PoseId })" class="card-link">
+                        <div class="card" id="table-card">
+                            <img src="@(!string.IsNullOrEmpty(pose.ThumbnailLocalPath) ? pose.ThumbnailLocalPath : pose.ThumbnailUrlSvg)"
+                                 alt="@pose.PoseName"
+                                 class="pose-thumbnail"/>
+                            <div class="pose-info">
+                                <h3>@pose.PoseName</h3>
+                            </div>
+                        </div>
+                    </a>
+                }
+            </div>
+        </div>
+
+        <div class="tab-pane fade grid grid-3" id="benefits">
+            <div class="grid grid-2">
+                @foreach (var pose in Model.BenePoseLinks)
+                {
+                    <a href="@Url.Action("Details", "Pose", new { id = pose.PoseId })" class="card-link">
+                        <div class="card" id="table-card">
+                            <img src="@(!string.IsNullOrEmpty(pose.ThumbnailLocalPath) ? pose.ThumbnailLocalPath : pose.ThumbnailUrlSvg)"
+                                 alt="@pose.PoseName"
+                                 class="pose-thumbnail"/>
+                            <div class="pose-info">
+                                <h3>@pose.PoseName</h3>
+                            </div>
+                        </div>
+                    </a>
+                }
+            </div>
+        </div>
+
+        <div class="tab-pane fade grid grid-3" id="categories">
+            <div class="grid grid-3">
+                @foreach (var cat in Model.CategoryLinks)
+                {
+                    <a asp-action="Details" asp-controller="Category" asp-route-id="@cat.CategoryId" class="card-link">
+                        <div class="card category-card fade-in">
+                            <div class="category-icon">
+                                <i class="fas fa-dumbbell"></i>
+                            </div>
+                            <h3>@cat.CategoryName</h3>
+                        </div>
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
 </div>
-</body>
-</html>

@@ -4,5 +4,5 @@ namespace YogaApp.Application.UseCases.SearchAi;
 
 public interface ISearchAiUseCase
 {
-    Task<List<PoseLinkDto>> ExecuteGetAiSuggestionsAsync(string userGoal);
+    Task<SearchAiResponseDto> ExecuteGetAiSuggestionsAsync(string userGoal);
 }

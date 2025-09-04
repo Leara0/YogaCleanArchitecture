@@ -3,6 +3,7 @@ using YogaApp.Application.UseCases.GetAllDifficulties;
 using YogaApp.Application.UseCases.GetAllPoses;
 using YogaApp.Application.UseCases.GetDifficultyByDiffId;
 using YogaApp.Application.UseCases.Search;
+using YogaApp.Application.UseCases.SearchAi;
 using YogaApp.Application.UseCases.UpdatePose;
 using YogaApp.Domain.Entities;
 
@@ -21,6 +22,6 @@ public interface IApplicationServices
     Task UpdatePoseToDbAsync(UpdatePoseRequestToDbDto requestDto);
     Task DeletePoseAsync(int poseId);
     Task<SearchResponseDto> SearchAsync(string searchString);
-    Task<List<PoseLinkDto>> GetAiSuggestionsAsync(string userGoal);
+    Task<SearchAiResponseDto> GetAiSuggestionsAsync(string userGoal);
 
 }

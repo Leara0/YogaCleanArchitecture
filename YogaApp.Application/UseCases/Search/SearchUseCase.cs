@@ -6,18 +6,18 @@ namespace YogaApp.Application.UseCases.Search;
 
 public class SearchUseCase: ISearchUseCase
 {
-    private readonly IPoseSearchServices _searchServices;
+    private readonly IPoseSearchService _searchService;
     private readonly ICategoryRepository _catRepo;
 
-    public SearchUseCase(IPoseSearchServices searchServices, ICategoryRepository catRepo)
+    public SearchUseCase(IPoseSearchService searchService, ICategoryRepository catRepo)
     {
-        _searchServices = searchServices;
+        _searchService = searchService;
         _catRepo = catRepo;
     }
     public async Task<SearchResponseDto> ExecuteSearchAsync(string searchString)
     {
         //call repo to search for names
-        var namePoses = await _searchServices.SearchByNameAsync(searchString);
+        var namePoses = await _searchService.SearchByNameAsync(searchString);
         
         //map to PoseLinkDto
         var namePoseLinks = namePoses.Select(p => new PoseLinkDto
@@ -29,7 +29,7 @@ public class SearchUseCase: ISearchUseCase
         }).ToList();
 
         //search descriptions
-        var descriptionPoses = await _searchServices.SearchByDescriptionAsync(searchString);
+        var descriptionPoses = await _searchService.SearchByDescriptionAsync(searchString);
         var descPoseLinks = descriptionPoses.Select(p => new PoseLinkDto
         {
             PoseId = p.PoseId,
@@ -39,7 +39,7 @@ public class SearchUseCase: ISearchUseCase
         }).ToList();
 
         //search benefits
-        var benefitsPoses = await _searchServices.SearchByBenefitsAsync(searchString);
+        var benefitsPoses = await _searchService.SearchByBenefitsAsync(searchString);
         var benePoseLinks = benefitsPoses.Select(p => new PoseLinkDto
         {
             PoseId = p.PoseId,

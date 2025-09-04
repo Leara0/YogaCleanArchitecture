@@ -20,7 +20,7 @@ public interface IApplicationServices
     Task<UpdatePoseResponseDto> UpdatePoseAsync(int poseId);
     Task UpdatePoseToDbAsync(UpdatePoseRequestToDbDto requestDto);
     Task DeletePoseAsync(int poseId);
-    
     Task<SearchResponseDto> SearchAsync(string searchString);
+    Task<List<PoseLinkDto>> GetAiSuggestionsAsync(string userGoal);
 
 }

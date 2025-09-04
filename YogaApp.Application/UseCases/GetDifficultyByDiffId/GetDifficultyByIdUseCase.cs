@@ -6,11 +6,11 @@ namespace YogaApp.Application.UseCases.GetDifficultyByDiffId;
 
 public class GetDifficultyByIdUseCase : IGetDifficultyByIdUseCase
 {
-    private readonly IPoseSearchServices _searchServices;
+    private readonly IPoseSearchService _searchService;
 
-    public GetDifficultyByIdUseCase(IPoseSearchServices searchServices)
+    public GetDifficultyByIdUseCase(IPoseSearchService searchService)
     {
-        _searchServices = searchServices;
+        _searchService = searchService;
     }
     public async Task<GetDifficultyByIdResponseDto> ExecuteGetDifficultyById(int DiffId)
     {
@@ -23,8 +23,8 @@ public class GetDifficultyByIdUseCase : IGetDifficultyByIdUseCase
        };
        
        //get id for poses that fall in this category and then complete Pose info for those poses
-       var poseIdsInDiff = await _searchServices.GetPoseIdsByDifficultyIdAsync(DiffId);
-       var posesInCat = await _searchServices.GetPosesByPoseIdsAsync(poseIdsInDiff);
+       var poseIdsInDiff = await _searchService.GetPoseIdsByDifficultyIdAsync(DiffId);
+       var posesInCat = await _searchService.GetPosesByPoseIdsAsync(poseIdsInDiff);
         
        //map Pose to PoseLink class for easier data handling
        var links = posesInCat.Select(p => new PoseLinkDto

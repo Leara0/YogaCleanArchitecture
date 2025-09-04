@@ -16,7 +16,7 @@ public class SearchUseCaseTest
     {
         //ARRANGE
         var mockCatRepo = new Mock<ICategoryRepository>();
-        var mockSearchService = new Mock<IPoseSearchServices>();
+        var mockSearchService = new Mock<IPoseSearchService>();
        
         //basic setup for function
         mockCatRepo.Setup(c => c.SearchByCategoryAsync(It.IsAny<string>()))
@@ -45,7 +45,7 @@ public class SearchUseCaseTest
     public async Task ExecuteSearchAsync_ReturnsAllSearchResults_InCorrectStructure()
     {
         var mockCatRepo = new Mock<ICategoryRepository>();
-        var mockSearchService = new Mock<IPoseSearchServices>();
+        var mockSearchService = new Mock<IPoseSearchService>();
         
         //create mock poses for each search type
         var namePoses = new List<PoseEntity>
@@ -94,7 +94,7 @@ public class SearchUseCaseTest
     {
         //ARRANGE
         var mockCatRepo = new Mock<ICategoryRepository>();
-        var mockSearchService = new Mock<IPoseSearchServices>();
+        var mockSearchService = new Mock<IPoseSearchService>();
 
         mockSearchService.Setup(s => s.SearchByNameAsync("not found"))
             .ReturnsAsync(new List<PoseEntity>());

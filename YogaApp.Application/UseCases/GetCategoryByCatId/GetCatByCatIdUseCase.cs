@@ -8,12 +8,12 @@ namespace YogaApp.Application.UseCases;
 public class GetCatByCatIdUseCase : IGetCatByCatIdUseCase
 {
     public readonly ICategoryRepository _catRepo;
-    public readonly IPoseSearchServices _searchServices;
+    public readonly IPoseSearchService SearchService;
 
-    public GetCatByCatIdUseCase(ICategoryRepository categoryRepository, IPoseSearchServices searchServices)
+    public GetCatByCatIdUseCase(ICategoryRepository categoryRepository, IPoseSearchService searchService)
     {
         _catRepo = categoryRepository;
-        _searchServices = searchServices;
+        SearchService = searchService;
     }
     public async Task<GetCatByCatIdResponseDto> ExecuteGetCatByCatIdAsync(int CatId)
     {
@@ -21,8 +21,8 @@ public class GetCatByCatIdUseCase : IGetCatByCatIdUseCase
         var category = await _catRepo.GetCategoryByCatIdAsync(CatId);
         
         //get all poses that fall in this category and tuple that matches poseId and Name
-        var poseIdsInCat = await _searchServices.GetPoseIdsByCategoryIdAsync(CatId);
-        var posesInCat = await _searchServices.GetPosesByPoseIdsAsync(poseIdsInCat);
+        var poseIdsInCat = await SearchService.GetPoseIdsByCategoryIdAsync(CatId);
+        var posesInCat = await SearchService.GetPosesByPoseIdsAsync(poseIdsInCat);
         
         //map Pose to PoseLink class for clean data handling
         var links = posesInCat.Select(p => new PoseLinkDto 

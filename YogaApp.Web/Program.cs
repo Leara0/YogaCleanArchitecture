@@ -10,6 +10,7 @@ using YogaApp.Application.UseCases.GetDifficultyByDiffId;
 using YogaApp.Application.UseCases.Search;
 using YogaApp.Application.UseCases.UpdatePose;
 using YogaApp.Infrastructure.Repositories;
+using YogaApp.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +26,7 @@ builder.Services.AddScoped<IDbConnection>(s =>
 builder.Services.AddScoped<IPoseRepository, PoseRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IDifficultyRepository, DifficultyRepository>();
-builder.Services.AddScoped<IPoseSearchServices, PoseSearchServices>();
+builder.Services.AddScoped<IPoseSearchService, PoseSearchService>();
 
 // Register use cases
 builder.Services.AddScoped<ICreatePoseUseCase, CreatePoseUseCase>();

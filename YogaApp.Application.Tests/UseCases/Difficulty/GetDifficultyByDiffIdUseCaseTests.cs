@@ -11,7 +11,7 @@ public class GetDifficultyByDiffIdUseCaseTests
     public async Task ExecuteGetDifficultyById_CallsRepositories_Once()
     {
         // ARRANGE
-        var mockSearchServices = new Mock<IPoseSearchServices>();
+        var mockSearchServices = new Mock<IPoseSearchService>();
     
         mockSearchServices.Setup(p => p.GetPoseIdsByDifficultyIdAsync(It.IsAny<int>()))
             .ReturnsAsync(new List<int>());
@@ -35,7 +35,7 @@ public class GetDifficultyByDiffIdUseCaseTests
     public async Task ExecuteGetDifficultyById_MapsDifficultyCorrectly(int diffId, string expectedName)
     {
         //ARRANGE
-        var mockSearchServices = new Mock<IPoseSearchServices>();
+        var mockSearchServices = new Mock<IPoseSearchService>();
 
         mockSearchServices.Setup(p => p.GetPoseIdsByDifficultyIdAsync(It.IsAny<int>()))
             .ReturnsAsync(new List<int>());
@@ -54,7 +54,7 @@ public class GetDifficultyByDiffIdUseCaseTests
     [Fact]
     public async Task ExecuteGetDifficultyById_MapsPosesToPoseLinksCorrectly()
     {
-        var mockSearchServices = new Mock<IPoseSearchServices>();
+        var mockSearchServices = new Mock<IPoseSearchService>();
 
         var poses = new List<Domain.Entities.Pose>
         {

@@ -12,7 +12,7 @@ public class GetCategoryByCatIdUseCaseTests
     {
         //ARRANGE
         var mockCatRepo = new Mock<ICategoryRepository>();
-        var mockSearchServices = new Mock<IPoseSearchServices>();
+        var mockSearchServices = new Mock<IPoseSearchService>();
 
         mockCatRepo.Setup(c => c.GetCategoryByCatIdAsync(It.IsAny<int>()))
             .ReturnsAsync(new Domain.Entities.Category());
@@ -37,7 +37,7 @@ public class GetCategoryByCatIdUseCaseTests
     {
         //ARRANGE
         var mockCatRepo = new Mock<ICategoryRepository>();
-        var mockSearchServices = new Mock<IPoseSearchServices>();
+        var mockSearchServices = new Mock<IPoseSearchService>();
 
         var poses = new List<Domain.Entities.Pose>
         {

@@ -11,4 +11,8 @@
       <ProjectReference Include="..\YogaApp.Infrastructure\YogaApp.Infrastructure.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="OpenAI" Version="2.3.0" />
+    </ItemGroup>
+
 </Project>

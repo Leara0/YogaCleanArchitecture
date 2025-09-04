@@ -6,6 +6,7 @@ using YogaApp.Application.UseCases.GetAllDifficulties;
 using YogaApp.Application.UseCases.GetAllPoses;
 using YogaApp.Application.UseCases.GetDifficultyByDiffId;
 using YogaApp.Application.UseCases.Search;
+using YogaApp.Application.UseCases.SearchAi;
 using YogaApp.Application.UseCases.UpdatePose;
 using YogaApp.Domain.Entities;
 
@@ -23,12 +24,14 @@ public class ApplicationService :IApplicationServices
     private readonly IUpdatePoseUseCase _updatePoseUseCase;
     private readonly IDeletePoseByPoseIdUseCase _deletePoseByPoseIdUseCase;
     private readonly ISearchUseCase _searchUseCase;
+    private readonly ISearchAiUseCase _searchAiUseCase;
 
     public ApplicationService(IGetAllCategoriesUseCase getAllCategories,
         IGetAllDifficultiesUseCase getAllDifficulties, ICreatePoseUseCase createPoseUseCase, IGetAllPosesUseCase getAllPosesUseCase,
         IGetPoseByIdUseCase getPoseByIdUseCase, IGetCatByCatIdUseCase getCatByCatIdUseCase, 
         IGetDifficultyByIdUseCase getDifficultyByIdUseCase, IUpdatePoseUseCase updatePoseUseCase,
-        IDeletePoseByPoseIdUseCase deletePoseByPoseIdUseCase, ISearchUseCase searchUseCase)
+        IDeletePoseByPoseIdUseCase deletePoseByPoseIdUseCase, ISearchUseCase searchUseCase,
+        ISearchAiUseCase searchAiUseCase)
     {
         _getAllCategories = getAllCategories;
         _getAllDifficulties = getAllDifficulties;
@@ -40,6 +43,7 @@ public class ApplicationService :IApplicationServices
         _updatePoseUseCase = updatePoseUseCase;
         _deletePoseByPoseIdUseCase = deletePoseByPoseIdUseCase;
         _searchUseCase = searchUseCase;
+        _searchAiUseCase = searchAiUseCase;
     }
     public async Task<int> CreatePoseInDbAsync(CreatePoseRequestDto requestDto)
     {
@@ -96,6 +100,11 @@ public class ApplicationService :IApplicationServices
     public async Task<SearchResponseDto> SearchAsync(string searchString)
     {
         return await _searchUseCase.ExecuteSearchAsync(searchString);
+    }
+
+    public async Task<List<PoseLinkDto>> GetAiSuggestionsAsync(string userGoal)
+    {
+        return await _searchAiUseCase.ExecuteGetAiSuggestionsAsync(userGoal);
     }
 }
 

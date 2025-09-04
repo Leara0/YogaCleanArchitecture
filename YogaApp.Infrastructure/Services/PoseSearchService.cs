@@ -1,16 +1,16 @@
 using System.Data;
-using YogaApp.Application.Interfaces;
 using Dapper;
+using YogaApp.Application.Interfaces;
 using YogaApp.Domain.Entities;
 using YogaApp.Infrastructure.DTO;
 
-namespace YogaApp.Infrastructure.Repositories;
+namespace YogaApp.Infrastructure.Services;
 
-public class PoseSearchServices: IPoseSearchServices
+public class PoseSearchService: IPoseSearchService
 {
     private readonly IDbConnection _db;
 
-    public PoseSearchServices(IDbConnection db)
+    public PoseSearchService(IDbConnection db)
     {
         _db = db;
     }
@@ -60,7 +60,23 @@ public class PoseSearchServices: IPoseSearchServices
             new {poseIds});
         return dto.Select(MapDtoToEntity).ToList();
     }
-    
+
+    public async Task<Pose?> SearchForSingleNameAsync(string name)
+    {
+        var exactMatchDto = await _db.QueryFirstOrDefaultAsync<PoseDto>("SELECT * FROM poses WHERE English_Name = @name",
+            new { name });
+        if (exactMatchDto != null)
+            return MapDtoToEntity(exactMatchDto);
+        
+        var partialMatchDto = await _db.QueryFirstOrDefaultAsync<PoseDto>
+        ("SELECT * FROM poses WHERE English_Name LIKE @searchPattern OR @name LIKE CONCAT('%', English_Name, '%')",
+            new { name, searchPattern = $"%{name}%" });
+        if(partialMatchDto != null)
+            return MapDtoToEntity(partialMatchDto);
+        
+        return null;
+    }
+
     private Pose MapDtoToEntity(PoseDto dto)
     {
         var pose = new Pose(dto.English_Name, dto.Difficulty_Id);

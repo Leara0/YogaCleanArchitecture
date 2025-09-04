@@ -65,7 +65,5 @@ public class SearchController : Controller
             viewModel.ErrorMessage = "Unable to generate AI suggestions right now. Please try again later.";
             return View(viewModel);
         }
-
-        _logger.LogInformation($"Searching for {searchTerm}");
     }
 }

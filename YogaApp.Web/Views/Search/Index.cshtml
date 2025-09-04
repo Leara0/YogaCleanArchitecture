@@ -40,7 +40,7 @@
                 {
                     <a href="@Url.Action("Details", "Pose", new { id = pose.PoseId })" class="card-link">
                         <div class="card" id="table-card">
-                            <img src="@(!string.IsNullOrEmpty(pose.ThumbnailLocalPath) ? pose.ThumbnailLocalPath : pose.ThumbnailUrlSvg)"
+                            <img src="@(!string.IsNullOrEmpty(pose.ThumbnailLocalPath) ? pose.ThumbnailLocalPath : pose.ThumbnailSvg)"
                                  alt="@pose.PoseName"
                                  class="pose-thumbnail"/>
                             <div class="pose-info">
@@ -58,7 +58,7 @@
                 {
                     <a href="@Url.Action("Details", "Pose", new { id = pose.PoseId })" class="card-link">
                         <div class="card" id="table-card">
-                            <img src="@(!string.IsNullOrEmpty(pose.ThumbnailLocalPath) ? pose.ThumbnailLocalPath : pose.ThumbnailUrlSvg)"
+                            <img src="@(!string.IsNullOrEmpty(pose.ThumbnailLocalPath) ? pose.ThumbnailLocalPath : pose.ThumbnailSvg)"
                                  alt="@pose.PoseName"
                                  class="pose-thumbnail"/>
                             <div class="pose-info">
@@ -76,7 +76,7 @@
                 {
                     <a href="@Url.Action("Details", "Pose", new { id = pose.PoseId })" class="card-link">
                         <div class="card" id="table-card">
-                            <img src="@(!string.IsNullOrEmpty(pose.ThumbnailLocalPath) ? pose.ThumbnailLocalPath : pose.ThumbnailUrlSvg)"
+                            <img src="@(!string.IsNullOrEmpty(pose.ThumbnailLocalPath) ? pose.ThumbnailLocalPath : pose.ThumbnailSvg)"
                                  alt="@pose.PoseName"
                                  class="pose-thumbnail"/>
                             <div class="pose-info">

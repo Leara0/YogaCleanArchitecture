@@ -1,0 +1,37 @@
+@model AiSequenceViewModel
+
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <div class="alert-danger">Model.ErrorMessage</div>
+}
+else if (Model.HasResults)
+{
+    <h2>For your goal of: @Model.SearchTerm</h2>
+    <h2>Your suggested sequence is:</h2>
+    <ul>
+        @foreach (var pose in Model.SuggestedPoses)
+        {
+            <li>@pose.PoseName</li>
+        }
+    </ul>
+    <p>Click the pose card below for more information about these poses</p>
+    <div class="grid grid-2">
+        @foreach (var pose in Model.SuggestedPoses)
+        {
+            <a href="@Url.Action("Details", "Pose", new { id = pose.PoseId })" class="card-link">
+                <div class="card" id="table-card">
+                    <img src="@(!string.IsNullOrEmpty(pose.ThumbnailLocalPath) ? pose.ThumbnailLocalPath : pose.ThumbnailSvg)"
+                         alt="@pose.PoseName"
+                         class="pose-thumbnail"/>
+                    <div class="pose-info">
+                        <h3>@pose.PoseName</h3>
+                    </div>
+                </div>
+            </a>
+        }
+    </div>
+}
+else
+{
+    <p>No matching poses found. Please try another search.</p>
+}

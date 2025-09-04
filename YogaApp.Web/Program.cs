@@ -8,6 +8,7 @@ using YogaApp.Application.UseCases;
 using YogaApp.Application.UseCases.DeletePose;
 using YogaApp.Application.UseCases.GetDifficultyByDiffId;
 using YogaApp.Application.UseCases.Search;
+using YogaApp.Application.UseCases.SearchAi;
 using YogaApp.Application.UseCases.UpdatePose;
 using YogaApp.Infrastructure.Repositories;
 using YogaApp.Infrastructure.Services;
@@ -27,6 +28,7 @@ builder.Services.AddScoped<IPoseRepository, PoseRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IDifficultyRepository, DifficultyRepository>();
 builder.Services.AddScoped<IPoseSearchService, PoseSearchService>();
+builder.Services.AddScoped<IAIYogaService, AIYogaService>();
 
 // Register use cases
 builder.Services.AddScoped<ICreatePoseUseCase, CreatePoseUseCase>();
@@ -39,6 +41,7 @@ builder.Services.AddScoped<IGetDifficultyByIdUseCase, GetDifficultyByIdUseCase>(
 builder.Services.AddScoped<IUpdatePoseUseCase, UpdatePoseUseCase>();
 builder.Services.AddScoped<IDeletePoseByPoseIdUseCase, DeletePoseByPoseIdUseCase>();
 builder.Services.AddScoped<ISearchUseCase, SearchUseCase>();
+builder.Services.AddScoped<ISearchAiUseCase, SearchAiUseCase>();
 
 //Register pose use case services facade
 builder.Services.AddScoped<IApplicationServices, ApplicationService>();

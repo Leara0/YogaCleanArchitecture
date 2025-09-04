@@ -23,13 +23,15 @@ public class CategoryRepository:ICategoryRepository
 
     public async Task<List<int>> GetCategoryIdsByPoseIdAsync(int poseId)
     {
-        var cat =  await _db.QueryAsync<int>("SELECT Category_Id FROM pose_mapping WHERE pose_Id = @poseId", new { poseId });
+        var cat =  await _db.QueryAsync<int>
+            ("SELECT Category_Id FROM pose_mapping WHERE pose_Id = @poseId", new { poseId });
         return cat.ToList();
     }
 
     public async Task<Category> GetCategoryByCatIdAsync(int catId)
     {
-        var cat = await _db.QuerySingleOrDefaultAsync<CategoryDto>("SELECT * FROM categories WHERE Category_Id = @catId", new { catId });
+        var cat = await _db.QuerySingleOrDefaultAsync<CategoryDto>
+            ("SELECT * FROM categories WHERE Category_Id = @catId", new { catId });
         return MapDtoToEntity(cat);
     }
 

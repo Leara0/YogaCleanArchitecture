@@ -102,7 +102,7 @@ public class ApplicationService :IApplicationServices
         return await _searchUseCase.ExecuteSearchAsync(searchString);
     }
 
-    public async Task<SearchAiResponseDto> GetAiSuggestionsAsync(string userGoal)
+    public async Task<List<PoseLinkDto>> GetAiSuggestionsAsync(string userGoal)
     {
         return await _searchAiUseCase.ExecuteGetAiSuggestionsAsync(userGoal);
     }

@@ -22,6 +22,6 @@ public interface IApplicationServices
     Task UpdatePoseToDbAsync(UpdatePoseRequestToDbDto requestDto);
     Task DeletePoseAsync(int poseId);
     Task<SearchResponseDto> SearchAsync(string searchString);
-    Task<SearchAiResponseDto> GetAiSuggestionsAsync(string userGoal);
+    Task<List<PoseLinkDto>> GetAiSuggestionsAsync(string userGoal);
 
 }

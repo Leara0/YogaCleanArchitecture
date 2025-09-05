@@ -38,32 +38,37 @@ public class SearchController : Controller
         return View(viewModel);
     }
 
-    //GET
-    public async Task<IActionResult> AiSequenceResults(string searchTerm)
+    [HttpGet]
+    public async Task<IActionResult> AiSequence()
     {
-        var viewModel = new AiSequenceViewModel { SearchTerm = searchTerm };
-
-        if (string.IsNullOrWhiteSpace(searchTerm))
+        return View(new AiSequenceViewModel());
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> AiSequence(AiSequenceViewModel model)
+    {
+        if (string.IsNullOrWhiteSpace(model.SearchTerm))
         {
-            return RedirectToAction("Index", "Home");
+            ModelState.AddModelError("SearchTerm", "Please enter a goal");
+            return View(model);
         }
 
         try
         {
             //get the results
-            var posesDto = await _services.GetAiSuggestionsAsync(searchTerm);
-            //map using the extension
-            viewModel = posesDto.ToAiSequenceViewModel();
+            var posesDto = await _services.GetAiSuggestionsAsync(model.SearchTerm);
+            //map the suggested poses from dto to view model using extension
+            model.SuggestedPoses = posesDto.ToAiSequenceViewModel();
             //check if there are any results
-            viewModel.HasResults = viewModel.SuggestedPoses.Any();
+            model.HasResults = true;
 
-            return View(viewModel);
+            return View(model);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, $"AI sequence generation failed for goal: {searchTerm}");
-            viewModel.ErrorMessage = "Unable to generate AI suggestions right now. Please try again later.";
-            return View(viewModel);
+            _logger.LogError(ex, $"AI sequence generation failed for goal: {model.SearchTerm}");
+            model.ErrorMessage = "Unable to generate AI suggestions right now. Please try again later.";
+            return View(model);
         }
     }
 }

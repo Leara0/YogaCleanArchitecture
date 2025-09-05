@@ -15,7 +15,7 @@ public class SearchAiUseCase : ISearchAiUseCase
         _aiService = aiService;
         _searchService = searchService;
     }
-    public async Task<SearchAiResponseDto> ExecuteGetAiSuggestionsAsync(string userGoal)
+    public async Task<List<PoseLinkDto>> ExecuteGetAiSuggestionsAsync(string userGoal)
     { 
         //get ai suggestions
         var suggestedPoseNames = await _aiService.GetPoseSuggestionsAsync(userGoal);
@@ -29,7 +29,7 @@ public class SearchAiUseCase : ISearchAiUseCase
                 foundPoses.Add(pose);
         }
 
-        var foundPosesLink = foundPoses.Select(pose => new PoseLinkDto
+        var listFoundPoses = foundPoses.Select(pose => new PoseLinkDto
         {
             PoseId = pose.PoseId,
             PoseName = pose.PoseName,
@@ -37,7 +37,7 @@ public class SearchAiUseCase : ISearchAiUseCase
             ThumbnailSvg = pose.ThumbnailUrlSvg
         }).ToList();
 
-        return new SearchAiResponseDto(foundPosesLink);
+        return listFoundPoses;
     }
 
 }

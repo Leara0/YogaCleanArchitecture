@@ -1,3 +1,4 @@
+using YogaApp.Application.DTO;
 using YogaApp.Application.UseCases.Search;
 using YogaApp.Application.UseCases.SearchAi;
 using YogaApp.Web.Models;
@@ -43,17 +44,15 @@ public static class SearchMappingExtensions
         };
     }
 
-    public static AiSequenceViewModel ToAiSequenceViewModel(this SearchAiResponseDto dto)
+    public static List<PoseLinkViewModel> ToAiSequenceViewModel(this List<PoseLinkDto> dto)
     {
-        return new AiSequenceViewModel
+        return dto.Select(p => new PoseLinkViewModel()
         {
-            SuggestedPoses = dto.PoseLinks.Select(pose => new PoseLinkViewModel()
-            {
-                PoseId = pose.PoseId,
-                PoseName = pose.PoseName,
-                ThumbnailLocalPath = pose.ThumbnailLocalPath,
-                ThumbnailSvg = pose.ThumbnailSvg
-            }).ToList()
-        };
+            PoseId = p.PoseId,
+            PoseName = p.PoseName,
+            ThumbnailSvg = p.ThumbnailSvg,
+            ThumbnailLocalPath = p.ThumbnailLocalPath
+        }).ToList();
+
     }
 }

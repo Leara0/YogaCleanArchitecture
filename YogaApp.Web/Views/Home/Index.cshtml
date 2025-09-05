@@ -22,7 +22,7 @@
         <p>Navigate through our organized collection or search to find exactly what you need:</p>
     </div>
     
-    <div class="search-section mb-xl">
+    <div class="search-section mb-xl fade-in">
         <div class="search-bar mb-xl">
             <form asp-controller="Search" asp-action="Index" method="get">
                 <div class="input-group">
@@ -42,6 +42,16 @@
                 advanced asanas. Each pose is presented with clear information to guide your practice.
             </p>
             <a href="@Url.Action("Index", "Pose")" class="btn btn-primary">Explore Poses</a>
+        </div>
+        
+        <div class="card fade-in">
+            <h3>AI-Powered Pose Suggestions</h3>
+            <p>
+                Tell our virtual yoga instructor want to work on - whether it's flexibility, strength building, or 
+                targeting specific areas, and our AI yoga instructor will suggest poses from your 
+                collection that match your goals.
+            </p>
+            <a href="@Url.Action("AiSequence", "Search")" class="btn btn-primary">Explore AI</a>
         </div>
 
         <div class="card fade-in">

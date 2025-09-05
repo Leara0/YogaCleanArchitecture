@@ -4,7 +4,7 @@
     box-shadow: 0 0 0 0.2rem rgba(var(--forest-green-rgb), 0.25);
 }
 
-/*Checkboxes*/
+/*Checkboxes- change it all to green*/
 .form-check-input:checked {
     background-color: var(--forest-green);
     border-color: var(--charcoal);
@@ -15,15 +15,14 @@
     box-shadow: 0 0 0 0.2rem rgba(var(--forest-green-rgb), 0.25);
 }
 
-/*Dropdown Options*/
+/*Dropdown Options - change is all to green*/
 select option:checked {
     background-color: var(--forest-green) !important;
-    color: white !important;
+    
 }
 
 select option:hover {
     background-color: var(--sage-green) !important;
-    color: white !important;
 }
 
 .form-group {
@@ -63,6 +62,7 @@ select option:hover {
     cursor: pointer;
 }
 
+/*Search bar */
 .search-bar {
     border-radius: 12px;
     box-shadow: var(--shadow-soft);
@@ -71,4 +71,24 @@ select option:hover {
 .search-bar:focus, .search-bar:focus {
     border-color: var(--forest-green);
     box-shadow: 0 0 0 0.2rem rgba(var(--forest-green-rgb), 0.25);
+}
+
+/*AI generate button*/
+.btn-generate {
+    background-color: var(--warm-beige);
+    border-color: var(--warm-beige);
+    color: var(--charcoal);
+}
+
+.btn-generate:hover {
+    background-color: var(--sage-green);
+    color: var(--soft-white);
+}
+
+.btn-generate:focus, 
+.btn-generate:active {
+    background-color: var(--forest-green) !important;
+    border-color: var(--forest-green) !important;
+    color: var(--soft-white) !important;
+    box-shadow: 0 0 0 0.2rem rgba(var(--forest-green-rgb), 0.25) !important;
 }

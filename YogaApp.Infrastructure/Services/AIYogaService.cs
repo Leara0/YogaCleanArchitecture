@@ -22,9 +22,10 @@ public class AIYogaService : IAIYogaService
         //you give the ai a conversation (a list of messages)
         var messages = new List<ChatMessage>
         {
-            new SystemChatMessage("You are a yoga instructor. Given a user's goal, suggest 5-6 yoga pose " +
+            new SystemChatMessage("You are a yoga instructor. Given a user's goal, suggest 9-10 yoga pose " +
                                   "names that would help achieve that goal. Return only pose names, separated by " +
-                                  "commas. Use standard pose names like 'Warrior I', 'Downward Dog', etc."),
+                                  "commas. Use standard pose names like 'Warrior I', 'Downward Dog', etc. Do not repeat" +
+                                  "any poses. Put the responses in a nice order for a yoga flow."),
             new UserChatMessage(userGoal)
         };
         

@@ -1,18 +1,23 @@
 @model AiSequenceViewModel
 
+@section Styles {
+    <link rel="stylesheet" href="~/css/pose-tables.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/forms.css" asp-append-version="true">
+    }
+
 @if (!string.IsNullOrEmpty(Model.ErrorMessage))
 {
     <div class="alert-danger">Model.ErrorMessage</div>
 }
-
+<h2>What's your yoga goal?</h2>
 <form method="post">
-    <div class="form-group">
-        <label for="SearchTerm">What's your yoga goal?</label>
+    <div class="form-group input-group">
         <input type="text" name="SearchTerm" value="@Model.SearchTerm"
                placeholder="e.g. I want to build arm strength"
                class="form-control" required>
+        <button type="submit" class="btn btn-generate">Generate Sequence</button>
     </div>
-    <button type="submit" class="btn btn-primary">Generate Sequence</button>
+    
 </form>
 
 
@@ -24,14 +29,8 @@
     <h2>For your goal of: @Model.SearchTerm</h2>
     @if (Model.SuggestedPoses.Any())
     {
-        <h2>Your suggested sequence is:</h2>
-        <ul>
-            @foreach (var pose in Model.SuggestedPoses)
-            {
-                <li>@pose.PoseName</li>
-            }
-        </ul>
-        <p>Click the pose card below for more information about these poses</p>
+        <h2>Your suggested pose/s are:</h2>
+        
         <div class="grid grid-2">
             @foreach (var pose in Model.SuggestedPoses)
             {

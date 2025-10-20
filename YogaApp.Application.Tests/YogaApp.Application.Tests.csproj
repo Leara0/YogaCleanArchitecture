@@ -23,6 +23,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\YogaApp.Application\YogaApp.Application.csproj" />
+      <ProjectReference Include="..\YogaApp.Infrastructure\YogaApp.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

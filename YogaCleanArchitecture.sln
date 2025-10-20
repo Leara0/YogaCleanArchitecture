@@ -1,7 +1,5 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YogaCleanArchitecture", "YogaCleanArchitecture\YogaCleanArchitecture.csproj", "{6626C604-E165-4BA3-B71A-BCBA22B1E88B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YogaApp.Domain", "YogaApp.Domain\YogaApp.Domain.csproj", "{CC7A5E68-30FE-4256-AEB7-32CDEAAC756E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YogaApp.Application", "YogaApp.Application\YogaApp.Application.csproj", "{0DAA8143-359D-4B1F-8201-7C85CDCEF8C7}"
@@ -16,16 +14,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YogaApp.Application.Tests",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YogaApp.Web.Tests", "YogaApp.Web.Tests\YogaApp.Web.Tests.csproj", "{DF48CEDC-2E12-4E1A-95C1-CCD9117C6F87}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F1C18708-F1C8-4DCF-8208-8B0247E16956}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6626C604-E165-4BA3-B71A-BCBA22B1E88B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6626C604-E165-4BA3-B71A-BCBA22B1E88B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6626C604-E165-4BA3-B71A-BCBA22B1E88B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6626C604-E165-4BA3-B71A-BCBA22B1E88B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CC7A5E68-30FE-4256-AEB7-32CDEAAC756E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CC7A5E68-30FE-4256-AEB7-32CDEAAC756E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC7A5E68-30FE-4256-AEB7-32CDEAAC756E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -54,5 +50,10 @@ Global
 		{DF48CEDC-2E12-4E1A-95C1-CCD9117C6F87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF48CEDC-2E12-4E1A-95C1-CCD9117C6F87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF48CEDC-2E12-4E1A-95C1-CCD9117C6F87}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4E839E7D-92AB-4ADA-9614-D51E75FB231E} = {F1C18708-F1C8-4DCF-8208-8B0247E16956}
+		{53273420-6CD4-4F76-A4CC-B546FF8F6064} = {F1C18708-F1C8-4DCF-8208-8B0247E16956}
+		{DF48CEDC-2E12-4E1A-95C1-CCD9117C6F87} = {F1C18708-F1C8-4DCF-8208-8B0247E16956}
 	EndGlobalSection
 EndGlobal

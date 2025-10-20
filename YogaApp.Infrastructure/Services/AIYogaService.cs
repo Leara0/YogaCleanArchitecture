@@ -24,8 +24,8 @@ public class AIYogaService : IAIYogaService
         {
             new SystemChatMessage("You are a yoga instructor. Given a user's goal, suggest 9-10 yoga pose " +
                                   "names that would help achieve that goal. Return only pose names, separated by " +
-                                  "commas. Use standard pose names like 'Warrior I', 'Downward Dog', etc. Do not repeat" +
-                                  "any poses. Put the responses in a nice order for a yoga flow."),
+                                  "commas. Use standard pose names like 'Warrior I', 'Downward Dog', etc. Do not " +
+                                  "repeat any poses. Put the responses in a nice order for a yoga flow."),
             new UserChatMessage(userGoal)
         };
         

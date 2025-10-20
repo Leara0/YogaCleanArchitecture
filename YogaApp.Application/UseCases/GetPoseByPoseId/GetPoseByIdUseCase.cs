@@ -10,14 +10,11 @@ public class GetPoseByIdUseCase : IGetPoseByIdUseCase
     //set up repository DI
     private readonly IPoseRepository _poseRepo;
     private readonly ICategoryRepository _catRepo;
-    private readonly IDifficultyRepository _diffRepo;
 
-    public GetPoseByIdUseCase(ICategoryRepository catRepo, IPoseRepository poseRepo,
-        IDifficultyRepository diffRepo)
+    public GetPoseByIdUseCase(ICategoryRepository catRepo, IPoseRepository poseRepo)
     {
         _catRepo = catRepo;
         _poseRepo = poseRepo;
-        _diffRepo = diffRepo;
     }
 
     public async Task<GetPoseByIdResponseDto> ExecuteGetPoseByIdAsync(int PoseId)

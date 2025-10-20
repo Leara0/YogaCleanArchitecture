@@ -1,11 +1,9 @@
 using Moq;
-using YogaApp.Application.DTO;
 using YogaApp.Application.Interfaces;
 using YogaApp.Application.RespositoryInterfaces;
 using YogaApp.Application.UseCases.Search;
-using YogaApp.Application.UseCases.UpdatePose;
 using PoseEntity = YogaApp.Domain.Entities.Pose;
-using CatEntity = YogaApp.Domain.Entities.Category;
+
 
 namespace YogaApp.Application.Tests.UseCases.Search;
 

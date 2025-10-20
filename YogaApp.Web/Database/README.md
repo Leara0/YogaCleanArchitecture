@@ -17,12 +17,32 @@ Database Setup Instructions
     - Maps poses to difficulty
 
 - Step 2: Update Connection String - Update your 'appsettings.json' with your MySQL connection details:
-  - {
+  {
     "ConnectionStrings": {
     "DefaultConnection": "Server=localhost;Database=Yoga;Uid=yourusername;Pwd=yourpassword;"
     }
-    }
+  } 
+  
+- Step 3: Set Up OpenAI API Key (for AI Features)
+  - Create an account at platform.openai.com 
+  - Navigate to API Keys section and create a new secret key  
+  - Add a payment method (required even for free tier usage)
+  - Set a usage limit (recommended: $5-10) to prevent unexpected charges 
+  - Add your API key to appsettings.json:
+  
+  {
+    "ConnectionStrings": {
+    "DefaultConnection": "Server=localhost;Database=Yoga;Uid=yourusername;Pwd=yourpassword;"
+    },
 
+    "OpenAI": {
+    "ApiKey": "your-openai-api-key-here"
+    }
+  }
+
+  - Important: Add appsettings.json to your .gitignore file to keep your API key secure 
+  - Note: The AI yoga sequence feature uses GPT-5-nano, which costs approximately $0.001-0.002 per request.
+ 
 Data Attribution
 - The pose data used in this application is adapted from the 'Yoga API project' by Alex Cumplido.
 - Original Data Source: https://github.com/alexcumplido/yoga-api

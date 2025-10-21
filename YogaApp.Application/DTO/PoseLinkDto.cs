@@ -6,4 +6,5 @@ public class PoseLinkDto
     public string PoseName { get; set; }
     public string? ThumbnailSvg {get; set;}
     public string? ThumbnailLocalPath { get; set; }
+    
 }

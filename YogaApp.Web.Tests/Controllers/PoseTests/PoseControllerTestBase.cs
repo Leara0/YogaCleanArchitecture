@@ -1,7 +1,6 @@
 using Microsoft.Extensions.Logging;
 using Moq;
 using YogaApp.Application.UseCaseInterfaces;
-using YogaApp.Web.Controllers;
 
 namespace YogaApp.Web.Tests.Controllers.PoseController;
 

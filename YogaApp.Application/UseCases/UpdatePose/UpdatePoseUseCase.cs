@@ -69,4 +69,5 @@ public class UpdatePoseUseCase : IUpdatePoseUseCase
             await _catRepo.AddCategoryByPoseIdAsync(pose.PoseId, pose.CategoryIds);
         }
     }
+    
 }

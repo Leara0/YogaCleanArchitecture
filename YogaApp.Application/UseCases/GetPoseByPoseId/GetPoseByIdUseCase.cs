@@ -1,7 +1,6 @@
 using YogaApp.Application.DTO;
 using YogaApp.Application.RespositoryInterfaces;
 using YogaApp.Application.UseCaseInterfaces;
-using YogaApp.Domain.Entities;
 
 namespace YogaApp.Application.UseCases;
 

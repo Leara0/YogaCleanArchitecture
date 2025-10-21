@@ -1,6 +1,5 @@
 using YogaApp.Application.DTO;
 using YogaApp.Application.UseCaseInterfaces;
-using YogaApp.Application.UseCases;
 using YogaApp.Application.UseCases.DeletePose;
 using YogaApp.Application.UseCases.GetAllDifficulties;
 using YogaApp.Application.UseCases.GetAllPoses;
@@ -8,7 +7,6 @@ using YogaApp.Application.UseCases.GetDifficultyByDiffId;
 using YogaApp.Application.UseCases.Search;
 using YogaApp.Application.UseCases.SearchAi;
 using YogaApp.Application.UseCases.UpdatePose;
-using YogaApp.Domain.Entities;
 
 namespace YogaApp.Application.Services;
 

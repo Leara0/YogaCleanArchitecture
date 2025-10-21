@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using YogaApp.Application.DTO;
 using YogaApp.Application.UseCaseInterfaces;
 using YogaApp.Web.Extensions;
 using YogaApp.Web.Models;
@@ -64,9 +63,10 @@ public class PoseController : Controller
             await RepopulateFormOptions(model);
             return View(model);
         }
+        
         try
         {
-            //map to DTO
+            //map to DTO using extension
             var poseDto = model.ToUpdatePoseDto();
             
             //send pose data to application layer

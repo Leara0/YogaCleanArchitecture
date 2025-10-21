@@ -126,4 +126,5 @@ public class UpdatePoseActionTests : PoseControllerTestBase
         Assert.False(Controller.ModelState.IsValid);
         Assert.Contains("Name cannot be empty!", Controller.ModelState[""].Errors[0].ErrorMessage);
     }
+    
 }

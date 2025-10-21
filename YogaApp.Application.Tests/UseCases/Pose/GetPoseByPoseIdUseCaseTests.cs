@@ -13,7 +13,6 @@ public class GetPoseByPoseIdUseCaseTests
         // ARRANGE
         var mockPoseRepo = new Mock<IPoseRepository>();
         var mockCatRepo = new Mock<ICategoryRepository>();
-        var mockDiffRepo = new Mock<IDifficultyRepository>();
 
         mockPoseRepo.Setup(p => p.GetPoseByIdAsync(It.IsAny<int>()))
             .ReturnsAsync(new Domain.Entities.Pose("Test", 1));
@@ -22,7 +21,7 @@ public class GetPoseByPoseIdUseCaseTests
         mockCatRepo.Setup(c => c.GetCatsInPoseAsync(It.IsAny<List<int>>()))
             .ReturnsAsync(new List<(int CatId, string CatName)>());
 
-        var useCase = new GetPoseByIdUseCase(mockCatRepo.Object, mockPoseRepo.Object, mockDiffRepo.Object);
+        var useCase = new GetPoseByIdUseCase(mockCatRepo.Object, mockPoseRepo.Object);
 
         // ACT
         await useCase.ExecuteGetPoseByIdAsync(5);
@@ -43,7 +42,6 @@ public class GetPoseByPoseIdUseCaseTests
         //ARRANGE
         var mockPoseRepo = new Mock<IPoseRepository>();
         var mockCatRepo = new Mock<ICategoryRepository>();
-        var mockDiffRepo = new Mock<IDifficultyRepository>();
         
         var pose = new Domain.Entities.Pose("Test Pose", difficultyId);
         
@@ -53,7 +51,7 @@ public class GetPoseByPoseIdUseCaseTests
         mockCatRepo.Setup(c => c.GetCatsInPoseAsync(It.IsAny<List<int>>()))
             .ReturnsAsync(new List<(int, string)>());
 
-        var useCase = new GetPoseByIdUseCase(mockCatRepo.Object, mockPoseRepo.Object, mockDiffRepo.Object); 
+        var useCase = new GetPoseByIdUseCase(mockCatRepo.Object, mockPoseRepo.Object); 
         
         //ACT
         var result = await useCase.ExecuteGetPoseByIdAsync(1);
@@ -68,7 +66,6 @@ public class GetPoseByPoseIdUseCaseTests
         //ARRANGE
         var mockPoseRepo = new Mock<IPoseRepository>();
         var mockCatRepo = new Mock<ICategoryRepository>();
-        var mockDiffRepo = new Mock<IDifficultyRepository>();
 
         var pose = new Domain.Entities.Pose("Test Pose", 1);
         var categoryIds = new List<int> { 2, 5, 8 };
@@ -86,7 +83,7 @@ public class GetPoseByPoseIdUseCaseTests
         mockCatRepo.Setup(c => c.GetCatsInPoseAsync(categoryIds))
             .ReturnsAsync(categoryTuples);
         
-        var useCase = new GetPoseByIdUseCase(mockCatRepo.Object, mockPoseRepo.Object, mockDiffRepo.Object);
+        var useCase = new GetPoseByIdUseCase(mockCatRepo.Object, mockPoseRepo.Object);
         
         //ACT
         var result = await useCase.ExecuteGetPoseByIdAsync(8);
@@ -114,7 +111,6 @@ public class GetPoseByPoseIdUseCaseTests
         //ARRANGE
         var mockPoseRepo = new Mock<IPoseRepository>();
         var mockCatRepo = new Mock<ICategoryRepository>();
-        var mockDiffRepo = new Mock<IDifficultyRepository>();
 
         var pose = new Domain.Entities.Pose("Test Pose", 1);
     
@@ -126,7 +122,7 @@ public class GetPoseByPoseIdUseCaseTests
         mockCatRepo.Setup(c => c.GetCatsInPoseAsync(It.IsAny<List<int>>()))
             .ReturnsAsync(new List<(int CatId, string CatName)>()); // Empty list
 
-        var useCase = new GetPoseByIdUseCase(mockCatRepo.Object, mockPoseRepo.Object, mockDiffRepo.Object);
+        var useCase = new GetPoseByIdUseCase(mockCatRepo.Object, mockPoseRepo.Object);
     
         //ACT
         var result = await useCase.ExecuteGetPoseByIdAsync(1);

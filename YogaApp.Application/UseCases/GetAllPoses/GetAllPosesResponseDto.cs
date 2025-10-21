@@ -4,6 +4,14 @@ namespace YogaApp.Application.DTO;
 
 public class GetAllPosesResponseDto
 {
+    public int PoseId { get; set; }
+    public string PoseName { get; set; }
+    public string? SanskritName { get; set; }
+    public string? PoseDescription { get; set; }
+    public int DifficultyId { get; set; }
+    public string? ThumbnailUrlSvg { get; set; }
+    public string? ThumbnailLocalPath { get; set; }
+    
     public GetAllPosesResponseDto(Pose pose)
     {
         PoseId = pose.PoseId;
@@ -14,12 +22,4 @@ public class GetAllPosesResponseDto
         ThumbnailUrlSvg = pose.ThumbnailUrlSvg;
         ThumbnailLocalPath = pose.ThumbnailLocalPath;
     }
-    
-    public int PoseId { get; set; }
-    public string PoseName { get; set; }
-    public string? SanskritName { get; set; }
-    public string? PoseDescription { get; set; }
-    public int DifficultyId { get; set; }
-    public string? ThumbnailUrlSvg { get; set; }
-    public string? ThumbnailLocalPath { get; set; }
 }

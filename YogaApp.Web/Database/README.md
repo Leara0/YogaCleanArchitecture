@@ -1,8 +1,7 @@
 Yoga App Database Setup
 
 Prerequisites:
-- MySql Server 8.0 or higher
-- MySql Workbench (optional but recommended)
+- SQL Server or SQL Server Express
 
 Database Setup Instructions
 - Step 1: Run SQL Scripts - Execute the SQL files in the following order:
@@ -19,7 +18,7 @@ Database Setup Instructions
 - Step 2: Update Connection String - Update your 'appsettings.json' with your MySQL connection details:
   {
     "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost;Database=Yoga;Uid=yourusername;Pwd=yourpassword;"
+    "DefaultConnection": "Server=localhost;Database=Yoga;Uid=yourusername;Pwd=yourpassword;TrustedServerCertificate=true"
     }
   } 
   
@@ -32,7 +31,7 @@ Database Setup Instructions
   
   {
     "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost;Database=Yoga;Uid=yourusername;Pwd=yourpassword;"
+    "DefaultConnection": "Server=localhost;Database=Yoga;Uid=yourusername;Pwd=yourpassword;TrustedServerCertificate=true"
     },
 
     "OpenAI": {

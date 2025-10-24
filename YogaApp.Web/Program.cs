@@ -1,5 +1,5 @@
 using System.Data;
-using MySql.Data.MySqlClient;
+using Microsoft.Data.SqlClient;
 using YogaApp.Application.Interfaces;
 using YogaApp.Application.RespositoryInterfaces;
 using YogaApp.Application.Services;
@@ -21,7 +21,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IDbConnection>(s => 
 {
     var connectionString = builder.Configuration.GetConnectionString("yogaApi");
-    return new MySqlConnection(connectionString);
+    return new SqlConnection(connectionString);
 });
 // Register repositories
 builder.Services.AddScoped<IPoseRepository, PoseRepository>();

@@ -59,9 +59,9 @@ public class PoseRepository : IPoseRepository
     {
         var sql = @"INSERT INTO poses (English_Name, Sanskrit_Name, Translation_Name, Pose_Description, 
                    Pose_Benefits, Difficulty_Id, Url_Svg, Url_Svg_Alt)
+                   OUTPUT INSERTED.pose_id
                    VALUES (@PoseName, @SanskritName, @TranslationOfName, @PoseDescription, @PoseBenefits, 
-                           @DifficultyId, @UrlSvg, @ThumbnailUrlSvg);
-                    SELECT LAST_INSERT_ID();";
+                           @DifficultyId, @UrlSvg, @ThumbnailUrlSvg);";
 
         var id = await _db.QuerySingleAsync<int>(sql, pose);
         //return the id of the new entry

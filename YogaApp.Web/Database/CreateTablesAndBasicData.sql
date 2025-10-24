@@ -32,6 +32,7 @@ CREATE TABLE poses (
                        url_svg TEXT,
                        url_png TEXT,
                        url_svg_alt TEXT,
+                       thumbnail TEXT,
                        PRIMARY KEY (pose_id),
                        FOREIGN KEY (difficulty_id) REFERENCES difficulty(difficulty_id)
 );

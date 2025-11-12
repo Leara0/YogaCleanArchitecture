@@ -72,6 +72,8 @@ public class PoseRepository : IPoseRepository
 
     public async Task DeletePoseByPoseIdAsync(int poseId)
     {
+        await _db.ExecuteAsync("DELETE FROM pose_mapping WHERE pose_id = @poseId", new { poseId });
+        
         await _db.ExecuteAsync("DELETE FROM poses WHERE pose_id = @poseId", new { poseId });
     }
 
